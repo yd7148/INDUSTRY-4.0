@@ -5,3 +5,6 @@
 
 # Large installer archives excluded from git (over GitHub 100MB limit)
 90-sw1dnd-gxw3-e_117x(update).zip
+
+# Windows per-folder metadata
+desktop.ini
