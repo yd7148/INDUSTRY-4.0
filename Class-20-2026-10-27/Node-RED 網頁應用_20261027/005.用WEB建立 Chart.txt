@@ -1,0 +1,204 @@
+﻿利用 Node-RED 內建或擴充的 random 節點來模擬隨機數據（例如模擬溫度、壓力或設備負載），並透過我們剛剛建立的 Chart.js 折線圖網頁來呈現，是非常完美的動態測試組合。
+因為這次要呈現的是 0 到 100 的連續數值，我們需要把原本設定給開關訊號的「階梯圖（stepped line）」改回標準的平滑折線圖，並調整 Y 軸限制，讓圖表能完美容納 0~100 的波動。
+以下是完整的設定與調整步驟：
+🛠️ 實作步驟與節點修改
+1. 建立「每 2 秒產生 0~100 隨機數」的觸發源
+* Inject 節點（週期觸發）：
+   * 拉入一個 Inject 節點。
+   * 將 Repeat（重複） 設定改為 「指定時間間隔 (interval)」，並設定為每 2 秒 (seconds) 觸發一次。
+* Random 節點（隨機數產生器）：
+   * 拉入一個 random 節點（若您的環境沒有，可在「節點管理」搜尋並安裝 node-red-node-random，或者直接用下方 Function 節點程式碼替代）。
+   * 設定最小值（Min）為 0，最大值（Max）為 100，整數（Integer）。
+   * 提示：如果不想安裝新節點，直接用一個 Function 節點寫 msg.payload = Math.floor(Math.random() * 101); 效果完全一樣。
+* 接線： 將 Inject 連接到 Random，再將 Random 的輸出連接到下方的「寫入歷史紀錄」節點。
+2. 修改「寫入歷史紀錄」的 Function 節點
+原本的紀錄器會把數值強制轉換成 1 或 0，我們需要修改它，讓它直接記錄真實傳入的隨機數值。請將該節點程式碼改為：
+
+
+
+
+
+
+JavaScript
+let now = new Date();
+let timeStr = String(now.getHours()).padStart(2, '0') + ":" + 
+             String(now.getMinutes()).padStart(2, '0') + ":" + 
+             String(now.getSeconds()).padStart(2, '0');
+
+// 💡 修改點：直接讀取真實傳入的 0~100 數值，不做布林轉換
+let currentVal = Number(msg.payload);
+
+let history = global.get("dataHistory") || [];
+history.push({ time: timeStr, value: currentVal });
+
+if (history.length > 50) { history.shift(); }
+global.set("dataHistory", history);
+
+return msg;
+
+3. 修改「折線圖網頁 HTML」的 Template 節點
+我們需要把原本為了開關訊號設計的鎖定（0 與 1）和階梯線條取消。請打開該節點，找到 <script> 區塊中的 datasets 與 scales 配置，修改為以下設定（或直接匯入下方完整 JSON）：
+* 將 stepped: true 改為 stepped: false（變回標準連續折線）。
+* 將 Y 軸的 min: -0.1, max: 1.1 改為 min: 0, max: 100。
+🚀 一鍵匯入優化後的完整流程碼
+為了讓您最快看到效果，您可以直接複製下方調整完畢的 JSON 程式碼，匯入到您的 Node-RED 中（已內含隨機數產生邏輯，不需額外安裝擴充套件）：
+
+
+
+
+
+JSON
+[
+   {
+       "id": "inject_2s_trigger",
+       "type": "inject",
+       "z": "flow_workspace",
+       "name": "每2秒觸發",
+       "props": [
+           { "p": "payload" }
+       ],
+       "repeat": "2",
+       "crontab": "",
+       "once": true,
+       "onceDelay": "0.1",
+       "topic": "",
+       "payload": "",
+       "payloadType": "date",
+       "x": 120,
+       "y": 220,
+       "wires": [
+           [
+               "function_sim_random"
+           ]
+       ]
+   },
+   {
+       "id": "function_sim_random",
+       "type": "function",
+       "z": "flow_workspace",
+       "name": "模擬 0~100 隨機數",
+       "func": "// 產生 0 到 100 的隨機整數\nmsg.payload = Math.floor(Math.random() * 101);\nreturn msg;",
+       "outputs": 1,
+       "noerr": 0,
+       "x": 330,
+       "y": 220,
+       "wires": [
+           [
+               "function_write_history_continuous"
+           ]
+       ]
+   },
+   {
+       "id": "function_write_history_continuous",
+       "type": "function",
+       "z": "flow_workspace",
+       "name": "寫入歷史紀錄(連續值)",
+       "func": "let now = new Date();\nlet timeStr = String(now.getHours()).padStart(2, '0') + \":\" + \n              String(now.getMinutes()).padStart(2, '0') + \":\" + \n              String(now.getSeconds()).padStart(2, '0');\n\nlet currentVal = Number(msg.payload);\nlet history = global.get(\"dataHistory\") || [];\nhistory.push({ time: timeStr, value: currentVal });\nif (history.length > 50) { history.shift(); }\nglobal.set(\"dataHistory\", history);\n\nreturn msg;",
+       "outputs": 1,
+       "x": 560,
+       "y": 220,
+       "wires": [
+           []
+       ]
+   },
+   {
+       "id": "http_in_chart_page",
+       "type": "http in",
+       "z": "flow_workspace",
+       "name": "圖表網頁進入點",
+       "url": "/chart",
+       "method": "get",
+       "upload": false,
+       "wires": [
+           [
+               "template_chart_html_continuous"
+           ]
+       ]
+   },
+   {
+       "id": "template_chart_html_continuous",
+       "type": "template",
+       "z": "flow_workspace",
+       "name": "連續折線圖網頁 HTML",
+       "field": "payload",
+       "fieldType": "msg",
+       "format": "html",
+       "syntax": "mustache",
+       "template": "<!DOCTYPE HTML>\n<html>\n<head>\n  <title>Node-RED 0-100 Real-time Chart</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n  <style>\n    body { font-family: Arial; text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; }\n    h2 { color: #2b3a55; }\n    .chart-container { position: relative; margin: auto; height: 45vh; width: 85vw; max-width: 750px; }\n  </style>\n</head>\n<body>\n  <h2>Node-RED 0~100 模擬數據即時折線圖</h2>\n  <div class=\"chart-container\">\n    <canvas id=\"realtimeChart\"></canvas>\n  </div>\n  <script>\n    var ctx = document.getElementById('realtimeChart').getContext('2d');\n    var myChart = new Chart(ctx, {\n      type: 'line',\n      data: {\n        labels: [],\n        datasets: [{ \n          label: '模擬感測器數據 (0~100)', \n          data: [], \n          borderColor: '#4CAF50', \n          backgroundColor: 'rgba(76, 175, 80, 0.15)', \n          borderWidth: 2,\n          stepped: false, \n          tension: 0.3 \n        }]\n      },\n      options: {\n        responsive: true, maintainAspectRatio: false,\n        scales: { y: { min: 0, max: 100, ticks: { stepSize: 10 } } }\n      }\n    });\n    function updateChartData() {\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          var resData = JSON.parse(this.responseText);\n          myChart.data.labels = resData.map(item => item.time);\n          myChart.data.datasets[0].data = resData.map(item => item.value);\n          myChart.update('none');\n        }\n      };\n      xhr.open(\"GET\", \"/chart-data?t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n    setInterval(updateChartData, 2000);\n    updateChartData();\n  </script>\n</body>\n</html>",
+       "output": "str",
+       "x": 340,
+       "y": 80,
+       "wires": [
+           [
+               "http_out_chart_page"
+           ]
+       ]
+   },
+   {
+       "id": "http_out_chart_page",
+       "type": "http response",
+       "z": "flow_workspace",
+       "name": "回傳圖表網頁",
+       "statusCode": "",
+       "headers": {},
+       "x": 560,
+       "y": 80,
+       "wires": []
+   },
+   {
+       "id": "http_in_chart_data",
+       "type": "http in",
+       "z": "flow_workspace",
+       "name": "圖表數據 API",
+       "url": "/chart-data",
+       "method": "get",
+       "upload": false,
+       "wires": [
+           [
+               "function_read_history"
+           ]
+       ]
+   },
+   {
+       "id": "function_read_history",
+       "type": "function",
+       "z": "flow_workspace",
+       "name": "讀取歷史紀錄",
+       "func": "msg.payload = global.get(\"dataHistory\") || [];\nreturn msg;",
+       "outputs": 1,
+       "x": 340,
+       "y": 140,
+       "wires": [
+           [
+               "http_out_chart_data"
+           ]
+       ]
+   },
+   {
+       "id": "http_out_chart_data",
+       "type": "http response",
+       "z": "flow_workspace",
+       "name": "回傳 JSON 數據",
+       "statusCode": "200",
+       "headers": {},
+       "x": 560,
+       "y": 140,
+       "wires": []
+   }
+]
+
+
+🎯 測試與檢視結果
+1. 匯入完成後，點擊右上角 Deploy（部署），此時背景檢查器會自動啟動，每 2 秒默默在全域陣列中塞入一個新產生的隨機數。
+2. 打開網頁瀏覽器，前往：http://您的IP:1880/chart。
+3. 您會看到原本生硬的開關方波圖，轉變成一條充滿動態美感、每 2 秒更新一次上下起伏的綠色隨機數據波形圖（Y 軸精準固定在 0 到 100 之間）！
+
+
+非常抱歉！這是上一段 JSON 程式碼中的一個排版失誤造成的。
+從您提供的截圖錯誤訊息 SyntaxError: Bad escaped character in JSON 可以精準地看出，在 function 節點的程式碼字串中，不小心多出了一個不合法的反斜線加空白 \ （在 \ history.pus 的位置）。Node-RED 的 JSON 解析器非常嚴格，只要有不合法的跳脫字元就會拒絕匯入。
+我已經將那個多餘的符號完全清除。請清空您目前的剪貼簿，直接複製下方修正後的完整程式碼，並重新貼上到 Node-RED 的匯入視窗中，這次就能順利匯入了：
+
+
+
+
+

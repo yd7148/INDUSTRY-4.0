@@ -1,0 +1,427 @@
+這就為您加上帳號密碼登入功能！
+
+為了維持您流程的純粹性（不需額外安裝第三方節點），我使用 Node-RED 內建的 Function 節點實作了標準的 **HTTP Basic Authentication (基本驗證)**。
+
+現在當使用者連線到 `/web` 時，瀏覽器會自動彈出視窗要求輸入帳號密碼。
+
+### 預設登入資訊：
+
+* **帳號：** `admin`
+* **密碼：** `123456`
+
+### 匯入更新後的流程 (JSON)：
+
+[
+  {
+    "id": "e4c5c17d085ef9f3",
+    "type": "tab",
+    "label": "流程4_設計設定時間開啟或關閉增加密碼",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "c17784b7a9aeebcb",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "網頁進入點",
+    "url": "/web",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 120,
+    "wires": [["auth_func_node"]]
+  },
+  {
+    "id": "auth_func_node",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "驗證帳號密碼",
+    "func": "const expectedAuth = \"Basic YWRtaW46MTIzNDU2\"; \nif (msg.req.headers.authorization === expectedAuth) {\n    return [msg, null];\n} else {\n    msg.statusCode = 401;\n    msg.headers = {\n        \"WWW-Authenticate\": 'Basic realm=\"Secure Area\"'\n    };\n    msg.payload = \"401 Unauthorized: 拒絕存取，請輸入正確的帳號密碼。\";\n    return [null, msg];\n}",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 310,
+    "y": 120,
+    "wires": [["85dd8d9f151582e3"], ["auth_401_node"]]
+  },
+  {
+    "id": "auth_401_node",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "要求登入 (401)",
+    "statusCode": "",
+    "headers": {},
+    "x": 520,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "logout_http_in",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 登出請求",
+    "url": "/logout",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 60,
+    "wires": [["logout_func_node"]]
+  },
+  {
+    "id": "logout_func_node",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "強制觸發 401",
+    "func": "msg.statusCode = 401;\nmsg.headers = {\n    \"WWW-Authenticate\": 'Basic realm=\"Secure Area\"'\n};\nmsg.payload = \"Logged out\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 310,
+    "y": 60,
+    "wires": [["auth_401_node"]]
+  },
+  {
+    "id": "85dd8d9f151582e3",
+    "type": "template",
+    "z": "e4c5c17d085ef9f3",
+    "name": "HTML 計時與排程網頁",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "html",
+    "syntax": "mustache",
+    "template": "<!DOCTYPE HTML>\n<html>\n<head>\n  <title>Node-RED Advanced Automation Server</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style>\n    html {font-family: Arial; display: inline-block; text-align: center;}\n    .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 450px; margin: 0 auto; }\n    h2 {font-size: 2.2rem; color: #2b3a55; margin: 20px 0;}\n    .btn-logout { background-color: #64748b; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; width: auto !important; margin: 0 !important; }\n    .btn-logout:hover { background-color: #475569; }\n    .section {background: #f4f4f4; padding: 15px; border-radius: 8px; margin: 15px auto; max-width: 450px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: left;}\n    .section h3 {margin-top: 0; color: #555; text-align: center;}\n    .time-display {font-size: 1.8rem; margin: 10px 0; color: #333; text-align: center;}\n    body {max-width: 600px; margin:0px auto; padding-bottom: 25px;}\n    .slider-range { -webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: #d3d3d3; margin: 10px 0; }\n    .slider-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #2b3a55; cursor: pointer; }\n    input[type=\"time\"], select, button { font-size: 1rem; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; }\n    button { background-color: #2b3a55; color: white; border: none; cursor: pointer; padding: 10px; font-weight: bold; margin-top: 10px; }\n    button:hover { background-color: #1e293b; }\n    .switch-container { text-align: center; margin: 15px 0; }\n    .switch {position: relative; display: inline-block; width: 120px; height: 68px;}\n    .switch input {display: none;}\n    .slider {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; border-radius: 34px;}\n    .slider:before {position: absolute; content: \"\"; height: 52px; width: 52px; left: 8px; bottom: 8px; background-color: #fff; transition: .4s; border-radius: 68px;}\n    input:checked+.slider {background-color: #2196F3;}\n    input:checked+.slider:before {-webkit-transform: translateX(52px); transform: translateX(52px);}\n    .week-days { display: flex; justify-content: space-between; margin: 10px 0; }\n    .day-checkbox { display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; }\n    .day-checkbox input { margin-bottom: 5px; }\n    .schedule-item { background: white; padding: 10px; border-radius: 4px; margin: 5px 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }\n    .btn-delete { background-color: #ef4444; color: white; width: auto; padding: 5px 10px; font-size: 0.85rem; margin: 0; }\n    .btn-delete:hover { background-color: #dc2626; }\n    .hidden { display: none !important; }\n    .mode-select { margin-bottom: 12px; display: flex; gap: 10px; align-items: center; }\n  </style>\n</head>\n<body>\n  <div class=\"header-container\">\n    <h2>ESP Server</h2>\n    <button class=\"btn-logout\" onclick=\"logout()\">🔒 登出系統</button>\n  </div>\n  \n  <div class=\"section\">\n    <h3>手動與延時控制</h3>\n    \n    <div class=\"mode-select\">\n      <label style=\"font-weight: bold;\">關閉模式：</label>\n      <select id=\"controlMode\" onchange=\"changeMode(this.value)\">\n        <option value=\"auto\">延時自動關閉</option>\n        <option value=\"manual\">完全手動關閉</option>\n      </select>\n    </div>\n\n    <div id=\"timerContainer\">\n      <div class=\"time-display\"><span id=\"timeValue\">5</span> 秒後自動關閉</div>\n      <input type=\"range\" min=\"1\" max=\"60\" value=\"5\" class=\"slider-range\" id=\"timerSlider\" oninput=\"updateTime(this.value)\">\n    </div>\n\n    <div class=\"switch-container\">\n      <label class=\"switch\">\n        <input type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"output\">\n        <span class=\"slider\"></span>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"section\">\n    <h3>新增排程規則</h3>\n    <label>執行時間：</label>\n    <input type=\"time\" id=\"schTime\" value=\"08:00\">\n    \n    <label>執行動作：</label>\n    <select id=\"schAction\">\n      <option value=\"1\">開啟 (ON)</option>\n      <option value=\"0\">關閉 (OFF)</option>\n    </select>\n    \n    <label>重複類型：</label>\n    <select id=\"schType\" onchange=\"toggleWeekDays(this.value)\">\n      <option value=\"daily\">每天</option>\n      <option value=\"weekly\">每週特定天</option>\n    </select>\n    \n    <div id=\"weekDaysContainer\" class=\"week-days hidden\">\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"1\">一</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"2\">二</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"3\">三</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"4\">四</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"5\">五</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"6\">六</label>\n      <label class=\"day-checkbox\"><input type=\"checkbox\" value=\"0\">日</label>\n    </div>\n    \n    <button onclick=\"addSchedule()\">新增排程紀錄</button>\n  </div>\n\n  <div class=\"section\">\n    <h3>目前排程清單</h3>\n    <div id=\"scheduleList\">載入中...</div>\n  </div>\n  \n  <script>\n    function logout() {\n      var xhr = new XMLHttpRequest();\n      xhr.open(\"GET\", \"/logout\", true, \"logout\", \"logout\");\n      xhr.send();\n      xhr.onreadystatechange = function() {\n        if (xhr.readyState === 4) {\n          window.location.reload(true);\n        }\n      };\n    }\n\n    function changeMode(mode) {\n      const timerContainer = document.getElementById(\"timerContainer\");\n      if (mode === \"manual\") {\n        timerContainer.classList.add(\"hidden\");\n      } else {\n        timerContainer.classList.remove(\"hidden\");\n      }\n    }\n\n    function updateTime(val) {\n      document.getElementById(\"timeValue\").innerHTML = val;\n    }\n\n    function toggleWeekDays(val) {\n      const container = document.getElementById(\"weekDaysContainer\");\n      if (val === \"weekly\") {\n        container.classList.remove(\"hidden\");\n      } else {\n        container.classList.add(\"hidden\");\n      }\n    }\n\n    function toggleCheckbox(element) {\n      var xhr = new XMLHttpRequest();\n      var mode = document.getElementById(\"controlMode\").value;\n      var time = mode === \"auto\" ? document.getElementById(\"timerSlider\").value : \"0\";\n      \n      if(element.checked) { \n        xhr.open(\"GET\", \"/update?state=1&mode=\" + mode + \"&time=\" + time + \"&t=\" + new Date().getTime(), true); \n      } else { \n        xhr.open(\"GET\", \"/update?state=0&t=\" + new Date().getTime(), true); \n      }\n      xhr.send();\n    }\n\n    function loadSchedules() {\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          var list = JSON.parse(this.responseText);\n          var html = \"\";\n          if (list.length === 0) {\n            html = \"<div style='color:#666;text-align:center;'>目前無任何排程紀錄</div>\";\n          } else {\n            const dayNames = [\"日\", \"一\", \"二\", \"三\", \"四\", \"五\", \"六\"];\n            list.forEach(function(item) {\n              var typeText = \"每天\";\n              if (item.type === \"weekly\" && item.days) {\n                var daysStr = item.days.map(d => dayNames[d]).join(\",\");\n                typeText = \"每週 (\" + daysStr + \")\";\n              }\n              var actionText = item.action === \"1\" ? \"開啟\" : \"關閉\";\n              html += \"<div class='schedule-item'>\";\n              html += \"<span>⏱️ \" + typeText + \" \" + item.time + \" ➡️ <b>\" + actionText + \"</b></span>\";\n              html += \"<button class='btn-delete' onclick='deleteSchedule(\\\"\" + item.id + \"\\\")'>刪除</button>\";\n              html += \"</div>\";\n            });\n          }\n          document.getElementById(\"scheduleList\").innerHTML = html;\n        }\n      };\n      xhr.open(\"GET\", \"/getSchedules?t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    function addSchedule() {\n      var time = document.getElementById(\"schTime\").value;\n      var action = document.getElementById(\"schAction\").value;\n      var type = document.getElementById(\"schType\").value;\n      \n      var days = [];\n      if (type === \"weekly\") {\n        var checkboxes = document.querySelectorAll(\"#weekDaysContainer input:checked\");\n        checkboxes.forEach(function(cb) {\n          days.push(parseInt(cb.value));\n        });\n        if (days.length === 0) {\n          alert(\"請至少選擇一個星期天數！\");\n          return;\n        }\n      }\n      \n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          if (this.responseText === \"SUCCESS\") {\n            loadSchedules();\n          } else {\n            alert(\"新增失敗\");\n          }\n        }\n      };\n      \n      var url = \"/addSchedule?time=\" + time + \"&action=\" + action + \"&type=\" + type;\n      if (days.length > 0) {\n        url += \"&days=\" + JSON.stringify(days);\n      }\n      url += \"&t=\" + new Date().getTime();\n      \n      xhr.open(\"GET\", url, true);\n      xhr.send();\n    }\n\n    function deleteSchedule(id) { \n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          if (this.responseText === \"SUCCESS\") {\n            loadSchedules();\n          }\n        }\n      };\n      xhr.open(\"GET\", \"/deleteSchedule?id=\" + id + \"&t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    loadSchedules();\n    setInterval(function () {\n      var xhttp = new XMLHttpRequest();\n      xhttp.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          document.getElementById(\"output\").checked = (this.responseText === \"1\");\n        }\n      };\n      xhttp.open(\"GET\", \"/state?t=\" + new Date().getTime(), true);\n      xhttp.send();\n    }, 1000);\n  </script>\n</body>\n</html>",
+    "output": "str",
+    "x": 520,
+    "y": 120,
+    "wires": [["9de20894b9e15779"]]
+  },
+  {
+    "id": "9de20894b9e15779",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳網頁",
+    "statusCode": "200",
+    "headers": {
+      "Content-Type": "text/html"
+    },
+    "x": 720,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "378b927568ee7323",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 獲取排程清單",
+    "url": "/getSchedules",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 200,
+    "wires": [["952e13232656d771"]]
+  },
+  {
+    "id": "952e13232656d771",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "讀取排程清單",
+    "func": "msg.payload = global.get(\"schedules\") || [];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 200,
+    "wires": [["a08ade591c661416"]]
+  },
+  {
+    "id": "a08ade591c661416",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳排程 JSON",
+    "statusCode": "200",
+    "headers": {},
+    "x": 520,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "f4bdc21a3ca71f3b",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 新增排程紀錄",
+    "url": "/addSchedule",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 280,
+    "wires": [["8cdb1e7e06d62e5e"]]
+  },
+  {
+    "id": "8cdb1e7e06d62e5e",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "新增排程項目",
+    "func": "let schedules = global.get(\"schedules\") || [];\nlet newSch = {\n    id: \"sch_\" + Date.now() + \"_\" + Math.floor(Math.random()*1000),\n    time: msg.payload.time,\n    action: msg.payload.action,\n    type: msg.payload.type\n};\nif (msg.payload.days) {\n    try {\n        newSch.days = JSON.parse(msg.payload.days);\n    } catch(e) {\n        newSch.days = [];\n    }\n}\nschedules.push(newSch);\nglobal.set(\"schedules\", schedules);\nmsg.payload = \"SUCCESS\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 280,
+    "wires": [["60a7d86e677a235d"]]
+  },
+  {
+    "id": "60a7d86e677a235d",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳 SUCCESS",
+    "statusCode": "200",
+    "x": 520,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "ffe883998a76b5d1",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 刪除排程紀錄",
+    "url": "/deleteSchedule",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 360,
+    "wires": [["1765384388420b76"]]
+  },
+  {
+    "id": "1765384388420b76",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "過濾並刪除排程",
+    "func": "let schedules = global.get(\"schedules\") || [];\nlet idToDelete = msg.payload.id;\nschedules = schedules.filter(item => item.id !== idToDelete);\nglobal.set(\"schedules\", schedules);\nmsg.payload = \"SUCCESS\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 360,
+    "wires": [["b708abfb2025a353"]]
+  },
+  {
+    "id": "b708abfb2025a353",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳 SUCCESS",
+    "statusCode": "200",
+    "x": 520,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "68f20a6f5456cd78",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 接收手動指令",
+    "url": "/update",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 120,
+    "y": 440,
+    "wires": [["d019d487ca6cc1b5"]]
+  },
+  {
+    "id": "d019d487ca6cc1b5",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "延時/手動控制邏輯",
+    "func": "let reqState = msg.payload.state;\nlet reqMode = msg.payload.mode || \"auto\";\nlet reqTime = parseInt(msg.payload.time || \"0\");\nlet timerId = context.get('timerId');\n\n// 清除既有定時器\nif (timerId) {\n    clearTimeout(timerId);\n    context.set('timerId', null);\n}\n\nif (reqState === \"1\") {\n    global.set(\"ledState\", \"1\");\n    node.send([{ payload: \"OK\" }, { payload: true }]);\n    \n    // 僅在自動模式且延時 > 0 時啟動計時器\n    if (reqMode === \"auto\" && reqTime > 0) {\n        timerId = setTimeout(function() {\n            global.set(\"ledState\", \"0\");\n            node.send([null, { payload: false }]);\n        }, reqTime * 1000);\n        context.set('timerId', timerId);\n    }\n} else {\n    global.set(\"ledState\", \"0\");\n    node.send([{ payload: \"OK\" }, { payload: false }]);\n}\nreturn null;",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 440,
+    "wires": [["03c4fb6ed29b3eb6"], ["efab355057aa6dd7", "6f3899d8f5446160"]]
+  },
+  {
+    "id": "03c4fb6ed29b3eb6",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳 200 OK",
+    "statusCode": "200",
+    "headers": {},
+    "x": 520,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "efab355057aa6dd7",
+    "type": "ui_led",
+    "z": "e4c5c17d085ef9f3",
+    "order": 1,
+    "group": "dashboard_group_timer",
+    "width": 0,
+    "height": 0,
+    "label": "智慧硬體燈號",
+    "labelPlacement": "left",
+    "labelAlignment": "left",
+    "colorForValue": [
+      { "color": "#ff0000", "value": "false", "valueType": "bool" },
+      { "color": "#00d000", "value": "true", "valueType": "bool" }
+    ],
+    "allowColorForValueInMessage": false,
+    "shape": "circle",
+    "showGlow": true,
+    "name": "",
+    "x": 520,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "353b131e46520e39",
+    "type": "http in",
+    "z": "e4c5c17d085ef9f3",
+    "name": "API 查詢狀態",
+    "url": "/state",
+    "method": "get",
+    "upload": false,
+    "x": 120,
+    "y": 540,
+    "wires": [["590d7ba42c652a96"]]
+  },
+  {
+    "id": "590d7ba42c652a96",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "讀取全域狀態",
+    "func": "msg.payload = global.get(\"ledState\") || \"0\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 320,
+    "y": 540,
+    "wires": [["13286cf6fe161105"]]
+  },
+  {
+    "id": "13286cf6fe161105",
+    "type": "http response",
+    "z": "e4c5c17d085ef9f3",
+    "name": "回傳即時狀態",
+    "statusCode": "200",
+    "x": 520,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "8529af327d552ba6",
+    "type": "inject",
+    "z": "e4c5c17d085ef9f3",
+    "name": "每分鐘檢查器",
+    "props": [{ "p": "payload" }],
+    "repeat": "60",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 120,
+    "y": 620,
+    "wires": [["c3d0a6250ec7adbb"]]
+  },
+  {
+    "id": "c3d0a6250ec7adbb",
+    "type": "function",
+    "z": "e4c5c17d085ef9f3",
+    "name": "時鐘比對核心",
+    "func": "let schedules = global.get(\"schedules\") || [];\nlet lastTriggeredTime = global.get(\"lastTriggeredTime\") || \"\";\n\nlet now = new Date();\nlet hours = String(now.getHours()).padStart(2, '0');\nlet minutes = String(now.getMinutes()).padStart(2, '0');\nlet currentTime = hours + \":\" + minutes;\nlet currentDay = now.getDay();\n\nif (currentTime !== lastTriggeredTime) {\n    let matchedAction = null;\n    \n    for (let item of schedules) {\n        if (item.time === currentTime) {\n            if (item.type === \"daily\") {\n                matchedAction = item.action;\n            } else if (item.type === \"weekly\" && item.days && item.days.includes(currentDay)) {\n                matchedAction = item.action;\n            }\n        }\n    }\n    \n    if (matchedAction !== null) {\n        global.set(\"ledState\", matchedAction);\n        global.set(\"lastTriggeredTime\", currentTime);\n        let isLedOn = (matchedAction === \"1\");\n        return { payload: isLedOn };\n    }\n}\nreturn { payload: \"當前時間:\" + currentTime + \", 星期:\" + currentDay };",
+    "outputs": 1,
+    "timeout": "",
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 620,
+    "wires": [["efab355057aa6dd7", "cbfbc45b7d384c27"]]
+  },
+  {
+    "id": "cbfbc45b7d384c27",
+    "type": "debug",
+    "z": "e4c5c17d085ef9f3",
+    "name": "debug 2",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 540,
+    "y": 680,
+    "wires": []
+  },
+  {
+    "id": "6f3899d8f5446160",
+    "type": "debug",
+    "z": "e4c5c17d085ef9f3",
+    "name": "debug 3",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 540,
+    "y": 620,
+    "wires": []
+  },
+  {
+    "id": "dashboard_group_timer",
+    "type": "ui_group",
+    "name": "定時面板",
+    "tab": "dashboard_tab_timer",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "dashboard_tab_timer",
+    "type": "ui_tab",
+    "name": "Web 定時器測試",
+    "icon": "dashboard",
+    "disabled": false,
+    "hidden": false
+  }
+]
+
+### 💡 如何修改自己的專屬帳號密碼？
+
+如果您想要把帳號改成其他名稱與密碼，請依照以下步驟修改：
+
+1. 將您想要的 `帳號:密碼` 轉換為 **Base64** 格式（網路上有許多免費的 Base64 Encode 工具）。
+* *例如：想改成帳號 `user`，密碼 `8888`，則字串 `user:8888` 編碼後會變成 `dXNlcjo4ODg4*`
+
+
+2. 雙擊開啟名為 **「驗證帳號密碼」** 的 Function 節點。
+3. 將第二行的 `YWRtaW46MTIzNDU2` 替換成您剛剛產生出的 Base64 字串即可：
+```javascript
+const expectedAuth = "Basic dXNlcjo4ODg4"; // 改成您的 Base64
+
+```
