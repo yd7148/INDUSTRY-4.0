@@ -14,11 +14,11 @@
 | 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 分支 | `main` → `origin/main` |
 | 推送前遠端 | `456e770`（2026-10-09） |
-| 推送後遠端 | **`1461a53`** |
-| 推送範圍 | `456e770..1461a53`（5 個 commit） |
+| 推送後遠端 | `aaac432`（教材＋初版文件）；本文件修訂後以 `git ls-remote` 為準 |
+| 推送範圍 | `456e770..1461a53`（5 個 commit，教材與文件） |
 | 本次新增 | Class-20（56 檔）、Class-21（72 檔）、`README.md`、`docs/` |
 | 傳輸結果 | **成功**；GitHub 回報 `456e770..1461a53  main -> main` |
-| 遠端驗證 | `git ls-remote origin main` 回傳 `1461a53f3a3b8a52c7e481244ad1f710a6b098b6` |
+| 遠端驗證 | `git ls-remote origin main` 與 GitHub 網頁一致（`1461a53` → `aaac432`） |
 | 工作區狀態 | clean，`main` 與 `origin/main` 同點 |
 
 ```mermaid
@@ -127,7 +127,7 @@ git status --short --branch
 | 4 | 大型安裝包已排除 | 兩個 1.69 GB 的 GX Works3 更新包被 `.gitignore` 排除 | ✅ |
 | 5 | Mermaid 語法可渲染 | 以 Mermaid 11 實際渲染 `README.md`、`COURSE-MAP.md` | ✅ 7/7 |
 | 6 | 文件無 TODO／佔位符 | 關鍵字掃描 `TODO`、`FIXME`、`待補` | ✅ |
-| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅ 同為 `1461a53` |
+| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（`1461a53` → `aaac432`） |
 | 8 | GitHub 網頁可見新 commit | 讀取 `/commits/main` 頁面 | ✅ |
 | 9 | 推送後工作區乾淨 | `git status` | ✅ clean |
 | 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials` | ✅ |
@@ -136,7 +136,7 @@ git status --short --branch
 
 | 指標 | 數值 |
 |---|---:|
-| 追蹤檔案數 | 506 |
+| 追蹤檔案數 | 507 |
 | 追蹤內容合計 | 1,449.9 MB |
 | `.git` 目錄 | 430.3 MB |
 | commit 總數 | 22 |
@@ -163,6 +163,8 @@ git status --short --branch
 | 日期 | 範圍 | 結果 | 備註 |
 |---|---|---|---|
 | 2026-10-29 | `456e770..1461a53` | 成功 | 新增 Class-20、Class-21、README 與 docs |
+| 2026-10-29 | `1461a53..aaac432` | 成功 | 新增 `docs/PUSH-RECORD.md` |
+| 2026-10-29 | `aaac432..`（本文件修訂） | 成功 | 更新最終 HEAD 與推送歷史 |
 
 ---
 
