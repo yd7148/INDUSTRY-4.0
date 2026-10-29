@@ -1,6 +1,6 @@
 # 課程教材地圖（Course Map）
 
-本文件逐一列出 20 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
+本文件逐一列出 21 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
 統計時間：2026-10-29；僅計入工作目錄實體檔案（含被 `.gitignore` 排除的大型壓縮檔）。
 
 ---
@@ -20,7 +20,7 @@ flowchart TD
     I --> J["Class 13-15<br/>10-01 ～ 10-08<br/>綜合練習與 Global Label"]
     J --> K["Class 16<br/>10-13<br/>Node-RED 基本節點"]
     J --> L["Class 17-18<br/>10-15 ～ 10-20<br/>機電整合丙級 CIROS"]
-    K --> M["Class 19-20<br/>10-22 ～ 10-27<br/>MQTT 與網頁儀錶板"]
+    K --> M["Class 19-21<br/>10-22 ～ 10-29<br/>MQTT、網頁儀錶板與 M2M"]
     L --> M
 ```
 
@@ -50,6 +50,7 @@ flowchart TD
 | 18 | `Class-18-2026-10-20` | 2026-10-20 | 35 | 25.6 MB | CIROS 機電整合丙 1 整合、IP133 範例、教師版 tutorial |
 | 19 | `Class-19-2026-10-22` | 2026-10-22 | 78 | 173.6 MB | Node-RED 網頁應用 4 個範例、MQTT 工具（Mosquitto／Explorer／MQTTBox） |
 | 20 | `Class-20-2026-10-27` | 2026-10-27 | 56 | 162.8 MB | Node-RED 網頁控制 LED、定時開關、Chart、Ngrok 轉址、MQTT 工具 |
+| 21 | `Class-21-2026-10-29` | 2026-10-29 | 72 | 39.0 MB | Node-RED Flow 1／2 匯出頁面、M2M 講義、PLC 範本 `2026-10-29-template-1.gx3` |
 | — | `80-自動控制工程職類共用資料-PDF` | — | 11 | 85.9 MB | Delta／FX5U／CIROS 共用手冊與規範 |
 | — | `netcheck` | — | 24 | 0.2 MB | 網路 Port、測速、網站連線診斷腳本與報告 |
 
@@ -84,6 +85,7 @@ gantt
     section 物聯網應用
     Class 19 Node-RED/MQTT   :c19, 2026-10-22, 1d
     Class 20 網頁應用         :c20, 2026-10-27, 1d
+    Class 21 Flow 與 M2M      :c21, 2026-10-29, 1d
 ```
 
 > 註：Class-07（09-15）與 Class-08（09-10）的編號與日期錯位，Gantt 圖依實際日期排列。
@@ -102,8 +104,8 @@ gantt
 | 順序控制（SFC） | 11 | SFC 講義與選單章節 |
 | 標籤化程式設計 | 14、15 | Global Label 教材與範例 |
 | 機電整合丙級實作 | 17、18 | 機丙 1 tutorial、CIROS IO 表與規範 |
-| Node-RED 流程設計 | 16、19、20 | 基本節點、儀錶板、Chart、LED 控制 |
-| MQTT 通訊與 Broker 架設 | 19、20 | Mosquitto 安裝檔、MQTT Explorer、教學 PDF |
+| Node-RED 流程設計 | 16、19、20、21 | 基本節點、儀錶板、Chart、LED 控制、Flow 匯出 |
+| MQTT／M2M 通訊 | 19、20、21 | Mosquitto 安裝檔、MQTT Explorer、M2M 講義 |
 | 網路診斷 | netcheck | Port 測試、測速、網站連線報告 |
 
 ---

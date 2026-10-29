@@ -1,12 +1,12 @@
 # 工業 4.0 自動控制工程職類｜課程教材庫
 
-本倉庫收錄 **2026-08-25 ～ 2026-10-27** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **20 堂課**、三大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用）與一份網路檢測報告。
+本倉庫收錄 **2026-08-25 ～ 2026-10-29** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **21 堂課**、三大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用）與一份網路檢測報告。
 
 | 項目 | 內容 |
 |---|---|
 | 線上倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 預設分支 | `main` |
-| 課程期間 | 2026-08-25 ～ 2026-10-27（20 堂） |
+| 課程期間 | 2026-08-25 ～ 2026-10-29（21 堂） |
 | 主要工具 | GX Works3、DVP-PLC、Node-RED、Mosquitto、MQTT Explorer |
 | 文件語言 | 繁體中文 |
 
@@ -30,14 +30,14 @@ flowchart LR
         C1["Class 13-18<br/>Global Label<br/>機電整合丙級 CIROS"]
     end
     subgraph P4["第四階段｜物聯網應用"]
-        D1["Class 19-20<br/>Node-RED 網頁儀錶板<br/>MQTT 通訊"]
+        D1["Class 19-21<br/>Node-RED 網頁儀錶板<br/>MQTT．M2M 通訊"]
     end
     A1 --> B1 --> B2 --> C1 --> D1
 ```
 
 ```mermaid
 flowchart TB
-    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-20<br/>逐堂教材"]
+    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-21<br/>逐堂教材"]
     REPO --> LIB["80-自動控制工程職類共用資料-PDF<br/>共用參考文件"]
     REPO --> NET["netcheck<br/>網路連線檢測報告"]
     REPO --> DOC["README.md / docs/<br/>說明與紀錄"]
@@ -74,6 +74,7 @@ flowchart TB
 | 18 | 2026-10-20 | CIROS 機電整合丙 1 整合實作 | `IP133 20261020 CIROS_機電整合丙1_2.gx3` |
 | 19 | 2026-10-22 | Node-RED 網頁應用、MQTT 工具 | `Node-RED 網頁應用/`、`MQTT 工具/` |
 | 20 | 2026-10-27 | Node-RED 網頁控制 LED、定時與圖表 | `Node-RED 網頁應用_20261027/`、`Class-20-2026-10-27.doc` |
+| 21 | 2026-10-29 | Node-RED Flow 設計與 M2M 應用 | `Node-RED _ Flow 2.html`、`Class-21-2026-10-29I4.0-M2M.pdf`、`2026-10-29-template-1.gx3` |
 
 > 主題依資料夾名稱與教材檔名歸納；Class-07 與 Class-08 的資料夾編號與日期曾因課程重新編號而錯位，
 > 表中以實際資料夾為準。Class-07／08 內容高度重複，屬同一堂課的兩份快照。
@@ -89,6 +90,7 @@ INDUSTRY-4.0/
 ├─ Class-03-2026-09-01/          # GX Works3、PLC 基礎
 ├─ ...
 ├─ Class-20-2026-10-27/          # Node-RED 網頁應用、MQTT 工具
+├─ Class-21-2026-10-29/          # Node-RED Flow、M2M 應用
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
