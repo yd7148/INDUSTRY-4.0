@@ -1,0 +1,4 @@
+netstat -an|find "1883"
+
+ipconfig
+
