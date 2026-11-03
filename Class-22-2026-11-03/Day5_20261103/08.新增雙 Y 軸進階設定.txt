@@ -1,0 +1,312 @@
+[
+    {
+        "id": "b07aea8fe8954f75",
+        "type": "tab",
+        "label": "流程7",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8e7f0159ef4816bd",
+        "type": "template",
+        "z": "b07aea8fe8954f75",
+        "name": "HTML 雙Y軸進階自訂折線圖網頁",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE HTML>\n<html>\n<head>\n  <title>Node-RED 溫濕度監控儀表板</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n  <style>\n    body { font-family: Arial; text-align: center; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #1a1a1a; color: #fff; }\n    h2 { color: #4CAF50; margin-bottom: 15px; }\n    .panel { background: #2b2b2b; padding: 15px 20px; border-radius: 8px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 12px; border: 1px solid #333; }\n    .panel-row { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }\n    .panel-group { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; color: #ccc; }\n    .panel-group label { font-weight: bold; }\n    input[type=\"number\"] { width: 60px; padding: 5px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: #fff; text-align: center; }\n    input[type=\"color\"] { width: 36px; height: 32px; border: none; border-radius: 4px; cursor: pointer; background: none; }\n    select, button { font-size: 0.9rem; padding: 6px 12px; border-radius: 4px; border: 1px solid #444; background: #333; color: #fff; cursor: pointer; }\n    .btn-apply { background-color: #2563eb; border: none; font-weight: bold; }\n    .btn-apply:hover { background-color: #1d4ed8; }\n    .btn-clear { background-color: #ef4444; border: none; font-weight: bold; }\n    .btn-clear:hover { background-color: #dc2626; }\n    .chart-container { position: relative; margin: auto; height: 55vh; width: 85vw; max-width: 850px; background-color: #2b2b2b; padding: 15px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2>MQTT 客廳溫濕度即時 Web 折線圖 (可自訂 Y 軸與顏色)</h2>\n  \n  <div class=\"panel\">\n    <div class=\"panel-row\">\n      <div class=\"panel-group\">\n        <label style=\"color:#FF5722;\">溫度 (左軸)：</label>\n        <span>Min</span>\n        <input type=\"number\" id=\"tempMin\" value=\"10\">\n        <span>Max</span>\n        <input type=\"number\" id=\"tempMax\" value=\"80\">\n        <input type=\"color\" id=\"tempColor\" value=\"#FF5722\" onchange=\"updateColors()\">\n      </div>\n\n      <div class=\"panel-group\">\n        <label style=\"color:#2196F3;\">濕度 (右軸)：</label>\n        <span>Min</span>\n        <input type=\"number\" id=\"humMin\" value=\"0\">\n        <span>Max</span>\n        <input type=\"number\" id=\"humMax\" value=\"100\">\n        <input type=\"color\" id=\"humColor\" value=\"#2196F3\" onchange=\"updateColors()\">\n      </div>\n\n      <button class=\"btn-apply\" onclick=\"applyScale()\">⚙️ 套用刻度</button>\n    </div>\n\n    <div class=\"panel-row\">\n      <div class=\"panel-group\">\n        <label for=\"limitSelect\">顯示筆數：</label>\n        <select id=\"limitSelect\" onchange=\"updateChartData()\">\n          <option value=\"10\">最近 10 筆</option>\n          <option value=\"20\" selected>最近 20 筆</option>\n          <option value=\"50\">最近 50 筆</option>\n          <option value=\"0\">顯示全部</option>\n        </select>\n      </div>\n      <button class=\"btn-clear\" onclick=\"clearData()\">🗑️ 清空歷史資料</button>\n    </div>\n  </div>\n\n  <div class=\"chart-container\">\n    <canvas id=\"envChart\"></canvas>\n  </div>\n\n  <script>\n    var ctx = document.getElementById('envChart').getContext('2d');\n    var myChart = new Chart(ctx, {\n      type: 'line',\n      data: {\n        labels: [],\n        datasets: [\n          { \n            label: '溫度 (°C)', \n            data: [], \n            borderColor: '#FF5722', \n            backgroundColor: 'rgba(255, 87, 34, 0.15)', \n            borderWidth: 2, tension: 0.3, spanGaps: true,\n            yAxisID: 'y-temp'\n          },\n          { \n            label: '濕度 (%)', \n            data: [], \n            borderColor: '#2196F3', \n            backgroundColor: 'rgba(33, 150, 243, 0.15)', \n            borderWidth: 2, tension: 0.3, spanGaps: true,\n            yAxisID: 'y-hum'\n          }\n        ]\n      },\n      options: {\n        responsive: true, maintainAspectRatio: false,\n        interaction: { mode: 'index', intersect: false },\n        scales: {\n          x: { ticks: { color: '#ccc' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },\n          'y-temp': {\n            type: 'linear',\n            display: true,\n            position: 'left',\n            title: { display: true, text: '溫度 (°C)', color: '#FF5722', font: { weight: 'bold' } },\n            min: 10, max: 80,\n            ticks: { color: '#FF5722' },\n            grid: { color: 'rgba(255, 87, 34, 0.15)' }\n          },\n          'y-hum': {\n            type: 'linear',\n            display: true,\n            position: 'right',\n            title: { display: true, text: '濕度 (%)', color: '#2196F3', font: { weight: 'bold' } },\n            min: 0, max: 100,\n            ticks: { color: '#2196F3' },\n            grid: { drawOnChartArea: false }\n          }\n        },\n        plugins: { legend: { labels: { color: '#fff' } } }\n      }\n    });\n\n    function hexToRgba(hex, alpha) {\n      var c = hex.replace('#', '');\n      var r = parseInt(c.substring(0, 2), 16);\n      var g = parseInt(c.substring(2, 4), 16);\n      var b = parseInt(c.substring(4, 6), 16);\n      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';\n    }\n\n    function updateColors() {\n      var tColor = document.getElementById(\"tempColor\").value;\n      var hColor = document.getElementById(\"humColor\").value;\n\n      // 更新溫度樣式\n      myChart.data.datasets[0].borderColor = tColor;\n      myChart.data.datasets[0].backgroundColor = hexToRgba(tColor, 0.15);\n      myChart.options.scales['y-temp'].title.color = tColor;\n      myChart.options.scales['y-temp'].ticks.color = tColor;\n      myChart.options.scales['y-temp'].grid.color = hexToRgba(tColor, 0.15);\n\n      // 更新濕度樣式\n      myChart.data.datasets[1].borderColor = hColor;\n      myChart.data.datasets[1].backgroundColor = hexToRgba(hColor, 0.15);\n      myChart.options.scales['y-hum'].title.color = hColor;\n      myChart.options.scales['y-hum'].ticks.color = hColor;\n\n      myChart.update();\n    }\n\n    function applyScale() {\n      var tMin = parseFloat(document.getElementById(\"tempMin\").value);\n      var tMax = parseFloat(document.getElementById(\"tempMax\").value);\n      var hMin = parseFloat(document.getElementById(\"humMin\").value);\n      var hMax = parseFloat(document.getElementById(\"humMax\").value);\n\n      if (!isNaN(tMin)) myChart.options.scales['y-temp'].min = tMin;\n      if (!isNaN(tMax)) myChart.options.scales['y-temp'].max = tMax;\n      if (!isNaN(hMin)) myChart.options.scales['y-hum'].min = hMin;\n      if (!isNaN(hMax)) myChart.options.scales['y-hum'].max = hMax;\n\n      myChart.update();\n    }\n\n    function updateChartData() {\n      var limit = document.getElementById(\"limitSelect\").value;\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          var resData = JSON.parse(this.responseText);\n          myChart.data.labels = resData.map(item => item.time);\n          myChart.data.datasets[0].data = resData.map(item => item.temp);\n          myChart.data.datasets[1].data = resData.map(item => item.hum);\n          myChart.update('none');\n        }\n      };\n      xhr.open(\"GET\", \"/chart-data?limit=\" + limit + \"&t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    function clearData() {\n      if (!confirm(\"確定要清空所有歷史資料嗎？\")) return;\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          updateChartData();\n        }\n      };\n      xhr.open(\"GET\", \"/clear-data?t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    setInterval(updateChartData, 2000);\n    updateChartData();\n  </script>\n</body>\n</html>",
+        "output": "str",
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "16fc78a23f8fdbb7"
+            ]
+        ]
+    },
+    {
+        "id": "8704522102f55558",
+        "type": "http in",
+        "z": "b07aea8fe8954f75",
+        "name": "網頁進入點",
+        "url": "/chart",
+        "method": "get",
+        "upload": false,
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "8e7f0159ef4816bd"
+            ]
+        ]
+    },
+    {
+        "id": "16fc78a23f8fdbb7",
+        "type": "http response",
+        "z": "b07aea8fe8954f75",
+        "name": "回傳網頁",
+        "statusCode": "200",
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "45b5f9eac2cd0ef3",
+        "type": "http in",
+        "z": "b07aea8fe8954f75",
+        "name": "圖表數據 API",
+        "url": "/chart-data",
+        "method": "get",
+        "upload": false,
+        "x": 170,
+        "y": 400,
+        "wires": [
+            [
+                "8f0ffb4a59cb8c05"
+            ]
+        ]
+    },
+    {
+        "id": "8f0ffb4a59cb8c05",
+        "type": "function",
+        "z": "b07aea8fe8954f75",
+        "name": "讀取與篩選溫濕度歷史",
+        "func": "let history = global.get(\"envHistory\") || [];\nlet limit = parseInt(msg.payload.limit || \"0\");\n\nif (limit > 0 && history.length > limit) {\n    history = history.slice(-limit);\n}\n\nmsg.payload = history;\nreturn msg;",
+        "outputs": 1,
+        "x": 520,
+        "y": 400,
+        "wires": [
+            [
+                "36f05541bb7e8e04"
+            ]
+        ]
+    },
+    {
+        "id": "36f05541bb7e8e04",
+        "type": "http response",
+        "z": "b07aea8fe8954f75",
+        "name": "回傳 JSON",
+        "statusCode": "200",
+        "x": 730,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ecf705b2982e7fb7",
+        "type": "http in",
+        "z": "b07aea8fe8954f75",
+        "name": "清空數據 API",
+        "url": "/clear-data",
+        "method": "get",
+        "upload": false,
+        "x": 170,
+        "y": 460,
+        "wires": [
+            [
+                "b9574b48352af7b7"
+            ]
+        ]
+    },
+    {
+        "id": "b9574b48352af7b7",
+        "type": "function",
+        "z": "b07aea8fe8954f75",
+        "name": "清空歷史紀錄",
+        "func": "global.set(\"envHistory\", []);\nmsg.payload = { status: \"SUCCESS\" };\nreturn msg;",
+        "outputs": 1,
+        "x": 520,
+        "y": 460,
+        "wires": [
+            [
+                "07a3ea906e85bba0"
+            ]
+        ]
+    },
+    {
+        "id": "07a3ea906e85bba0",
+        "type": "http response",
+        "z": "b07aea8fe8954f75",
+        "name": "回傳 SUCCESS",
+        "statusCode": "200",
+        "x": 730,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "146b638cc5188690",
+        "type": "inject",
+        "z": "b07aea8fe8954f75",
+        "name": "每5秒觸發測試",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "780e536b17e5075b",
+                "b3dd77a8f566a0f5"
+            ]
+        ]
+    },
+    {
+        "id": "780e536b17e5075b",
+        "type": "random",
+        "z": "b07aea8fe8954f75",
+        "name": "random-溫度",
+        "low": "10",
+        "high": "30",
+        "inte": "true",
+        "property": "payload",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "9a193da32019201d"
+            ]
+        ]
+    },
+    {
+        "id": "b3dd77a8f566a0f5",
+        "type": "random",
+        "z": "b07aea8fe8954f75",
+        "name": "random-濕度",
+        "low": "20",
+        "high": "70",
+        "inte": "true",
+        "property": "payload",
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "81fe7110f39173c2"
+            ]
+        ]
+    },
+    {
+        "id": "9a193da32019201d",
+        "type": "mqtt out",
+        "z": "b07aea8fe8954f75",
+        "name": "發送溫度",
+        "topic": "sensors/livingroom/temp",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b43c3e810458f829",
+        "x": 520,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "81fe7110f39173c2",
+        "type": "mqtt out",
+        "z": "b07aea8fe8954f75",
+        "name": "發送濕度",
+        "topic": "sensors/livingroom/humidity",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b43c3e810458f829",
+        "x": 520,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5d058c192d6ecab7",
+        "type": "mqtt in",
+        "z": "b07aea8fe8954f75",
+        "name": "訂閱溫度",
+        "topic": "sensors/livingroom/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b43c3e810458f829",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "95633eaba6992127"
+            ]
+        ]
+    },
+    {
+        "id": "4d65e50c7ed3de13",
+        "type": "mqtt in",
+        "z": "b07aea8fe8954f75",
+        "name": "訂閱濕度",
+        "topic": "sensors/livingroom/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b43c3e810458f829",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "95633eaba6992127"
+            ]
+        ]
+    },
+    {
+        "id": "95633eaba6992127",
+        "type": "function",
+        "z": "b07aea8fe8954f75",
+        "name": "寫入溫濕度歷史",
+        "func": "let now = new Date();\nlet timeStr = String(now.getHours()).padStart(2, '0') + \":\" + \n              String(now.getMinutes()).padStart(2, '0') + \":\" + \n              String(now.getSeconds()).padStart(2, '0');\n\nlet history = global.get(\"envHistory\") || [];\nlet val = Number(msg.payload);\n\nif (msg.topic.endsWith(\"temp\")) {\n    history.push({ time: timeStr, temp: val, hum: null });\n} else if (msg.topic.endsWith(\"humidity\")) {\n    history.push({ time: timeStr, temp: null, hum: val });\n}\n\nif (history.length > 200) { history.shift(); }\nglobal.set(\"envHistory\", history);\nreturn msg;",
+        "outputs": 1,
+        "x": 520,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b43c3e810458f829",
+        "type": "mqtt-broker",
+        "name": "Local Mosquitto",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "14649e6958566d68",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-random": "0.4.0"
+        }
+    }
+]
