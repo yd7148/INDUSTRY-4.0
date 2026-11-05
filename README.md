@@ -175,10 +175,14 @@ flowchart LR
 
 ## 6. 上課影片播放清單
 
-所有上課直播收錄於 YouTube 播放清單（頻道：**留五針**）：
+所有上課直播收錄於 YouTube 播放清單，頻道：**留五針**。
 
-> **播放清單**：<https://www.youtube.com/playlist?list=PLKvXv11lxGbo>
->（清單名稱：工業4.0--工業4.0概論，I-4.0; Industrial-4.0，共 19 段直播）
+| 項目 | 內容 |
+|---|---|
+| 清單名稱 | **工業4.0--工業4.0概論**（I-4.0; Industrial-4.0） |
+| 影片數 | **19 段直播**（涵蓋 2026-08-25 ～ 2026-11-05） |
+| 觀看方式 | 下方「播放清單網址」一次看完，或逐段點擊下表影片連結 |
+| 播放清單網址 | <https://www.youtube.com/playlist?list=PLKvXv11lxGbo> |
 
 ```mermaid
 timeline

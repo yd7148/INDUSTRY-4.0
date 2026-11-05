@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 330" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 470" width="1600" height="470" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#1c2333"/>
@@ -21,121 +21,159 @@
       <stop offset="0" stop-color="#b06cff"/>
       <stop offset="1" stop-color="#d0a1ff"/>
     </linearGradient>
+    <marker id="wrappar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
   </defs>
-  <rect width="1180" height="330" fill="url(#bg)"/>
-  <text x="50" y="48" fill="#ffffff" font-size="26" font-weight="bold">工業 4.0 課程時間軸（Class 01-23，2026-08-25 ～ 2026-11-05）</text>
-  <text x="50" y="76" fill="#9fb2d8" font-size="14">註記於每節點：上課日期，顏色對應學習階段。細節請見 README.md 與 docs/COURSE-MAP.md</text>
+  <rect width="1600" height="470" fill="url(#bg)"/>
 
-  <!-- baseline -->
-  <line x1="60" y1="150" x2="1130" y2="150" stroke="#44506e" stroke-width="4" stroke-linecap="round"/>
+  <text x="50" y="46" fill="#ffffff" font-size="26" font-weight="bold">工業 4.0 課程時間軸（Class 01-23，2026-08-25 ～ 2026-11-05）</text>
+  <text x="50" y="74" fill="#9fb2d8" font-size="14">節點上方：課次編號｜節點下方：上課日期與主題。顏色對應學習階段（見底部圖例），細節請見 README.md 與 docs/COURSE-MAP.md</text>
 
-  <!-- phase bands -->
-  <g font-size="13" text-anchor="middle">
-    <rect x="60" y="185" width="140" height="30" rx="15" fill="url(#intro)" opacity="0.85"/>
-    <text x="130" y="205" fill="#1c2333" font-weight="bold">01-02 觀念建立</text>
-    <rect x="215" y="185" width="330" height="30" rx="15" fill="url(#plc)" opacity="0.9"/>
-    <text x="380" y="205" fill="#0d1b3a" font-weight="bold">03-12 PLC 程式設計</text>
-    <rect x="560" y="185" width="150" height="30" rx="15" fill="url(#me)" opacity="0.9"/>
-    <text x="635" y="205" fill="#3d2800" font-weight="bold">13-18 機電整合</text>
-    <rect x="725" y="185" width="400" height="30" rx="15" fill="url(#iot)" opacity="0.9"/>
-    <text x="925" y="205" fill="#0d3325" font-weight="bold">19-23 物聯網應用（Node-RED / MQTT / Modbus）</text>
-  </g>
+  <!-- ============ Row 1 : Class 01 ~ 12 ============ -->
+  <text x="50" y="112" fill="#6f8ab8" font-size="13" font-weight="bold">上半（觀念建立 → PLC 程式設計）</text>
+  <line x1="70" y1="170" x2="1530" y2="170" stroke="#44506e" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- nodes: cycle through alternate y -->
-  <g font-size="12" fill="#ffffff" text-anchor="middle">
+  <g font-size="12" text-anchor="middle">
     <!-- 01 08/25 -->
-    <circle cx="85" cy="150" r="13" fill="url(#intro)" stroke="#fff" stroke-width="2"/>
-    <text x="85" y="128" font-weight="bold">01</text><text x="85" y="113" fill="#9fb2d8">08/25</text>
-    <text x="85" y="240" fill="#cdb8ff" font-size="11">技術指引</text>
+    <circle cx="120" cy="170" r="14" fill="url(#intro)" stroke="#ffffff" stroke-width="2"/>
+    <text x="120" y="146" fill="#ffffff" font-weight="bold" font-size="13">01</text>
+    <text x="120" y="128" fill="#9fb2d8" font-size="11">2026-08-25</text>
+    <text x="120" y="206" fill="#cdb8ff" font-size="11">技術指引</text>
     <!-- 02 08/27 -->
-    <circle cx="145" cy="150" r="13" fill="url(#intro)" stroke="#fff" stroke-width="2"/>
-    <text x="145" y="128" font-weight="bold">02</text><text x="145" y="113" fill="#9fb2d8">08/27</text>
-    <text x="145" y="240" fill="#cdb8ff" font-size="11">工業4.0概論</text>
+    <circle cx="245" cy="170" r="14" fill="url(#intro)" stroke="#ffffff" stroke-width="2"/>
+    <text x="245" y="146" fill="#ffffff" font-weight="bold" font-size="13">02</text>
+    <text x="245" y="128" fill="#9fb2d8" font-size="11">2026-08-27</text>
+    <text x="245" y="206" fill="#cdb8ff" font-size="11">工業4.0概論</text>
     <!-- 03 09/01 -->
-    <circle cx="215" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="215" y="128" font-weight="bold">03</text><text x="215" y="113" fill="#9fb2d8">09/01</text>
-    <text x="215" y="240" fill="#a8c6ff" font-size="11">GX Works3</text>
+    <circle cx="370" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="370" y="146" fill="#ffffff" font-weight="bold" font-size="13">03</text>
+    <text x="370" y="128" fill="#9fb2d8" font-size="11">2026-09-01</text>
+    <text x="370" y="206" fill="#a8c6ff" font-size="11">GX Works3</text>
     <!-- 04 09/03 -->
-    <circle cx="275" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="275" y="128" font-weight="bold">04</text><text x="275" y="113" fill="#9fb2d8">09/03</text>
-    <text x="275" y="240" fill="#a8c6ff" font-size="11">DVP-PLC101</text>
-    <!-- 05-06 shortcuts -->
-    <circle cx="330" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="330" y="128" font-weight="bold">05</text><text x="330" y="113" fill="#9fb2d8">09/04</text>
-    <text x="330" y="240" fill="#a8c6ff" font-size="11">LD 基本指令</text>
-    <circle cx="385" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="385" y="128" font-weight="bold">06</text><text x="385" y="113" fill="#9fb2d8">09/08</text>
-    <text x="385" y="240" fill="#a8c6ff" font-size="11">LD 練習</text>
-    <circle cx="440" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="440" y="128" font-weight="bold">08</text><text x="440" y="113" fill="#9fb2d8">09/10</text>
-    <text x="440" y="240" fill="#a8c6ff" font-size="11">LD 綜合</text>
-    <circle cx="495" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="495" y="128" font-weight="bold">07</text><text x="495" y="113" fill="#9fb2d8">09/15</text>
-    <text x="495" y="240" fill="#a8c6ff" font-size="11">LD 綜合</text>
-    <circle cx="550" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="550" y="128" font-weight="bold">09</text><text x="550" y="113" fill="#9fb2d8">09/17</text>
-    <text x="550" y="240" fill="#a8c6ff" font-size="11">PLC IP 設定</text>
-    <circle cx="555" cy="150" r="0"/>
+    <circle cx="495" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="495" y="146" fill="#ffffff" font-weight="bold" font-size="13">04</text>
+    <text x="495" y="128" fill="#9fb2d8" font-size="11">2026-09-03</text>
+    <text x="495" y="206" fill="#a8c6ff" font-size="11">DVP-PLC101</text>
+    <!-- 05 09/04 -->
+    <circle cx="620" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="620" y="146" fill="#ffffff" font-weight="bold" font-size="13">05</text>
+    <text x="620" y="128" fill="#9fb2d8" font-size="11">2026-09-04</text>
+    <text x="620" y="206" fill="#a8c6ff" font-size="11">LD 基本指令</text>
+    <!-- 06 09/08 -->
+    <circle cx="745" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="745" y="146" fill="#ffffff" font-weight="bold" font-size="13">06</text>
+    <text x="745" y="128" fill="#9fb2d8" font-size="11">2026-09-08</text>
+    <text x="745" y="206" fill="#a8c6ff" font-size="11">LD 練習</text>
+    <!-- 08 09/10 -->
+    <circle cx="870" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="870" y="146" fill="#ffffff" font-weight="bold" font-size="13">08</text>
+    <text x="870" y="128" fill="#9fb2d8" font-size="11">2026-09-10</text>
+    <text x="870" y="206" fill="#a8c6ff" font-size="11">LD 綜合</text>
+    <!-- 07 09/15 -->
+    <circle cx="995" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="995" y="146" fill="#ffffff" font-weight="bold" font-size="13">07</text>
+    <text x="995" y="128" fill="#9fb2d8" font-size="11">2026-09-15</text>
+    <text x="995" y="206" fill="#a8c6ff" font-size="11">LD 綜合</text>
+    <!-- 09 09/17 -->
+    <circle cx="1120" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1120" y="146" fill="#ffffff" font-weight="bold" font-size="13">09</text>
+    <text x="1120" y="128" fill="#9fb2d8" font-size="11">2026-09-17</text>
+    <text x="1120" y="206" fill="#a8c6ff" font-size="11">PLC IP 設定</text>
     <!-- 10 09/22 -->
-    <circle cx="610" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="610" y="128" font-weight="bold">10</text><text x="610" y="113" fill="#9fb2d8">09/22</text>
-    <text x="610" y="240" fill="#a8c6ff" font-size="11">LD/ST 進階</text>
-    <!-- move mech phase rightwards -->
-    <circle cx="665" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="665" y="128" font-weight="bold">11</text><text x="665" y="113" fill="#9fb2d8">09/24</text>
-    <text x="665" y="240" fill="#a8c6ff" font-size="11">SFC</text>
-    <circle cx="720" cy="150" r="13" fill="url(#plc)" stroke="#fff" stroke-width="2"/>
-    <text x="720" y="128" font-weight="bold">12</text><text x="720" y="113" fill="#9fb2d8">09/29</text>
-    <text x="720" y="240" fill="#a8c6ff" font-size="11">STL</text>
-    <circle cx="775" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="775" y="128" font-weight="bold">13</text><text x="775" y="113" fill="#9fb2d8">10/01</text>
-    <text x="775" y="240" fill="#ffd268" font-size="11">綜合練習</text>
-    <circle cx="830" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="830" y="128" font-weight="bold">14</text><text x="830" y="113" fill="#9fb2d8">10/06</text>
-    <text x="830" y="240" fill="#ffd268" font-size="11">Global Label</text>
-    <circle cx="885" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="885" y="128" font-weight="bold">15</text><text x="885" y="113" fill="#9fb2d8">10/08</text>
-    <text x="885" y="240" fill="#ffd268" font-size="11">Global Label</text>
-    <circle cx="940" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="940" y="128" font-weight="bold">16</text><text x="940" y="113" fill="#9fb2d8">10/13</text>
-    <text x="940" y="240" fill="#ffd268" font-size="11">Node-RED 節點</text>
-    <circle cx="995" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="995" y="128" font-weight="bold">17</text><text x="995" y="113" fill="#9fb2d8">10/15</text>
-    <text x="995" y="240" fill="#ffd268" font-size="11">機丙 1</text>
-    <circle cx="1050" cy="150" r="13" fill="url(#me)" stroke="#fff" stroke-width="2"/>
-    <text x="1050" y="128" font-weight="bold">18</text><text x="1050" y="113" fill="#9fb2d8">10/20</text>
-    <text x="1050" y="240" fill="#ffd268" font-size="11">CIROS 整合</text>
-    <circle cx="1105" cy="150" r="13" fill="url(#iot)" stroke="#fff" stroke-width="2"/>
-    <text x="1105" y="128" font-weight="bold">19</text><text x="1105" y="113" fill="#9fb2d8">10/22</text>
-    <text x="1105" y="240" fill="#6be3b3" font-size="11">Node-RED/MQTT</text>
+    <circle cx="1245" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1245" y="146" fill="#ffffff" font-weight="bold" font-size="13">10</text>
+    <text x="1245" y="128" fill="#9fb2d8" font-size="11">2026-09-22</text>
+    <text x="1245" y="206" fill="#a8c6ff" font-size="11">LD／ST 進階</text>
+    <!-- 11 09/24 -->
+    <circle cx="1370" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1370" y="146" fill="#ffffff" font-weight="bold" font-size="13">11</text>
+    <text x="1370" y="128" fill="#9fb2d8" font-size="11">2026-09-24</text>
+    <text x="1370" y="206" fill="#a8c6ff" font-size="11">SFC</text>
+    <!-- 12 09/29 -->
+    <circle cx="1495" cy="170" r="14" fill="url(#plc)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1495" y="146" fill="#ffffff" font-weight="bold" font-size="13">12</text>
+    <text x="1495" y="128" fill="#9fb2d8" font-size="11">2026-09-29</text>
+    <text x="1495" y="206" fill="#a8c6ff" font-size="11">STL</text>
   </g>
 
-  <!-- second row for 20-23 -->
-  <g font-size="12" fill="#ffffff" text-anchor="middle">
-    <line x1="1105" y1="163" x2="1105" y2="265" stroke="#44506e" stroke-width="2" stroke-dasharray="4 3"/>
-    <line x1="1105" y1="265" x2="935" y2="265" stroke="#44506e" stroke-width="2" stroke-dasharray="4 3"/>
-    <line x1="935" y1="265" x2="935" y2="256" stroke="#44506e" stroke-width="2" stroke-dasharray="4 3"/>
-    <circle cx="935" cy="243" r="13" fill="url(#iot)" stroke="#fff" stroke-width="2"/>
-    <text x="935" y="221" font-weight="bold">20</text>
-    <text x="935" y="221" dy="-18" fill="#9fb2d8" font-size="11"></text>
-    <text x="900" y="221" fill="#9fb2d8" font-size="11" text-anchor="end">10/27</text>
-    <text x="935" y="304" fill="#6be3b3" font-size="11">網頁控制 LED</text>
-    <circle cx="985" cy="243" r="13" fill="url(#iot)" stroke="#fff" stroke-width="2"/>
-    <text x="985" y="221" font-weight="bold">21</text><text x="985" y="203" fill="#9fb2d8" font-size="11">10/29</text>
-    <text x="985" y="304" fill="#6be3b3" font-size="11">Flow / M2M</text>
-    <circle cx="1035" cy="243" r="13" fill="url(#iot)" stroke="#fff" stroke-width="2"/>
-    <text x="1035" y="221" font-weight="bold">22</text><text x="1035" y="203" fill="#9fb2d8" font-size="11">11/03</text>
-    <text x="1035" y="304" fill="#6be3b3" font-size="11">MQTT + Chart</text>
-    <circle cx="1085" cy="243" r="13" fill="url(#iot)" stroke="#fff" stroke-width="2"/>
-    <text x="1085" y="221" font-weight="bold">23</text><text x="1085" y="203" fill="#9fb2d8" font-size="11">11/05</text>
-    <text x="1085" y="304" fill="#6be3b3" font-size="11">Modbus TCP</text>
+  <!-- wrap connector row1 -> row2 -->
+  <path d="M1495,190 L1495,268" stroke="#44506e" stroke-width="3" fill="none" stroke-dasharray="6 5"/>
+  <path d="M1495,268 L123,268" stroke="#44506e" stroke-width="3" fill="none" stroke-dasharray="6 5"/>
+  <path d="M123,268 L123,296" stroke="#44506e" stroke-width="3" fill="none" stroke-dasharray="6 5" marker-end="url(#wrappar)"/>
+
+  <!-- ============ Row 2 : Class 13 ~ 23 ============ -->
+  <text x="50" y="318" fill="#6f8ab8" font-size="13" font-weight="bold">下半（機電整合 → 物聯網應用）</text>
+  <line x1="70" y1="380" x2="1530" y2="380" stroke="#44506e" stroke-width="4" stroke-linecap="round"/>
+
+  <g font-size="12" text-anchor="middle">
+    <!-- 13 10/01 -->
+    <circle cx="120" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="120" y="356" fill="#ffffff" font-weight="bold" font-size="13">13</text>
+    <text x="120" y="338" fill="#9fb2d8" font-size="11">2026-10-01</text>
+    <text x="120" y="416" fill="#ffd268" font-size="11">綜合練習</text>
+    <!-- 14 10/06 -->
+    <circle cx="245" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="245" y="356" fill="#ffffff" font-weight="bold" font-size="13">14</text>
+    <text x="245" y="338" fill="#9fb2d8" font-size="11">2026-10-06</text>
+    <text x="245" y="416" fill="#ffd268" font-size="11">Global Label</text>
+    <!-- 15 10/08 -->
+    <circle cx="370" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="370" y="356" fill="#ffffff" font-weight="bold" font-size="13">15</text>
+    <text x="370" y="338" fill="#9fb2d8" font-size="11">2026-10-08</text>
+    <text x="370" y="416" fill="#ffd268" font-size="11">Global Label</text>
+    <!-- 16 10/13 -->
+    <circle cx="495" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="495" y="356" fill="#ffffff" font-weight="bold" font-size="13">16</text>
+    <text x="495" y="338" fill="#9fb2d8" font-size="11">2026-10-13</text>
+    <text x="495" y="416" fill="#ffd268" font-size="11">Node-RED 節點</text>
+    <!-- 17 10/15 -->
+    <circle cx="620" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="620" y="356" fill="#ffffff" font-weight="bold" font-size="13">17</text>
+    <text x="620" y="338" fill="#9fb2d8" font-size="11">2026-10-15</text>
+    <text x="620" y="416" fill="#ffd268" font-size="11">機丙 1</text>
+    <!-- 18 10/20 -->
+    <circle cx="745" cy="380" r="14" fill="url(#me)" stroke="#ffffff" stroke-width="2"/>
+    <text x="745" y="356" fill="#ffffff" font-weight="bold" font-size="13">18</text>
+    <text x="745" y="338" fill="#9fb2d8" font-size="11">2026-10-20</text>
+    <text x="745" y="416" fill="#ffd268" font-size="11">CIROS 整合</text>
+    <!-- 19 10/22 -->
+    <circle cx="870" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="870" y="356" fill="#ffffff" font-weight="bold" font-size="13">19</text>
+    <text x="870" y="338" fill="#9fb2d8" font-size="11">2026-10-22</text>
+    <text x="870" y="416" fill="#6be3b3" font-size="11">Node-RED／MQTT</text>
+    <!-- 20 10/27 -->
+    <circle cx="995" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="995" y="356" fill="#ffffff" font-weight="bold" font-size="13">20</text>
+    <text x="995" y="338" fill="#9fb2d8" font-size="11">2026-10-27</text>
+    <text x="995" y="416" fill="#6be3b3" font-size="11">網頁控制 LED</text>
+    <!-- 21 10/29 -->
+    <circle cx="1120" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1120" y="356" fill="#ffffff" font-weight="bold" font-size="13">21</text>
+    <text x="1120" y="338" fill="#9fb2d8" font-size="11">2026-10-29</text>
+    <text x="1120" y="416" fill="#6be3b3" font-size="11">Flow／M2M</text>
+    <!-- 22 11/03 -->
+    <circle cx="1245" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1245" y="356" fill="#ffffff" font-weight="bold" font-size="13">22</text>
+    <text x="1245" y="338" fill="#9fb2d8" font-size="11">2026-11-03</text>
+    <text x="1245" y="416" fill="#6be3b3" font-size="11">MQTT＋Chart</text>
+    <!-- 23 11/05 -->
+    <circle cx="1370" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1370" y="356" fill="#ffffff" font-weight="bold" font-size="13">23</text>
+    <text x="1370" y="338" fill="#9fb2d8" font-size="11">2026-11-05</text>
+    <text x="1370" y="416" fill="#6be3b3" font-size="11">Modbus TCP</text>
   </g>
 
-  <g font-size="12" fill="#6f7fa3">
-    <rect x="50" y="286" width="14" height="14" rx="3" fill="url(#intro)"/><text x="72" y="298">觀念建立</text>
-    <rect x="150" y="286" width="14" height="14" rx="3" fill="url(#plc)"/><text x="172" y="298">PLC 程式設計</text>
-    <rect x="290" y="286" width="14" height="14" rx="3" fill="url(#me)"/><text x="312" y="298">機電整合</text>
-    <rect x="410" y="286" width="14" height="14" rx="3" fill="url(#iot)"/><text x="432" y="298">物聯網應用</text>
-    <text x="540" y="298" fill="#9fb2d8">Class 07／08 編號與日期錯位，圖中依實際上課日期排列</text>
+  <!-- phase legend -->
+  <g font-size="13">
+    <rect x="70" y="438" width="16" height="16" rx="4" fill="url(#intro)"/>
+    <text x="94" y="451" fill="#cdb8ff">01-02 觀念建立</text>
+    <rect x="230" y="438" width="16" height="16" rx="4" fill="url(#plc)"/>
+    <text x="254" y="451" fill="#a8c6ff">03-12 PLC 程式設計</text>
+    <rect x="440" y="438" width="16" height="16" rx="4" fill="url(#me)"/>
+    <text x="464" y="451" fill="#ffd268">13-18 機電整合</text>
+    <rect x="620" y="438" width="16" height="16" rx="4" fill="url(#iot)"/>
+    <text x="644" y="451" fill="#6be3b3">19-23 物聯網應用（Node-RED／MQTT／Modbus）</text>
+    <text x="1080" y="451" fill="#9fb2d8">※ Class 07／08 編號與日期錯位，圖中依實際上課日期排列</text>
   </g>
 </svg>
