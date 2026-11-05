@@ -165,6 +165,7 @@ git status --short --branch
 | 2026-10-29 | `456e770..1461a53` | 成功 | 新增 Class-20、Class-21、README 與 docs |
 | 2026-10-29 | `1461a53..aaac432` | 成功 | 新增 `docs/PUSH-RECORD.md` |
 | 2026-10-29 | `aaac432..`（本文件修訂） | 成功 | 更新最終 HEAD 與推送歷史 |
+| 2026-11-05 | `463e28f..d6cf742` | 成功 | 上傳 Class-23-2026-11-05 完整教材（Modbus TCP／M2M）、Class-22 遺漏流程檔、23 份 Class README、根 README／COURSE-MAP 更新、docs/img 兩張 SVG 圖表（共 108 檔） |
 
 ---
 
