@@ -186,26 +186,32 @@ flowchart LR
 
 ```mermaid
 timeline
-    title 上課直播時間軸（依播放清單，2026-08-25 ～ 2026-11-05）
-    2026-08-25 : Channel Class01 技術指引／課表
-    2026-08-27 : Channel Class02 概論、Node-RED 安裝
-    2026-09-10 : Channel Class04 LD 綜合練習
-    2026-09-15 : Channel Class07 LD 綜合練習
-    2026-09-17 : Channel Class08 PLC IP 設定
-    2026-09-22 : Channel Class09 LD／ST 進階
-    2026-09-24 : Channel Class10 SFC 順序控制
-    2026-09-29 : Channel Class11 STL 指令
-    2026-10-01 : Channel Class12 綜合練習
-    2026-10-06 : Channel Class13 Global Label
-    2026-10-08 : Channel Class15 Global Label
-    2026-10-13 : Channel Class16 Node-RED 基本節點
-    2026-10-15 : Channel Class17 機丙 1（Part 2）
-    2026-10-20 : Channel Class18 CIROS 整合
-    2026-10-22 : Channel Class19 Node-RED／MQTT
-    2026-10-27 : Channel Class20 網頁控制 LED
-    2026-10-29 : Channel Class21 Flow 與 M2M
-    2026-11-03 : Channel Class22 MQTT ＋ Web Chart
-    2026-11-05 : Channel Class24 FX5U Modbus TCP＋M2M
+    title 上半：觀念建立 → PLC 程式設計（2026-08-25 ～ 2026-09-29）
+    08-25 技術指引／課表
+    08-27 概論
+        : Node-RED 安裝
+    09-10 LD 綜合
+    09-15 LD 綜合
+    09-17 PLC IP 設定
+    09-22 LD／ST 進階
+    09-24 SFC 順序控制
+    09-29 STL 指令
+```
+
+```mermaid
+timeline
+    title 下半：機電整合 → 物聯網應用（2026-10-01 ～ 2026-11-05）
+    10-01 綜合練習
+    10-06 Global Label
+    10-08 Global Label
+    10-13 Node-RED 節點
+    10-15 機丙 1（Part 2）
+    10-20 CIROS 整合
+    10-22 Node-RED／MQTT
+    10-27 網頁控制 LED
+    10-29 Flow 與 M2M
+    11-03 MQTT＋Chart
+    11-05 Modbus TCP＋M2M
 ```
 
 > 註：直播存檔的「Channel 課次編號」與資料夾編號不完全一致（例如 2026-11-05 的影片標題為
