@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 460" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16202f"/>
+      <stop offset="1" stop-color="#1e2c44"/>
+    </linearGradient>
+    <linearGradient id="plcG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d7bff"/>
+      <stop offset="1" stop-color="#6b9bff"/>
+    </linearGradient>
+    <linearGradient id="nrG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8f4b3a"/>
+      <stop offset="1" stop-color="#c4654c"/>
+    </linearGradient>
+    <linearGradient id="mqttG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a5cff"/>
+      <stop offset="1" stop-color="#a48bff"/>
+    </linearGradient>
+    <linearGradient id="webG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1fa97b"/>
+      <stop offset="1" stop-color="#3fd6a0"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
+  </defs>
+  <rect width="1180" height="460" fill="url(#bg2)"/>
+  <text x="50" y="46" fill="#fff" font-size="24" font-weight="bold">Class-23（2026-11-05）系統架構：FX5U Modbus TCP ＋ Node-RED ＋ MQTT／M2M</text>
+  <text x="50" y="72" fill="#93a9cf" font-size="14">讀取流程使用 FC1／FC3，寫入流程使用 FC5／FC6／FC15／FC16；成果整理見 Class-23-2026-11-05/README.md</text>
+
+  <!-- FX5U PLC -->
+  <g>
+    <rect x="60" y="120" width="250" height="200" rx="16" fill="url(#plcG)" opacity="0.95"/>
+    <text x="185" y="152" fill="#0d1b3a" font-size="18" font-weight="bold" text-anchor="middle">FX5U PLC</text>
+    <text x="185" y="174" fill="#0d1b3a" font-size="12" text-anchor="middle">三菱 iQ-F／GX Works3 專案 20261105-2.gx3</text>
+    <rect x="80" y="188" width="210" height="24" rx="6" fill="#0d1b3a" opacity="0.25"/>
+    <text x="185" y="205" fill="#0d1b3a" font-size="12" text-anchor="middle" font-weight="bold">Modbus TCP Server（unitid 1）</text>
+    <text x="92" y="238" fill="#0d1b3a" font-size="12">M0 = Modbus 位址 8192</text>
+    <text x="92" y="258" fill="#0d1b3a" font-size="12">M100~M103 → addr 8292</text>
+    <text x="92" y="278" fill="#0d1b3a" font-size="12">D100~D103 → addr 100</text>
+    <text x="92" y="298" fill="#0d1b3a" font-size="12">IP130（write 流程節點設定）</text>
+  </g>
+
+  <!-- Node-RED -->
+  <g>
+    <rect x="430" y="100" width="300" height="240" rx="16" fill="url(#nrG)" opacity="0.95"/>
+    <text x="580" y="132" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">Node-RED</text>
+    <text x="580" y="152" fill="#ffe1d9" font-size="12" text-anchor="middle">Modbus 讀寫流程（fx5u_modbus_read／write.json）</text>
+    <rect x="450" y="166" width="260" height="30" rx="8" fill="#3a1f18" opacity="0.55"/>
+    <text x="580" y="186" fill="#ffffff" font-size="12" text-anchor="middle">modbus-read（FC1 讀 M100~M103、FC3 讀 D100~D103）</text>
+    <rect x="450" y="202" width="260" height="30" rx="8" fill="#3a1f18" opacity="0.55"/>
+    <text x="580" y="222" fill="#ffffff" font-size="12" text-anchor="middle">modbus-flex-write（FC5／FC15 寫 M 位、FC6／FC16 寫 D 暫存器）</text>
+    <rect x="450" y="238" width="260" height="30" rx="8" fill="#3a1f18" opacity="0.55"/>
+    <text x="580" y="258" fill="#ffffff" font-size="12" text-anchor="middle">MQTT in／out（broker：Mosquitto，topic 雙向）</text>
+    <rect x="450" y="274" width="260" height="30" rx="8" fill="#3a1f18" opacity="0.55"/>
+    <text x="580" y="294" fill="#ffffff" font-size="12" text-anchor="middle">Dashboard：ui_led（node-red-contrib-ui-led）＋ Chart</text>
+    <text x="580" y="326" fill="#ffe1d9" font-size="11" text-anchor="middle">Node_Red_setup.bat：npm install -g node-red｜Node_Red_server.bat：node-red</text>
+  </g>
+
+  <!-- MQTT Broker -->
+  <g>
+    <rect x="850" y="120" width="260" height="130" rx="16" fill="url(#mqttG)" opacity="0.95"/>
+    <text x="980" y="150" fill="#fff" font-size="17" font-weight="bold" text-anchor="middle">Mosquitto Broker（1.6.12a）</text>
+    <text x="980" y="172" fill="#1b0f33" font-size="12" text-anchor="middle">本機 1883 埠發布／訂閱</text>
+    <text x="980" y="192" fill="#1b0f33" font-size="12" text-anchor="middle">MQTT Explorer／MQTTBox／MyMQTT 手機 App 驗證</text>
+    <text x="980" y="212" fill="#1b0f33" font-size="12" text-anchor="middle">設定文件：MQTT教學一二 PDF、mqtt_setup.txt</text>
+  </g>
+
+  <!-- Web users -->
+  <g>
+    <rect x="850" y="280" width="260" height="120" rx="16" fill="url(#webG)" opacity="0.95"/>
+    <text x="980" y="310" fill="#0d3325" font-size="17" font-weight="bold" text-anchor="middle">Web 儀錶板／Chart</text>
+    <text x="980" y="332" fill="#0d3325" font-size="12" text-anchor="middle">ui_led API（LED節點.txt）</text>
+    <text x="980" y="352" fill="#0d3325" font-size="12" text-anchor="middle">06.MQTT+Web chart、07 清空／比數、08 雙 Y 軸</text>
+    <text x="980" y="372" fill="#0d3325" font-size="12" text-anchor="middle">時間控制＋密碼（WEB課程_004）</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#8ea6d6" stroke-width="3" fill="none">
+    <path d="M310,180 L424,180" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+    <path d="M730,170 L844,170" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+    <path d="M730,300 L844,316" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+    <path d="M980,250 L980,274" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  </g>
+  <g font-size="12" fill="#cfe0ff">
+    <text x="322" y="168">Modbus TCP 502+</text>
+    <text x="742" y="158">MQTT publish/subscribe</text>
+    <text x="742" y="290">HTTP dashboard</text>
+    <text x="992" y="266">broker</text>
+  </g>
+
+  <!-- M2M note -->
+  <g>
+    <rect x="60" y="356" width="670" height="70" rx="12" fill="#31425f" opacity="0.8"/>
+    <text x="80" y="382" fill="#cfe0ff" font-size="13" font-weight="bold">M2M（Machine to Machine）重點：</text>
+    <text x="80" y="404" fill="#9fb2d8" font-size="12">PLC 之外多台裝置（手機 App、另一個 Flow、瀏覽器）都以 MQTT topic 交換狀態，達成不經人工 PLC 端程式修改的機器對機器互動；講義：Class-23-2026-11-05-29I4.0-M2M.pdf</text>
+  </g>
+</svg>

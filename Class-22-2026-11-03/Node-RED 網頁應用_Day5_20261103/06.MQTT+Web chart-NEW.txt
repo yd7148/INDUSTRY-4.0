@@ -1,0 +1,312 @@
+[
+    {
+        "id": "07d37e96e205ae45",
+        "type": "tab",
+        "label": "流程6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "697ad0ecb041eee6",
+        "type": "template",
+        "z": "07d37e96e205ae45",
+        "name": "HTML 雙Y軸折線圖網頁",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE HTML>\n<html>\n<head>\n  <title>Node-RED 溫濕度監控儀表板</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n  <style>\n    body { font-family: Arial; text-align: center; max-width: 850px; margin: 0 auto; padding: 20px; background-color: #1a1a1a; color: #fff; }\n    h2 { color: #4CAF50; margin-bottom: 10px; }\n    .controls { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px; background: #2b2b2b; padding: 10px 20px; border-radius: 8px; }\n    .controls label { font-size: 0.95rem; color: #ccc; }\n    .controls select, .controls button { font-size: 0.9rem; padding: 6px 12px; border-radius: 4px; border: 1px solid #444; background: #333; color: #fff; cursor: pointer; }\n    .controls button { background-color: #ef4444; border: none; font-weight: bold; }\n    .controls button:hover { background-color: #dc2626; }\n    .chart-container { position: relative; margin: auto; height: 52vh; width: 85vw; max-width: 800px; background-color: #2b2b2b; padding: 15px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2>MQTT 客廳溫濕度即時 Web 折線圖 (雙 Y 軸)</h2>\n  \n  <div class=\"controls\">\n    <div>\n      <label for=\"limitSelect\">顯示筆數：</label>\n      <select id=\"limitSelect\" onchange=\"updateChartData()\">\n        <option value=\"10\">最近 10 筆</option>\n        <option value=\"20\" selected>最近 20 筆</option>\n        <option value=\"50\">最近 50 筆</option>\n        <option value=\"0\">顯示全部</option>\n      </select>\n    </div>\n    <button onclick=\"clearData()\">🗑️ 清空歷史資料</button>\n  </div>\n\n  <div class=\"chart-container\">\n    <canvas id=\"envChart\"></canvas>\n  </div>\n\n  <script>\n    var ctx = document.getElementById('envChart').getContext('2d');\n    var myChart = new Chart(ctx, {\n      type: 'line',\n      data: {\n        labels: [],\n        datasets: [\n          { \n            label: '溫度 (°C)', \n            data: [], \n            borderColor: '#FF5722', \n            backgroundColor: 'rgba(255, 87, 34, 0.2)', \n            borderWidth: 2, tension: 0.3, spanGaps: true,\n            yAxisID: 'y-temp'\n          },\n          { \n            label: '濕度 (%)', \n            data: [], \n            borderColor: '#2196F3', \n            backgroundColor: 'rgba(33, 150, 243, 0.2)', \n            borderWidth: 2, tension: 0.3, spanGaps: true,\n            yAxisID: 'y-hum'\n          }\n        ]\n      },\n      options: {\n        responsive: true, maintainAspectRatio: false,\n        interaction: { mode: 'index', intersect: false },\n        scales: {\n          x: { ticks: { color: '#ccc' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },\n          'y-temp': {\n            type: 'linear',\n            display: true,\n            position: 'left',\n            title: { display: true, text: '溫度 (°C)', color: '#FF5722', font: { weight: 'bold' } },\n            min: 10, max: 80,\n            ticks: { color: '#FF5722' },\n            grid: { color: 'rgba(255, 87, 34, 0.15)' }\n          },\n          'y-hum': {\n            type: 'linear',\n            display: true,\n            position: 'right',\n            title: { display: true, text: '濕度 (%)', color: '#2196F3', font: { weight: 'bold' } },\n            min: 0, max: 100,\n            ticks: { color: '#2196F3' },\n            grid: { drawOnChartArea: false } // 避免兩邊網格線重疊錯亂\n          }\n        },\n        plugins: { legend: { labels: { color: '#fff' } } }\n      }\n    });\n\n    function updateChartData() {\n      var limit = document.getElementById(\"limitSelect\").value;\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          var resData = JSON.parse(this.responseText);\n          myChart.data.labels = resData.map(item => item.time);\n          myChart.data.datasets[0].data = resData.map(item => item.temp);\n          myChart.data.datasets[1].data = resData.map(item => item.hum);\n          myChart.update('none');\n        }\n      };\n      xhr.open(\"GET\", \"/chart-data?limit=\" + limit + \"&t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    function clearData() {\n      if (!confirm(\"確定要清空所有歷史資料嗎？\")) return;\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          updateChartData();\n        }\n      };\n      xhr.open(\"GET\", \"/clear-data?t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n\n    setInterval(updateChartData, 2000);\n    updateChartData();\n  </script>\n</body>\n</html>",
+        "output": "str",
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "1d81304aecc28454"
+            ]
+        ]
+    },
+    {
+        "id": "d6e479689cadecc2",
+        "type": "http in",
+        "z": "07d37e96e205ae45",
+        "name": "網頁進入點",
+        "url": "/chart",
+        "method": "get",
+        "upload": false,
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "697ad0ecb041eee6"
+            ]
+        ]
+    },
+    {
+        "id": "1d81304aecc28454",
+        "type": "http response",
+        "z": "07d37e96e205ae45",
+        "name": "回傳網頁",
+        "statusCode": "200",
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "x": 720,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "035682fbb05e0947",
+        "type": "http in",
+        "z": "07d37e96e205ae45",
+        "name": "圖表數據 API",
+        "url": "/chart-data",
+        "method": "get",
+        "upload": false,
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "df588a82030ffc0a"
+            ]
+        ]
+    },
+    {
+        "id": "df588a82030ffc0a",
+        "type": "function",
+        "z": "07d37e96e205ae45",
+        "name": "讀取與篩選溫濕度歷史",
+        "func": "let history = global.get(\"envHistory\") || [];\nlet limit = parseInt(msg.payload.limit || \"0\");\n\nif (limit > 0 && history.length > limit) {\n    history = history.slice(-limit);\n}\n\nmsg.payload = history;\nreturn msg;",
+        "outputs": 1,
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [
+                "7cc58c1a99a79cad"
+            ]
+        ]
+    },
+    {
+        "id": "7cc58c1a99a79cad",
+        "type": "http response",
+        "z": "07d37e96e205ae45",
+        "name": "回傳 JSON",
+        "statusCode": "200",
+        "x": 720,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "36d0d4bcc317c8c5",
+        "type": "http in",
+        "z": "07d37e96e205ae45",
+        "name": "清空數據 API",
+        "url": "/clear-data",
+        "method": "get",
+        "upload": false,
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "671b320e02c8175e"
+            ]
+        ]
+    },
+    {
+        "id": "671b320e02c8175e",
+        "type": "function",
+        "z": "07d37e96e205ae45",
+        "name": "清空歷史紀錄",
+        "func": "global.set(\"envHistory\", []);\nmsg.payload = { status: \"SUCCESS\" };\nreturn msg;",
+        "outputs": 1,
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "6896e9e87e2520a2"
+            ]
+        ]
+    },
+    {
+        "id": "6896e9e87e2520a2",
+        "type": "http response",
+        "z": "07d37e96e205ae45",
+        "name": "回傳 SUCCESS",
+        "statusCode": "200",
+        "x": 720,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d64fad050223ef8e",
+        "type": "inject",
+        "z": "07d37e96e205ae45",
+        "name": "每5秒觸發測試",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "5303b12b222827fb",
+                "9a251f09f1b67071"
+            ]
+        ]
+    },
+    {
+        "id": "5303b12b222827fb",
+        "type": "random",
+        "z": "07d37e96e205ae45",
+        "name": "random-溫度",
+        "low": "10",
+        "high": "30",
+        "inte": "true",
+        "property": "payload",
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "f7c4b24bd2915928"
+            ]
+        ]
+    },
+    {
+        "id": "9a251f09f1b67071",
+        "type": "random",
+        "z": "07d37e96e205ae45",
+        "name": "random-濕度",
+        "low": "20",
+        "high": "70",
+        "inte": "true",
+        "property": "payload",
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "717e43e32e542186"
+            ]
+        ]
+    },
+    {
+        "id": "f7c4b24bd2915928",
+        "type": "mqtt out",
+        "z": "07d37e96e205ae45",
+        "name": "發送溫度",
+        "topic": "sensors/livingroom/temp",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "540b7de65633faaf",
+        "x": 510,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "717e43e32e542186",
+        "type": "mqtt out",
+        "z": "07d37e96e205ae45",
+        "name": "發送濕度",
+        "topic": "sensors/livingroom/humidity",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "540b7de65633faaf",
+        "x": 510,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1c18bc39a9bcda2f",
+        "type": "mqtt in",
+        "z": "07d37e96e205ae45",
+        "name": "訂閱溫度",
+        "topic": "sensors/livingroom/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "540b7de65633faaf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "e23c72b01682e567"
+            ]
+        ]
+    },
+    {
+        "id": "f6f842253423dabe",
+        "type": "mqtt in",
+        "z": "07d37e96e205ae45",
+        "name": "訂閱濕度",
+        "topic": "sensors/livingroom/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "540b7de65633faaf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "e23c72b01682e567"
+            ]
+        ]
+    },
+    {
+        "id": "e23c72b01682e567",
+        "type": "function",
+        "z": "07d37e96e205ae45",
+        "name": "寫入溫濕度歷史",
+        "func": "let now = new Date();\nlet timeStr = String(now.getHours()).padStart(2, '0') + \":\" + \n              String(now.getMinutes()).padStart(2, '0') + \":\" + \n              String(now.getSeconds()).padStart(2, '0');\n\nlet history = global.get(\"envHistory\") || [];\nlet val = Number(msg.payload);\n\nif (msg.topic.endsWith(\"temp\")) {\n    history.push({ time: timeStr, temp: val, hum: null });\n} else if (msg.topic.endsWith(\"humidity\")) {\n    history.push({ time: timeStr, temp: null, hum: val });\n}\n\nif (history.length > 200) { history.shift(); }\nglobal.set(\"envHistory\", history);\nreturn msg;",
+        "outputs": 1,
+        "x": 510,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "540b7de65633faaf",
+        "type": "mqtt-broker",
+        "name": "Local Mosquitto",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "78c0a5eb5c1ae1cd",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-random": "0.4.0"
+        }
+    }
+]

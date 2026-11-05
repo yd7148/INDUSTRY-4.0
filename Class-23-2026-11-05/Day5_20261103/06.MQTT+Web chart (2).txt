@@ -1,0 +1,91 @@
+[
+    {
+        "id": "e7384d6ceba66be7",
+        "type": "template",
+        "z": "b22e6d9bd74128ca",
+        "name": "HTML 雙線折線圖網頁",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE HTML>\n<html>\n<head>\n  <title>Node-RED 溫濕度監控儀表板</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n  <style>\n    body { font-family: Arial; text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #1a1a1a; color: #fff; }\n    h2 { color: #4CAF50; }\n    .chart-container { position: relative; margin: auto; height: 50vh; width: 85vw; max-width: 750px; background-color: #2b2b2b; padding: 15px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2>MQTT 客廳溫濕度即時 Web 折線圖</h2>\n  <div class=\"chart-container\">\n    <canvas id=\"envChart\"></canvas>\n  </div>\n  <script>\n    var ctx = document.getElementById('envChart').getContext('2d');\n    var myChart = new Chart(ctx, {\n      type: 'line',\n      data: {\n        labels: [],\n        datasets: [\n          { \n            label: 'temperature (溫度)', \n            data: [], \n            borderColor: '#FF5722', \n            backgroundColor: 'rgba(255, 87, 34, 0.2)', \n            borderWidth: 2, tension: 0.3, spanGaps: true\n          },\n          { \n            label: 'humidity (濕度)', \n            data: [], \n            borderColor: '#2196F3', \n            backgroundColor: 'rgba(33, 150, 243, 0.2)', \n            borderWidth: 2, tension: 0.3, spanGaps: true\n          }\n        ]\n      },\n      options: {\n        responsive: true, maintainAspectRatio: false,\n        scales: { y: { min: 10, max: 80, ticks: { color: '#ccc' } }, x: { ticks: { color: '#ccc' } } },\n        plugins: { legend: { labels: { color: '#fff' } } }\n      }\n    });\n    function updateChartData() {\n      var xhr = new XMLHttpRequest();\n      xhr.onreadystatechange = function() {\n        if (this.readyState == 4 && this.status == 200) {\n          var resData = JSON.parse(this.responseText);\n          myChart.data.labels = resData.map(item => item.time);\n          myChart.data.datasets[0].data = resData.map(item => item.temp);\n          myChart.data.datasets[1].data = resData.map(item => item.hum);\n          myChart.update('none');\n        }\n      };\n      xhr.open(\"GET\", \"/chart-data?t=\" + new Date().getTime(), true);\n      xhr.send();\n    }\n    setInterval(updateChartData, 2000);\n    updateChartData();\n  </script>\n</body>\n</html>",
+        "output": "str",
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "5d3e8854bec5a443"
+            ]
+        ]
+    },
+    {
+        "id": "2ed6f49c2c3f546a",
+        "type": "http in",
+        "z": "b22e6d9bd74128ca",
+        "name": "網頁進入點",
+        "url": "/chart",
+        "method": "get",
+        "upload": false,
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "e7384d6ceba66be7"
+            ]
+        ]
+    },
+    {
+        "id": "5d3e8854bec5a443",
+        "type": "http response",
+        "z": "b22e6d9bd74128ca",
+        "name": "回傳網頁",
+        "statusCode": "200",
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "x": 790,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3972ab5b5c6d69fa",
+        "type": "http in",
+        "z": "b22e6d9bd74128ca",
+        "name": "圖表數據 API",
+        "url": "/chart-data",
+        "method": "get",
+        "upload": false,
+        "x": 230,
+        "y": 500,
+        "wires": [
+            [
+                "c9d608ea4cce42a9"
+            ]
+        ]
+    },
+    {
+        "id": "c9d608ea4cce42a9",
+        "type": "function",
+        "z": "b22e6d9bd74128ca",
+        "name": "讀取溫濕度歷史",
+        "func": "msg.payload = global.get(\"envHistory\") || [];\nreturn msg;",
+        "outputs": 1,
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "e229147b66a90645"
+            ]
+        ]
+    },
+    {
+        "id": "e229147b66a90645",
+        "type": "http response",
+        "z": "b22e6d9bd74128ca",
+        "name": "回傳 JSON",
+        "statusCode": "200",
+        "x": 790,
+        "y": 500,
+        "wires": []
+    }
+]
