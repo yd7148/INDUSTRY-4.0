@@ -14,19 +14,19 @@
 | 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 分支 | `main` → `origin/main` |
 | 推送前遠端 | `cc06860`（2026-11-05） |
-| 推送後遠端 | `fd7fb8a`；本文件修訂後以 `git ls-remote` 為準 |
-| 推送範圍 | `cc06860..fd7fb8a`（2 個 commit，Class-24 教材與文件） |
-| 本次新增 | Class-24-2026-11-10（26 檔：授課筆記、`Day6_20261110.zip` 與解壓內容、`ch09-examples/` 7 個範例流程）、Class-23 `20261105-2.gx3` 更新、根 README／COURSE-MAP／SVG 更新 |
-| 傳輸結果 | **成功**；GitHub 回報 `cc06860..fd7fb8a  main -> main` |
-| 遠端驗證 | `git ls-remote origin main` 回傳 `fd7fb8a`，與本機 HEAD 一致 |
+| 推送後遠端 | `097b06c`；本文件修訂後以 `git ls-remote` 為準 |
+| 推送範圍 | `cc06860..097b06c`（4 個 commit，Class-24 教材與文件） |
+| 本次新增 | Class-24-2026-11-10（27 檔：授課筆記、`Day6_20261110.zip` 與解壓內容、`ch09-examples/` 7 個範例流程、`dog.jpg` 測試影像）、Class-23 `20261105-2.gx3` 更新、根 README／COURSE-MAP／SVG 更新 |
+| 傳輸結果 | **成功**；GitHub 回報 `cc06860..097b06c  main -> main` |
+| 遠端驗證 | `git ls-remote origin main` 回傳 `097b06c`，與本機 HEAD 一致 |
 | 工作區狀態 | clean，`main` 與 `origin/main` 同點 |
 
 ```mermaid
 flowchart LR
-    A["推送前<br/>origin/main = cc06860"] --> B["本機提交 2 個 commit"]
+    A["推送前<br/>origin/main = cc06860"] --> B["本機提交 4 個 commit"]
     B --> C["git push origin main"]
     C --> D{"遠端回應"}
-    D -->|成功| E["origin/main = fd7fb8a"]
+    D -->|成功| E["origin/main = 097b06c"]
     D -->|失敗| F["保留本機 commit<br/>排除後重試"]
     E --> G["ls-remote / 網頁雙重驗證"]
 ```
@@ -51,6 +51,8 @@ gitGraph
     commit id: "cc06860 11-05 timeline restyle"
     commit id: "0a186f8 11-10 Class24"
     commit id: "fd7fb8a 11-10 docs"
+    commit id: "038b622 11-10 push record"
+    commit id: "097b06c 11-10 dog.jpg"
 ```
 
 | Commit | 日期時間 | 說明 |
@@ -69,6 +71,8 @@ gitGraph
 | `cc06860` | 2026-11-05 | 播放清單時間軸拆成上下半兩段 |
 | `0a186f8` | 2026-11-10 18:51 | **新增 Class-24-2026-11-10（Node-RED AI／Teachable Machine）**，更新 Class-23 `20261105-2.gx3` |
 | `fd7fb8a` | 2026-11-10 18:51 | 更新根 README、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（23 → 24 堂，播放清單 19 → 23 段） |
+| `038b622` | 2026-11-10 18:53 | 推送紀錄補上 2026-11-10 該列與新的環境準備／檢核流程 |
+| `097b06c` | 2026-11-10 18:59 | 補上 Class-24 測試影像 `dog.jpg`，同步更新該資料夾檔案清單 |
 
 > 本次推送前本機已領先遠端 0 個 commit（`cc06860` 為雙方共同點），
 > 推送範圍為本次新增的 2 個 commit。
@@ -195,6 +199,7 @@ git -C D:\INDUSTRY-4.0 status --short --branch
 | 2026-10-29 | `aaac432..`（本文件修訂） | 成功 | 更新最終 HEAD 與推送歷史 |
 | 2026-11-05 | `463e28f..d6cf742` | 成功 | 上傳 Class-23-2026-11-05 完整教材（Modbus TCP／M2M）、Class-22 遺漏流程檔、23 份 Class README、根 README／COURSE-MAP 更新、docs/img 兩張 SVG 圖表（共 108 檔） |
 | 2026-11-10 | `cc06860..fd7fb8a` | 成功 | 新增 Class-24-2026-11-10（Node-RED AI／Teachable Machine，26 檔）、更新 Class-23 `20261105-2.gx3`、根 README／COURSE-MAP／SVG 同步更新（29 檔） |
+| 2026-11-10 | `fd7fb8a..097b06c` | 成功 | 補上推送紀錄更新與 Class-24 測試影像 `dog.jpg`（2 個 commit） |
 
 ---
 
