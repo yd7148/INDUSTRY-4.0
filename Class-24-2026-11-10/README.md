@@ -132,6 +132,7 @@ flowchart LR
 | 程式／範例 | [Day6_20261110/ch09-examples/teachablemachine.html](Day6_20261110/ch09-examples/teachablemachine.html) | 3 KB |
 | 工具／字型 | [Day6_20261110/ch09-examples/SourceSansPro-Regular.ttf](Day6_20261110/ch09-examples/SourceSansPro-Regular.ttf) | 116 KB |
 | 測試影像 | `Day6_20261110/ch09-examples/images/`（6 張 JPG） | 103 KB |
+| 測試影像 | [dog.jpg](dog.jpg) | 29 KB |
 | 程式／範例 | [Node_Red_setup.bat](Node_Red_setup.bat) | 1 KB |
 | 程式／範例 | [Node_Red_server.bat](Node_Red_server.bat) | 1 KB |
 
