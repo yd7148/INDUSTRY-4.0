@@ -1,0 +1,133 @@
+[
+    {
+        "id": "79498c72.509684",
+        "type": "inject",
+        "z": "9de4386a79403552",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "b8f03989.caaa98"
+            ]
+        ]
+    },
+    {
+        "id": "b8f03989.caaa98",
+        "type": "file in",
+        "z": "9de4386a79403552",
+        "name": "",
+        "filename": "C:\\AIoT\\ch09\\images\\apple-01.jpg",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "72056dc6.e8a7e4",
+                "d05d22cc85d9b0a0"
+            ]
+        ]
+    },
+    {
+        "id": "72056dc6.e8a7e4",
+        "type": "change",
+        "z": "9de4386a79403552",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "annotations",
+                "pt": "msg",
+                "to": "[{\"type\":\"rect\",\"label\":\"fresh_apple (96.92%)\",\"classId\":0,\"className\":\"fresh_apple\",\"probability\":0.9691785573959351,\"bbox\":[34.22332763671875,59.64910888671875,561.0816040039062,468.48919677734375],\"labelLocation\":\"top\"}]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "905cd92d7ddf0829"
+            ]
+        ]
+    },
+    {
+        "id": "d05d22cc85d9b0a0",
+        "type": "image viewer",
+        "z": "9de4386a79403552",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e8b1e0e7abd2360",
+        "type": "image viewer",
+        "z": "9de4386a79403552",
+        "name": "",
+        "width": "300",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 710,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "905cd92d7ddf0829",
+        "type": "annotate-image-plus",
+        "z": "9de4386a79403552",
+        "name": "",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "10",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "8e8b1e0e7abd2360"
+            ]
+        ]
+    }
+]

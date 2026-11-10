@@ -1,0 +1,136 @@
+[
+  {
+    "id": "tab_tm_smooth_realtime",
+    "type": "tab",
+    "label": "TM_流暢即時畫面版",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "ui_template_tm_smooth",
+    "type": "ui_template",
+    "z": "tab_tm_smooth_realtime",
+    "group": "group_smooth_ai",
+    "name": "Teachable Machine 流暢即時影像",
+    "order": 1,
+    "width": "6",
+    "height": "9",
+    "format": "<script src=\"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js\"></script>\n\n<div style=\"text-align: center; font-family: Arial, sans-serif;\">\n  <h4 style=\"margin: 5px 0;\">AI 即時動態影像偵測</h4>\n  <button type=\"button\" class=\"md-button md-raised md-primary\" onclick=\"initSmoothTM()\" style=\"margin: 5px 0;\">Start Camera</button>\n  <div id=\"sm-status-msg\" style=\"font-weight: bold; margin: 3px 0; color: #555;\">按下 Start 開始流暢偵測</div>\n  <div id=\"sm-webcam-container\" style=\"margin: 5px auto; display: inline-block; border-radius: 6px; overflow: hidden;\"></div>\n  <div id=\"sm-label-container\" style=\"font-weight: bold; font-size: 1.1rem;\"></div>\n</div>\n\n<script type=\"text/javascript\">\n  // ========================================================\n  // 📍 【模型連結設定區】未來更換模型時，僅需修改下方雙引號內的網址即可\n  // ========================================================\n  const TM_CLOUD_URL = \"https://teachablemachine.withgoogle.com/models/xxxxxx/\";\n  // ========================================================\n\n  let smModel, smWebcam, smLabelContainer, smMaxPredictions;\n  let lastPersonState = null; // 僅紀錄狀態變化，避免阻塞主執行緒\n\n  async function initSmoothTM() {\n    const statusEl = document.getElementById(\"sm-status-msg\");\n    statusEl.innerHTML = \"正在初始化攝影機...\";\n    \n    try {\n      const modelURL = TM_CLOUD_URL + \"model.json\";\n      const metadataURL = TM_CLOUD_URL + \"metadata.json\";\n      smModel = await tmImage.load(modelURL, metadataURL);\n      smMaxPredictions = smModel.getTotalClasses();\n\n      const flip = true;\n      smWebcam = new tmImage.Webcam(240, 240, flip);\n      await smWebcam.setup();\n      await smWebcam.play();\n      window.requestAnimationFrame(loopSmoothTM);\n\n      const webcamContainer = document.getElementById(\"sm-webcam-container\");\n      webcamContainer.innerHTML = \"\";\n      webcamContainer.appendChild(smWebcam.canvas);\n      \n      smLabelContainer = document.getElementById(\"sm-label-container\");\n      smLabelContainer.innerHTML = \"\";\n      for (let i = 0; i < smMaxPredictions; i++) {\n        smLabelContainer.appendChild(document.createElement(\"div\"));\n      }\n      statusEl.innerHTML = \"<span style='color:green;'>🟢 即時影像串流中</span>\";\n    } catch (err) {\n      statusEl.innerHTML = \"<span style='color:red;'>❌ 錯誤：\" + (err.message || err) + \"</span>\";\n    }\n  }\n\n  async function loopSmoothTM() {\n    smWebcam.update(); // 每幀連續繪製畫面\n    await predictSmoothTM();\n    window.requestAnimationFrame(loopSmoothTM);\n  }\n\n  async function predictSmoothTM() {\n    const prediction = await smModel.predict(smWebcam.canvas);\n    let highestProb = 0;\n    let bestClass = \"\";\n\n    for (let i = 0; i < smMaxPredictions; i++) {\n      const classPrediction = prediction[i].className + \": \" + (prediction[i].probability * 100).toFixed(0) + \"%\";\n      if (smLabelContainer.childNodes[i]) {\n        smLabelContainer.childNodes[i].innerHTML = classPrediction;\n      }\n\n      if (prediction[i].probability > highestProb) {\n        highestProb = prediction[i].probability;\n        bestClass = prediction[i].className;\n      }\n    }\n\n    // 判斷當前是否有人 (信心度 > 60%)\n    let currentIsPerson = (bestClass === \"有人\" || bestClass === \"Person\" || bestClass === \"Class 1\") && (highestProb > 0.6);\n\n    // 關鍵修正：只有當狀態【真正發生改變】時才發送 API，徹底解鎖 CPU/網路阻塞問題\n    if (currentIsPerson !== lastPersonState) {\n      lastPersonState = currentIsPerson;\n      \n      // 非阻塞式傳送\n      fetch(\"/teachablemachine-result?isPerson=\" + currentIsPerson, { cache: \"no-store\" }).catch(function(){});\n    }\n  }\n</script>",
+    "storeOutMessages": true,
+    "fwdInMessages": true,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 210,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "http_in_smooth_api",
+    "type": "http in",
+    "z": "tab_tm_smooth_realtime",
+    "name": "API 接收端點",
+    "url": "/teachablemachine-result",
+    "method": "get",
+    "upload": false,
+    "skipBodyParsing": false,
+    "swaggerDoc": "",
+    "x": 170,
+    "y": 180,
+    "wires": [
+      [
+        "function_smooth_logic"
+      ]
+    ]
+  },
+  {
+    "id": "function_smooth_logic",
+    "type": "function",
+    "z": "tab_tm_smooth_realtime",
+    "name": "轉換為 LED 布林值",
+    "func": "let isPerson = msg.payload.isPerson === \"true\";\nmsg.payload = isPerson; // true = 紅燈 (有人), false = 綠燈 (無人)\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 390,
+    "y": 180,
+    "wires": [
+      [
+        "ui_led_smooth_status",
+        "http_out_smooth_resp"
+      ]
+    ]
+  },
+  {
+    "id": "http_out_smooth_resp",
+    "type": "http response",
+    "z": "tab_tm_smooth_realtime",
+    "name": "回傳 200",
+    "statusCode": "200",
+    "headers": {},
+    "x": 630,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "ui_led_smooth_status",
+    "type": "ui_led",
+    "z": "tab_tm_smooth_realtime",
+    "order": 2,
+    "group": "group_smooth_ai",
+    "width": "6",
+    "height": "1",
+    "label": "人員偵測 (有人亮紅燈 / 沒人亮綠燈)",
+    "labelPlacement": "left",
+    "labelAlignment": "left",
+    "colorForValue": [
+      {
+        "color": "#00d000",
+        "value": "false",
+        "valueType": "bool"
+      },
+      {
+        "color": "#ff0000",
+        "value": "true",
+        "valueType": "bool"
+      }
+    ],
+    "allowColorForValueInMessage": false,
+    "shape": "circle",
+    "showGlow": true,
+    "name": "",
+    "x": 680,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "group_smooth_ai",
+    "type": "ui_group",
+    "name": "AI 即時監控面板",
+    "tab": "tab_smooth_monitor",
+    "order": 1,
+    "disp": true,
+    "width": 6,
+    "collapse": false,
+    "className": ""
+  },
+  {
+    "id": "tab_smooth_monitor",
+    "type": "ui_tab",
+    "name": "即時 AI 儀表板",
+    "icon": "dashboard",
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "e835c47a30043310",
+    "type": "global-config",
+    "env": [],
+    "modules": {
+      "node-red-dashboard": "3.0.4",
+      "node-red-contrib-ui-led": "0.4.11"
+    }
+  }
+]

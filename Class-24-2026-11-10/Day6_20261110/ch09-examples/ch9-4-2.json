@@ -1,0 +1,70 @@
+[
+    {
+        "id": "5f5e1f61581fca92",
+        "type": "teachable machine",
+        "z": "f4e0355d87fbbc59",
+        "name": "",
+        "mode": "online",
+        "modelUrl": "https://teachablemachine.withgoogle.com/models/_mD6F2flP/",
+        "localModel": "teachable_model",
+        "output": "best",
+        "activeThreshold": false,
+        "threshold": 80,
+        "activeMaxResults": false,
+        "maxResults": 3,
+        "passThrough": false,
+        "x": 410,
+        "y": 600,
+        "wires": [
+            [
+                "55ea3e332de6fa5d"
+            ]
+        ]
+    },
+    {
+        "id": "3ab654d366011106",
+        "type": "fileinject",
+        "z": "f4e0355d87fbbc59",
+        "name": "",
+        "x": 200,
+        "y": 600,
+        "wires": [
+            [
+                "5f5e1f61581fca92",
+                "0704904fb2424471"
+            ]
+        ]
+    },
+    {
+        "id": "0704904fb2424471",
+        "type": "image viewer",
+        "z": "f4e0355d87fbbc59",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 370,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "55ea3e332de6fa5d",
+        "type": "debug",
+        "z": "f4e0355d87fbbc59",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].class",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 600,
+        "wires": []
+    }
+]

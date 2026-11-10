@@ -1,0 +1,48 @@
+[
+    {
+        "id": "5bf3a3eb5a48bd63",
+        "type": "fileinject",
+        "z": "1fd67608306cd9df",
+        "name": "",
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "3d654acc5bd39b22",
+                "afc01165043e3dcf"
+            ]
+        ]
+    },
+    {
+        "id": "3d654acc5bd39b22",
+        "type": "debug",
+        "z": "1fd67608306cd9df",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "afc01165043e3dcf",
+        "type": "image viewer",
+        "z": "1fd67608306cd9df",
+        "name": "",
+        "width": "200",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 530,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    }
+]
