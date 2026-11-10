@@ -27,7 +27,7 @@
   </defs>
   <rect width="1600" height="470" fill="url(#bg)"/>
 
-  <text x="50" y="46" fill="#ffffff" font-size="26" font-weight="bold">工業 4.0 課程時間軸（Class 01-23，2026-08-25 ～ 2026-11-05）</text>
+  <text x="50" y="46" fill="#ffffff" font-size="26" font-weight="bold">工業 4.0 課程時間軸（Class 01-24，2026-08-25 ～ 2026-11-10）</text>
   <text x="50" y="74" fill="#9fb2d8" font-size="14">節點上方：課次編號｜節點下方：上課日期與主題。顏色對應學習階段（見底部圖例），細節請見 README.md 與 docs/COURSE-MAP.md</text>
 
   <!-- ============ Row 1 : Class 01 ~ 12 ============ -->
@@ -162,6 +162,11 @@
     <text x="1370" y="356" fill="#ffffff" font-weight="bold" font-size="13">23</text>
     <text x="1370" y="338" fill="#9fb2d8" font-size="11">2026-11-05</text>
     <text x="1370" y="416" fill="#6be3b3" font-size="11">Modbus TCP</text>
+    <!-- 24 11/10 -->
+    <circle cx="1495" cy="380" r="14" fill="url(#iot)" stroke="#ffffff" stroke-width="2"/>
+    <text x="1495" y="356" fill="#ffffff" font-weight="bold" font-size="13">24</text>
+    <text x="1495" y="338" fill="#9fb2d8" font-size="11">2026-11-10</text>
+    <text x="1495" y="416" fill="#6be3b3" font-size="11">Node-RED AI</text>
   </g>
 
   <!-- phase legend -->
@@ -173,7 +178,7 @@
     <rect x="440" y="438" width="16" height="16" rx="4" fill="url(#me)"/>
     <text x="464" y="451" fill="#ffd268">13-18 機電整合</text>
     <rect x="620" y="438" width="16" height="16" rx="4" fill="url(#iot)"/>
-    <text x="644" y="451" fill="#6be3b3">19-23 物聯網應用（Node-RED／MQTT／Modbus）</text>
-    <text x="1080" y="451" fill="#9fb2d8">※ Class 07／08 編號與日期錯位，圖中依實際上課日期排列</text>
+    <text x="644" y="451" fill="#6be3b3">19-24 物聯網應用（Node-RED／MQTT／Modbus／AI）</text>
+    <text x="1120" y="451" fill="#9fb2d8">※ Class 07／08 編號與日期錯位，圖中依實際上課日期排列</text>
   </g>
 </svg>

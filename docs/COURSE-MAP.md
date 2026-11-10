@@ -1,7 +1,7 @@
 # 課程教材地圖（Course Map）
 
-本文件逐一列出 23 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
-統計時間：2026-11-05；僅計入工作目錄實體檔案（含被 `.gitignore` 排除的大型壓縮檔）。
+本文件逐一列出 24 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
+統計時間：2026-11-10；僅計入工作目錄實體檔案（含被 `.gitignore` 排除的大型壓縮檔）。
 
 ---
 
@@ -23,6 +23,7 @@ flowchart TD
     K --> M["Class 19-21<br/>10-22 ～ 10-29<br/>MQTT、網頁儀錶板與 M2M"]
     L --> M
     M --> N["Class 22-23<br/>11-03 ～ 11-05<br/>MQTT＋Web Chart、FX5U Modbus TCP"]
+    N --> O["Class 24<br/>11-10<br/>Node-RED AI、Teachable Machine"]
 ```
 
 ---
@@ -53,7 +54,8 @@ flowchart TD
 | 20 | `Class-20-2026-10-27` | 2026-10-27 | 56 | 162.8 MB | Node-RED 網頁控制 LED、定時開關、Chart、Ngrok 轉址、MQTT 工具 |
 | 21 | `Class-21-2026-10-29` | 2026-10-29 | 72 | 39.0 MB | Node-RED Flow 1／2 匯出頁面、M2M 講義、PLC 範本 `2026-10-29-template-1.gx3` |
 | 22 | `Class-22-2026-11-03` | 2026-11-03 | 76 | 548.1 MB | Node-RED MQTT 應用 PDF、`06~08` 流程（Web Chart／清空資料／雙 Y 軸）、`Day5_20261103.zip` |
-| 23 | `Class-23-2026-11-05` | 2026-11-05 | 81 | 548.6 MB | FX5U Modbus TCP 讀／寫流程 JSON、`20261105-2.gx3`、M2M 講義、`Day5_20261103.zip` |
+| 23 | `Class-23-2026-11-05` | 2026-11-05 | 84 | 548.6 MB | FX5U Modbus TCP 讀／寫流程 JSON、`20261105-2.gx3`、M2M 講義、`Day5_20261103.zip` |
+| 24 | `Class-24-2026-11-10` | 2026-11-10 | 25 | 37.9 MB | Teachable Machine 訓練、Ch9 講義 PDF、`ch09-examples/` 7 個範例流程、Webcam 判斷 LED 流程 |
 | — | `80-自動控制工程職類共用資料-PDF` | — | 11 | 85.9 MB | Delta／FX5U／CIROS 共用手冊與規範 |
 | — | `netcheck` | — | 24 | 0.2 MB | 網路 Port、測速、網站連線診斷腳本與報告 |
 
@@ -91,6 +93,7 @@ gantt
     Class 21 Flow 與 M2M      :c21, 2026-10-29, 1d
     Class 22 MQTT＋Chart     :c22, 2026-11-03, 1d
     Class 23 Modbus TCP      :c23, 2026-11-05, 1d
+    Class 24 Node-RED AI     :c24, 2026-11-10, 1d
 ```
 
 > 註：Class-07（09-15）與 Class-08（09-10）的編號與日期錯位，Gantt 圖依實際日期排列。
@@ -109,9 +112,10 @@ gantt
 | 順序控制（SFC） | 11 | SFC 講義與選單章節 |
 | 標籤化程式設計 | 14、15 | Global Label 教材與範例 |
 | 機電整合丙級實作 | 17、18 | 機丙 1 tutorial、CIROS IO 表與規範 |
-| Node-RED 流程設計 | 16、19、20、21、22、23 | 基本節點、儀錶板、Chart、LED 控制、Flow 匯出 |
+| Node-RED 流程設計 | 16、19、20、21、22、23、24 | 基本節點、儀錶板、Chart、LED 控制、Flow 匯出 |
 | MQTT／M2M 通訊 | 19、20、21、22、23 | Mosquitto 安裝檔、MQTT Explorer、M2M 講義、Web Chart 進階 |
 | Modbus TCP PLC 通訊 | 23 | `fx5u_modbus_read.json`／`fx5u_modbus_write.json`、`20261105-2.gx3` |
+| AI 影像分類（Teachable Machine） | 24 | Ch9 講義、`ch09-examples/` 範例流程、Webcam 判斷 LED 流程 |
 | 網路診斷 | netcheck | Port 測試、測速、網站連線報告 |
 
 ---
@@ -147,6 +151,7 @@ flowchart LR
 | `MQTT 工具` | Class-19／20／22／23 各一份，含 95 MB 安裝檔重複副本 | 若需長期保存，改用 Git LFS 或 GitHub Releases |
 | `90-sw1dnd-gxw3-e_117x(update).zip` | 1.69 GB × 2，已被 `.gitignore` 排除 | 維持排除，避免超過 GitHub 單檔 100 MB 限制 |
 | `Day5_20261103.zip` | Class-22／23 各一份（約 96 MB，接近單檔上限） | 維持現狀；若需更新改用 Git LFS／Releases |
+| `Day6_20261110.zip` | Class-24 一份（約 8.3 MB），另保留解壓後的 `Day6_20261110/` | 沿用 Class-22／23 的「壓縮包＋解壓內容」模式，容量無壓力 |
 
 ---
 

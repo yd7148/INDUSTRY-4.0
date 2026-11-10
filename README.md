@@ -1,13 +1,13 @@
 # 工業 4.0 自動控制工程職類｜課程教材庫
 
-本倉庫收錄 **2026-08-25 ～ 2026-11-05** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **23 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊）與一份網路檢測報告。
+本倉庫收錄 **2026-08-25 ～ 2026-11-10** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **24 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類）與一份網路檢測報告。
 
 | 項目 | 內容 |
 |---|---|
 | 線上倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 預設分支 | `main` |
-| 課程期間 | 2026-08-25 ～ 2026-11-05（23 堂） |
-| 主要工具 | GX Works3、DVP-PLC、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP |
+| 課程期間 | 2026-08-25 ～ 2026-11-10（24 堂） |
+| 主要工具 | GX Works3、DVP-PLC、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP、Teachable Machine |
 | 上課影片播放清單 | [工業4.0--工業4.0概論（YouTube）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo) |
 | 文件語言 | 繁體中文 |
 
@@ -34,13 +34,14 @@ flowchart LR
     subgraph P4["第四階段｜物聯網應用"]
         D1["Class 19-21<br/>Node-RED 網頁儀錶板<br/>MQTT．M2M 通訊"]
         D2["Class 22-23<br/>Node-RED MQTT 應用<br/>FX5U Modbus TCP 讀寫"]
+        D3["Class 24<br/>Teachable Machine 影像分類<br/>攝影機辨識聯動 LED"]
     end
-    A1 --> B1 --> B2 --> C1 --> D1 --> D2
+    A1 --> B1 --> B2 --> C1 --> D1 --> D2 --> D3
 ```
 
 ```mermaid
 flowchart TB
-    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-23<br/>逐堂教材（每資料夾附 README.md）"]
+    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-24<br/>逐堂教材（每資料夾附 README.md）"]
     REPO --> LIB["80-自動控制工程職類共用資料-PDF<br/>共用參考文件"]
     REPO --> NET["netcheck<br/>網路連線檢測報告"]
     REPO --> DOC["README.md / docs/<br/>說明、地圖與圖表"]
@@ -50,6 +51,7 @@ flowchart TB
     CLS --> DOCX["*.doc / *.docx<br/>課程筆記"]
     CLS --> TOOL["MQTT 工具 / Node-RED<br/>安裝檔與範例流程"]
     CLS --> JSON["*.json / *.bat<br/>Modbus 流程與啟動腳本"]
+    CLS --> AI["Node-RED AI 範例<br/>Teachable Machine／影像分類"]
 ```
 
 ### 課程時間軸（SVG）
@@ -57,6 +59,7 @@ flowchart TB
 ![課程時間軸](docs/img/course-timeline.svg)
 
 > SVG 原檔：[docs/img/course-timeline.svg](docs/img/course-timeline.svg)。Class-23 的 Modbus＋MQTT 系統架構圖：[docs/img/class23-modbus-mqtt.svg](docs/img/class23-modbus-mqtt.svg)。
+> Class-24 的 Teachable Machine → LED 判斷流程圖見該資料夾 [README.md](Class-24-2026-11-10/README.md)。
 
 ![Class-23 系統架構](docs/img/class23-modbus-mqtt.svg)
 
@@ -89,9 +92,11 @@ flowchart TB
 | 21 | 2026-10-29 | Node-RED Flow 設計與 M2M 應用 | `Node-RED _ Flow 2.html`、`Class-21-2026-10-29I4.0-M2M.pdf`、`2026-10-29-template-1.gx3` |
 | 22 | 2026-11-03 | Node-RED MQTT 應用、Web Chart 進階 | `01-Node-RED MQTT應用_20261102.pdf`、`06.MQTT+Web chart-NEW.txt`、`Day5_20261103.zip` |
 | 23 | 2026-11-05 | FX5U Modbus TCP 讀寫與 M2M 應用 | `Class-23-2026-11-05-29I4.0-M2M.pdf`、`fx5u_modbus_read.json`、`fx5u_modbus_write.json`、`20261105-2.gx3` |
+| 24 | 2026-11-10 | Node-RED AI：Teachable Machine 影像分類與攝影機聯動 LED | `Node-RED AI_ch9.pdf`、`Node-RED AI應用_ch9_20261110.pdf`、`06.webcam判斷有無人開啟LED燈(填訓練link).txt`、`ch09-examples/` |
 
 > 主題依資料夾名稱與教材檔名歸納；Class-07 與 Class-08 的資料夾編號與日期曾因課程重新編號而錯位，
 > 表中以實際資料夾為準。Class-07／08 內容高度重複，屬同一堂課的兩份快照。
+> Class-24（2026-11-10）為 Node-RED 線上課程 **Day 6**，直播尚未收錄於播放清單。
 
 ---
 
@@ -108,6 +113,8 @@ INDUSTRY-4.0/
 │  ├─ Day5_20261103/             # 上課流程包原始檔（含 README）
 │  ├─ MQTT 工具/                 # Mosquitto Broker 與 Client 工具（含 README）
 │  └─ Node-RED 網頁應用_Day5_20261103/  # 06~08 流程副本（含 README）
+├─ Class-24-2026-11-10/          # Node-RED AI、Teachable Machine 影像分類
+│  └─ ch09-examples/             # Ch9 範例流程、字型與測試影像
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
@@ -136,6 +143,7 @@ INDUSTRY-4.0/
 | 講義／手冊 | `.pdf` | 觀念說明與操作步驟 | 任意 PDF 閱讀器 |
 | 課程筆記 | `.doc`、`.docx` | 教師授課重點 | Word 或 LibreOffice |
 | Node-RED 流程 | `.txt`、`.json` | 匯入節點流程 | Node-RED 編輯器 |
+| AI 範例流程 | `.json`、`.html`、`.ttf` | Teachable Machine 分類與影像註記 | Node-RED 編輯器 |
 | 工具安裝檔 | `.exe`、`.zip` | MQTT／Node-RED 環境 | 詳見各資料夾說明 |
 | 檢測腳本 | `.ps1`、`.md` | 網路診斷與報告 | PowerShell |
 
@@ -149,10 +157,12 @@ flowchart LR
     D -->|機電整合| F["CIROS + FX5U IO 表"]
     D -->|物聯網| G["Node-RED 匯入流程<br/>Mosquitto 測試"]
     D -->|Modbus TCP| H["20261105-2.gx3 設為 Server<br/>Node-RED 讀寫流程"]
+    D -->|AI 影像| I2["Teachable Machine 訓練<br/>ui_iframe 嵌入模型"]
     E --> I["歸檔回對應 Class 資料夾"]
     F --> I
     G --> I
     H --> I
+    I2 --> I
 ```
 
 ---
@@ -168,6 +178,8 @@ flowchart LR
 | MQTT Explorer／MQTTBox | MQTT 訊息測試 | 同上 |
 | FX5U Modbus TCP | PLC 資料讀寫（FC1/3/5/6/15/16） | `Class-23` |
 | CIROS | 機電整合虛擬機台 | `80-.../CIROS`、`Class-18` |
+| Teachable Machine／TensorFlow.js | 影像分類模型訓練與瀏覽器端推論 | `Class-24` |
+| node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-24` |
 
 > 教材內的 `.exe`、`.zip` 為課堂教學用安裝檔，僅供教學參考；安裝前請自行確認來源與授權。
 
@@ -180,7 +192,7 @@ flowchart LR
 | 項目 | 內容 |
 |---|---|
 | 清單名稱 | **工業4.0--工業4.0概論**（I-4.0; Industrial-4.0） |
-| 影片數 | **19 段直播**（涵蓋 2026-08-25 ～ 2026-11-05） |
+| 影片數 | **23 段直播**（涵蓋 2026-08-25 ～ 2026-11-05，共 22 個上課日；Class-17 拆 Part-1／Part-2） |
 | 觀看方式 | 下方「播放清單網址」一次看完，或逐段點擊下表影片連結 |
 | 播放清單網址 | <https://www.youtube.com/playlist?list=PLKvXv11lxGbo> |
 
@@ -190,6 +202,9 @@ timeline
     08-25 技術指引／課表
     08-27 概論
         : Node-RED 安裝
+    09-01 GX Works3
+    09-03 DVP-PLC101
+    09-08 LD 練習
     09-10 LD 綜合
     09-15 LD 綜合
     09-17 PLC IP 設定
@@ -200,18 +215,19 @@ timeline
 
 ```mermaid
 timeline
-    title 下半：機電整合 → 物聯網應用（2026-10-01 ～ 2026-11-05）
+    title 下半：機電整合 → 物聯網應用（2026-10-01 ～ 2026-11-10）
     10-01 綜合練習
     10-06 Global Label
     10-08 Global Label
     10-13 Node-RED 節點
-    10-15 機丙 1（Part 2）
+    10-15 機丙 1（Part 1／2）
     10-20 CIROS 整合
     10-22 Node-RED／MQTT
     10-27 網頁控制 LED
     10-29 Flow 與 M2M
     11-03 MQTT＋Chart
     11-05 Modbus TCP＋M2M
+    11-10 Node-RED AI（未上架）
 ```
 
 > 註：直播存檔的「Channel 課次編號」與資料夾編號不完全一致（例如 2026-11-05 的影片標題為
@@ -221,6 +237,9 @@ timeline
 |---|---|---|--:|
 | 2026-08-25 | Class-01 | [工業4.0-2026-08-25](https://www.youtube.com/watch?v=18ot0-nbHtM&list=PLKvXv11lxGbo) | 2:54:37 |
 | 2026-08-27 | Class-02 | [工業4.0-2026-08-27](https://www.youtube.com/watch?v=cr5l5oebU7I&list=PLKvXv11lxGbo) | 2:52:40 |
+| 2026-09-01 | Class-03 | [工業4.0-2026-09-01](https://www.youtube.com/watch?v=bW0NWtQxCJA&list=PLKvXv11lxGbo) | 3:03:51 |
+| 2026-09-03 | Class-04 | [工業4.0-2026-09-03](https://www.youtube.com/watch?v=rHOddBbdj-4&list=PLKvXv11lxGbo) | 2:30:57 |
+| 2026-09-08 | Class-06 | [工業4.0-2026-09-08](https://www.youtube.com/watch?v=APUDDFnRhRY&list=PLKvXv11lxGbo) | 2:58:32 |
 | 2026-09-10 | Class-08 | [工業4.0-2026-09-10](https://www.youtube.com/watch?v=f29rsBUVOM8&list=PLKvXv11lxGbo) | 2:58:35 |
 | 2026-09-15 | Class-07 | [工業4.0-2026-09-15](https://www.youtube.com/watch?v=IIvgYmmdBQQ&list=PLKvXv11lxGbo) | 3:09:33 |
 | 2026-09-17 | Class-09 | [工業4.0-2026-09-17](https://www.youtube.com/watch?v=PnkD23eItPw&list=PLKvXv11lxGbo) | 2:50:59 |
@@ -231,15 +250,18 @@ timeline
 | 2026-10-06 | Class-14 | [工業4.0-2026-10-06](https://www.youtube.com/watch?v=BW0T8RQLV0s&list=PLKvXv11lxGbo) | 3:01:39 |
 | 2026-10-08 | Class-15 | [工業4.0-2026-10-08](https://www.youtube.com/watch?v=VAJEc1f5dSs&list=PLKvXv11lxGbo) | 3:05:13 |
 | 2026-10-13 | Class-16 | [工業4.0-2026-10-13](https://www.youtube.com/watch?v=GGhErkxavAs&list=PLKvXv11lxGbo) | 2:42:48 |
+| 2026-10-15 | Class-17 | [工業4.0-2026-10-15 Class17-Part-1](https://www.youtube.com/watch?v=LOBq3CMpvFg&list=PLKvXv11lxGbo) | 0:49:46 |
 | 2026-10-15 | Class-17 | [工業4.0-2026-10-15 Class17-Part-2](https://www.youtube.com/watch?v=r7HuMHnCCu4&list=PLKvXv11lxGbo) | 1:56:42 |
 | 2026-10-20 | Class-18 | [工業4.0-2026-10-20](https://www.youtube.com/watch?v=7Skj8dwFkRY&list=PLKvXv11lxGbo) | 2:53:03 |
 | 2026-10-22 | Class-19 | [工業4.0-2026-10-22](https://www.youtube.com/watch?v=0YhJ1nQwPH4&list=PLKvXv11lxGbo) | 2:57:21 |
 | 2026-10-27 | Class-20 | [工業4.0-2026-10-27](https://www.youtube.com/watch?v=QoYQ7r5mEaU&list=PLKvXv11lxGbo) | 2:49:31 |
 | 2026-10-29 | Class-21 | [工業4.0-2026-10-29](https://www.youtube.com/watch?v=_vi7SMZXi6A&list=PLKvXv11lxGbo) | 2:51:04 |
 | 2026-11-03 | Class-22 | [工業4.0-2026-11-03](https://www.youtube.com/watch?v=IDaHEhsdeMQ&list=PLKvXv11lxGbo) | 2:30:03 |
-| 2026-11-05 | Class-23 | [工業4.0-2026-11-05](https://www.youtube.com/watch?v=8_-iuXGPXtk&list=PLKvXv11lxGbo) | 直播（最新） |
+| 2026-11-05 | Class-23 | [工業4.0-2026-11-05](https://www.youtube.com/watch?v=8_-iuXGPXtk&list=PLKvXv11lxGbo) | 2:49:30 |
+| 2026-11-10 | Class-24 | （尚未上架，Day 6：Node-RED AI／Teachable Machine） | — |
 
-> 播放清單中未收錄 2026-09-01（Class-03）、09-04（Class-05）、09-08（Class-06）三天；缺課內容可直接閱讀該資料夾的 README.md 與教材。
+> 播放清單中未收錄 2026-09-04（Class-05）一天；該堂課請直接閱讀 [Class-05 資料夾](Class-05-2026-09-04/README.md) 的教材。
+> 2026-11-10（Class-24）的直播／錄影亦尚未上架，教材已先收錄於本庫。
 
 ---
 
@@ -264,6 +286,8 @@ flowchart TB
   已接近 GitHub 單檔上限；若後續要長期保存，建議改用 Git LFS 或 Releases。
 - **重複教材**：多堂課保留同一份 PDF 快照（例如 `DVP-PLC101samples_tc.pdf`），
   這是刻意的「單堂可獨立取用」設計，不在版控中做去重。
+- **授課工具**：本機以 MinGit（可攜版）操作版控，並以 GitHub Device Flow 授權；完整流程見
+  [docs/PUSH-RECORD.md](docs/PUSH-RECORD.md) 第 3 節。
 
 ---
 
@@ -274,7 +298,7 @@ flowchart TB
 | [README.md](README.md) | 本頁：專案總覽、課程索引、播放清單、環境與版控政策 |
 | [docs/COURSE-MAP.md](docs/COURSE-MAP.md) | 逐堂教材清單、學習路徑、技能矩陣 |
 | [docs/PUSH-RECORD.md](docs/PUSH-RECORD.md) | 推送流程、指令、檢核清單與結果紀錄 |
-| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 23 堂課時間軸圖（SVG） |
+| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 24 堂課時間軸圖（SVG） |
 | [docs/img/class23-modbus-mqtt.svg](docs/img/class23-modbus-mqtt.svg) | Class-23 Modbus＋MQTT 系統架構圖（SVG） |
 | [Class-XX/README.md](docs/COURSE-MAP.md) | 各堂課資料夾說明：YT 連結、筆記、參考文件與程式 |
 | [netcheck/REPORT.md](netcheck/REPORT.md) | 對外網路連線測試報告 |
@@ -283,4 +307,4 @@ flowchart TB
 
 ---
 
-*文件最後更新：2026-11-05（新增 Class-22／Class-23、上課影片播放清單與 SVG 圖表）*
+*文件最後更新：2026-11-10（新增 Class-24（2026-11-10，Node-RED AI／Teachable Machine）、更新上課影片播放清單為 23 段、SVG 時間軸加入 Class-24）*
