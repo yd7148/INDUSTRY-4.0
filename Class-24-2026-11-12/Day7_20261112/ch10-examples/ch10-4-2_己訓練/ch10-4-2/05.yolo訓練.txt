@@ -1,0 +1,254 @@
+[
+    {
+        "id": "tab_starwars_flow",
+        "type": "tab",
+        "label": "星際大戰飛船辨識流程",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fileinject_starwars",
+        "type": "fileinject",
+        "z": "tab_starwars_flow",
+        "name": "選取 val/images 圖片",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "save_img_buffer"
+            ]
+        ]
+    },
+    {
+        "id": "save_img_buffer",
+        "type": "change",
+        "z": "tab_starwars_flow",
+        "name": "暫存原始圖片",
+        "rules": [
+            {
+                "t": "set",
+                "p": "origImage",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "exec_starwars_yolo"
+            ]
+        ]
+    },
+    {
+        "id": "exec_starwars_yolo",
+        "type": "exec",
+        "z": "tab_starwars_flow",
+        "command": "\"D:\\IIOT\\課程資料\\thonny-5.0.1-windows-portable-x64\\python.exe\" \"D:\\IIOT\\課程資料\\Node-RED AI 學習\\ch10-examples\\ch10-4-2\\003_yolo_infer_starwars.py\"",
+        "addpay": "filename",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "呼叫星際大戰 YOLO 模型",
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "json_parse_starwars"
+            ],
+            [
+                "stderr_to_text"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "stderr_to_text",
+        "type": "function",
+        "z": "tab_starwars_flow",
+        "name": "錯誤Buffer轉文字",
+        "func": "if (Buffer.isBuffer(msg.payload)) {\n    msg.payload = msg.payload.toString('utf8');\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 520,
+        "wires": [
+            [
+                "debug_stderr"
+            ]
+        ]
+    },
+    {
+        "id": "debug_stderr",
+        "type": "debug",
+        "z": "tab_starwars_flow",
+        "name": "Python錯誤訊息",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 400,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "json_parse_starwars",
+        "type": "json",
+        "z": "tab_starwars_flow",
+        "name": "解析 JSON 輸出",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 180,
+        "y": 400,
+        "wires": [
+            [
+                "debug_starwars",
+                "restore_img_buffer"
+            ]
+        ]
+    },
+    {
+        "id": "debug_starwars",
+        "type": "debug",
+        "z": "tab_starwars_flow",
+        "name": "辨識結果 JSON",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 400,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "restore_img_buffer",
+        "type": "change",
+        "z": "tab_starwars_flow",
+        "name": "還原圖片並設定標註",
+        "rules": [
+            {
+                "t": "set",
+                "p": "annotations",
+                "pt": "msg",
+                "to": "payload.annotations",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "origImage",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "switch_has_boxes"
+            ]
+        ]
+    },
+    {
+        "id": "switch_has_boxes",
+        "type": "switch",
+        "z": "tab_starwars_flow",
+        "name": "是否有偵測到物件",
+        "property": "annotations.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 440,
+        "wires": [
+            [
+                "annotate_starwars"
+            ],
+            [
+                "viewer_starwars"
+            ]
+        ]
+    },
+    {
+        "id": "annotate_starwars",
+        "type": "annotate-image-plus",
+        "z": "tab_starwars_flow",
+        "name": "畫框標註",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "10",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 820,
+        "y": 400,
+        "wires": [
+            [
+                "viewer_starwars"
+            ]
+        ]
+    },
+    {
+        "id": "viewer_starwars",
+        "type": "image viewer",
+        "z": "tab_starwars_flow",
+        "name": "顯示辨識圖片",
+        "width": "400",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 1010,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f797f3b2c1b97a8",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-browser-utils": "0.0.11",
+            "@smcgann/node-red-annotate-image-plus": "0.0.4",
+            "node-red-contrib-image-tools": "2.1.1"
+        }
+    }
+]

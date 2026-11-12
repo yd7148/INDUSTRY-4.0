@@ -5,6 +5,11 @@
 
 # Large installer archives excluded from git (over GitHub 100MB limit)
 90-sw1dnd-gxw3-e_117x(update).zip
+Day7_20261112.zip
+
+# Python bytecode caches
+__pycache__/
+*.pyc
 
 # Windows per-folder metadata
 desktop.ini

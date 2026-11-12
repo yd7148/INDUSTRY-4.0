@@ -1,0 +1,19 @@
+{
+  "settings_version": "0.0.8",
+  "datasets_dir": "C:\\Users\\noahtu\\datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "bc69870ba2baa07c8eb299c84abaa07816462fb12366051b773b601f1d045f81",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "mlflow": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

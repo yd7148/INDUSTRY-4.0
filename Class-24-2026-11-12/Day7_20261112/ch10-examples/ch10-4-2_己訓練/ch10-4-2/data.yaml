@@ -1,0 +1,7 @@
+path: D:/IIOT/課程資料/Node-RED AI 學習/ch10-examples/ch10-4-2
+train: train/images
+val: val/images
+
+names:
+  0: Millennium Falcon
+  1: Tie Fighter

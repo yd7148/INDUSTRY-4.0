@@ -1,0 +1,231 @@
+[
+    {
+        "id": "7ff0c2b338f7b4ac",
+        "type": "fileinject",
+        "z": "3cb080970f5cb5f3",
+        "name": "選取圖檔",
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "859f9554284bba63"
+            ]
+        ]
+    },
+    {
+        "id": "954a9d48bcfeeae2",
+        "type": "function",
+        "z": "3cb080970f5cb5f3",
+        "name": "轉換成BBox座標",
+        "func": "// 取得檔案內容的陣列, 一行是一個元素, 這是使用\"\\n\"來切割 Buffer\nlet annotations = msg.annotations.toString().split('\\n');\n// 初始 msg.annotations 屬性\nmsg.annotations = [];\n// 使用 for 迴圈來處理陣列的每一行資料\nfor (let i = 0; i < annotations.length; i++) {\n    let line = annotations[i].trim(); // 刪除空白\n    // 跳過空白行\n    if (!line) continue;\n    // 將每一行的資料, 使用空白字元分割成數字陣列\n    let parts = line.split(' ').map(Number);\n    // 取出分類索引和邊界框資料x, y, width, height\n    let classIndex = parts[0];\n    let centerX = parts[1];\n    let centerY = parts[2];\n    let width = parts[3];\n    let height = parts[4];\n    // console.log(\"YOLO:\", classIndex, centerX, centerY, width, height);\n    // 將 YOLO 格式轉換為 bbox 格式 (x, y, width, height)\n    let bbox_x = (centerX - width / 2) * msg.width;\n    let bbox_y = (centerY - height / 2) * msg.height;\n    let bbox_width = width * msg.width;\n    let bbox_height = height * msg.height;\n    // console.log(\"BBOX:\", bbox_x, bbox_y, bbox_width, bbox_height);\n    // 建立每一筆標註資料的 JSON 物件\n    let jsondata = {\n        label: msg.classNames[classIndex], // 根據索引取得分類名稱\n        bbox: [bbox_x, bbox_y, bbox_width, bbox_height],\n        labelLocation: \"top\" // 預設標籤位置為 \"top\"\n    }\n    // console.log(jsondata)\n    // 新增一個標註物件\n    msg.annotations.push(jsondata);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "4860fa80f0591675"
+            ]
+        ]
+    },
+    {
+        "id": "4860fa80f0591675",
+        "type": "annotate-image-plus",
+        "z": "3cb080970f5cb5f3",
+        "name": "",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "5",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 560,
+        "y": 160,
+        "wires": [
+            [
+                "f47b2aa7014f1403",
+                "ad35ca6da78f49c5"
+            ]
+        ]
+    },
+    {
+        "id": "f47b2aa7014f1403",
+        "type": "image viewer",
+        "z": "3cb080970f5cb5f3",
+        "name": "顯示標註影像",
+        "width": "400",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 540,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad35ca6da78f49c5",
+        "type": "debug",
+        "z": "3cb080970f5cb5f3",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "4e3ab9073a039209",
+        "type": "image-info",
+        "z": "3cb080970f5cb5f3",
+        "name": "取得圖檔尺寸",
+        "x": 560,
+        "y": 80,
+        "wires": [
+            [
+                "e40f5cf83041e852"
+            ]
+        ]
+    },
+    {
+        "id": "e40f5cf83041e852",
+        "type": "function",
+        "z": "3cb080970f5cb5f3",
+        "name": "取得標註檔路徑",
+        "func": "// 取得 msg.filename 完整的圖檔名稱\nlet baseName = msg.filename\n// 刪除副檔名，只保留檔名\nlet nameWithoutExtension = baseName.substring(0, baseName.lastIndexOf('.'));\n// 建立YOLO標註檔的路徑\nmsg.textFilePath = msg.filePath + \"labels\\\\\" + nameWithoutExtension + \".txt\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 80,
+        "wires": [
+            [
+                "2270f6574cca35c5"
+            ]
+        ]
+    },
+    {
+        "id": "d28aa479473c8fdf",
+        "type": "file in",
+        "z": "3cb080970f5cb5f3",
+        "name": "讀取YOLO標註檔",
+        "filename": "textFilePath",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "745ec8897b6816ca"
+            ]
+        ]
+    },
+    {
+        "id": "2270f6574cca35c5",
+        "type": "change",
+        "z": "3cb080970f5cb5f3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "imageBuffer",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "d28aa479473c8fdf"
+            ]
+        ]
+    },
+    {
+        "id": "745ec8897b6816ca",
+        "type": "change",
+        "z": "3cb080970f5cb5f3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "annotations",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "imageBuffer",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "textFilePath",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 280,
+        "wires": [
+            [
+                "954a9d48bcfeeae2"
+            ]
+        ]
+    },
+    {
+        "id": "859f9554284bba63",
+        "type": "function",
+        "z": "3cb080970f5cb5f3",
+        "name": "設定參數",
+        "func": "// 分類名稱陣列\nmsg.classNames = [\"Millennium Falcon\", \"Tie Fighter\"];\n// 圖檔資料集的絕對路徑, 最後需加上\"/\", 如用\"\\\", 請用\"\\\\\"\nmsg.filePath = \"C:/AIoT/ch10/ch10-4-2/train/\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "4e3ab9073a039209"
+            ]
+        ]
+    }
+]
