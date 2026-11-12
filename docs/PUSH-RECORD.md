@@ -14,12 +14,12 @@
 | 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 分支 | `main` → `origin/main` |
 | 推送前遠端 | `94f0bc9`（2026-11-10） |
-| 推送後遠端 | 本文件修訂後以 `git ls-remote` 為準 |
+| 推送後遠端 | `9a1e5155` |
 | 推送範圍 | `94f0bc9..`（課次重新編號 + Class-24 新教材 + 文件同步） |
 | 本次新增 | **課次編號全面重新編號**（Class-01～Class-24，與 YouTube 頻道存檔標題一致）、`Class-24-2026-11-12`（Node-RED AI Ch10／YOLO 物件偵測，Day 7）、Class-22 Modbus 架構圖更名、根 README／COURSE-MAP／SVG 全面更新 |
-| 傳輸結果 | 待推送後填寫 |
-| 遠端驗證 | 待推送後填寫 |
-| 工作區狀態 | 待推送後填寫 |
+| 傳輸結果 | **成功**；GitHub 回報 `94f0bc9a..9a1e5155  main -> main` |
+| 遠端驗證 | `git ls-remote origin main` 回傳 `9a1e5155`，與本機 HEAD 一致；GitHub 網頁 `/commits/main` 亦已可見 |
+| 工作區狀態 | clean，`main` 與 `origin/main` 同點 |
 ```mermaid
 flowchart LR
     A["推送前<br/>origin/main = cc06860"] --> B["本機提交 4 個 commit"]
@@ -52,8 +52,8 @@ gitGraph
     commit id: "fd7fb8a 11-10 docs"
     commit id: "038b622 11-10 push record"
     commit id: "097b06c 11-10 dog.jpg"
-    commit id: "a1b2c3d 11-12 renumber+Class24"
-    commit id: "e4f5a6b 11-12 docs sync"
+    commit id: "edc2de2 11-12 renumber+Class24"
+    commit id: "9a1e515 11-12 docs sync"
 ```
 
 | Commit | 日期時間 | 說明 |
@@ -74,8 +74,8 @@ gitGraph
 | `fd7fb8a` | 2026-11-10 18:51 | 更新根 README、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（23 → 24 堂，播放清單 19 → 23 段） |
 | `038b622` | 2026-11-10 18:53 | 推送紀錄補上 2026-11-10 該列與新的環境準備／檢核流程 |
 | `097b06c` | 2026-11-10 18:59 | 補上 Class-24 測試影像 `dog.jpg`，同步更新該資料夾檔案清單 |
-| `a1b2c3d` | 2026-11-12 | **課次重新編號**（Class-01～Class-24，與 YouTube 頻道存檔標題一致）、新增 `Class-24-2026-11-12`（Node-RED AI Ch10／YOLO 物件偵測）、同步各堂教材檔名 |
-| `e4f5a6b` | 2026-11-12 | 更新根 `README.md`、`docs/COURSE-MAP.md`、`docs/PUSH-RECORD.md`、24 堂各堂 `README.md`、SVG 時間軸與 Modbus 架構圖 |
+| `edc2de2` | 2026-11-12 | **課次重新編號**（Class-01～Class-24，與 YouTube 頻道存檔標題一致）、新增 `Class-24-2026-11-12`（Node-RED AI Ch10／YOLO 物件偵測）、同步各堂教材檔名 |
+| `9a1e515` | 2026-11-12 | 更新根 `README.md`、`docs/COURSE-MAP.md`、`docs/PUSH-RECORD.md`、24 堂各堂 `README.md`、SVG 時間軸與 Modbus 架構圖 |
 
 > 本次推送前本機與遠端同點（`94f0bc9`），推送範圍為本次新增的 2 個 commit。
 
@@ -207,7 +207,7 @@ git -C D:\INDUSTRY-4.0 status --short --branch
 | 2026-11-05 | `463e28f..d6cf742` | 成功 | 上傳 Class-23-2026-11-05 完整教材（Modbus TCP／M2M）、Class-22 遺漏流程檔、23 份 Class README、根 README／COURSE-MAP 更新、docs/img 兩張 SVG 圖表（共 108 檔） |
 | 2026-11-10 | `cc06860..fd7fb8a` | 成功 | 新增 Class-24-2026-11-10（Node-RED AI／Teachable Machine，26 檔）、更新 Class-23 `20261105-2.gx3`、根 README／COURSE-MAP／SVG 同步更新（29 檔） |
 | 2026-11-10 | `fd7fb8a..097b06c` | 成功 | 補上推送紀錄更新與 Class-24 測試影像 `dog.jpg`（2 個 commit） |
-| 2026-11-12 | `94f0bc9..` | 待填寫 | 課次重新編號（Class-01～Class-24）＋ 新增 Class-24（2026-11-12，Node-RED AI Ch10／YOLO）＋ 全部文件同步 |
+| 2026-11-12 | `94f0bc9a..9a1e5155` | 成功 | 課次重新編號（Class-01～Class-24）＋ 新增 Class-24（2026-11-12，Node-RED AI Ch10／YOLO）＋ 全部文件同步 | 課次重新編號（Class-01～Class-24）＋ 新增 Class-24（2026-11-12，Node-RED AI Ch10／YOLO）＋ 全部文件同步 |
 
 ---
 
