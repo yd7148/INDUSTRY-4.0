@@ -6,15 +6,15 @@
 |---|---|
 | 課次／日期 | Class-04／2026-09-03 |
 | 主題 | DVP-PLC101 範例、階梯圖（LD）練習 |
-| 上課直播 | 未取得影片 |
+| 上課直播 | [https://www.youtube.com/watch?v=rHOddBbdj-4] |
 | 播放清單 | [工業4.0--工業4.0概論](https://www.youtube.com/playlist?list=PLKvXv11lxGbo) |
 
 ## 1. 上課影片
 
-- **上課直播（YouTube）**：本第一天尚未錄到對應影片，可從播放清單依日期找相近堂次。
+- **上課直播（YouTube）**：[工業4.0-2026-09-03](https://www.youtube.com/watch?v=rHOddBbdj-4&list=PLKvXv11lxGbo)（videoId：rHOddBbdj-4，長度 2:30:57）
 
 - [播放清單：工業4.0--工業4.0概論](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)
-- 若影片標題課次編號與資料夾編號不同，係直播存檔重新編號所致；本表以上課日期對應。
+- 頻道存檔標題的課次編號已與本庫資料夾編號一致（Class04），本表以日期對應。
 
 ## 2. 本資料夾重點
 
@@ -29,9 +29,10 @@ DVP-PLC101 範例、階梯圖（LD）練習
 
 | 類型 | 檔名 | 大小 |
 |---|---|--:|
-| 筆記 | [00-Class-02-2026-08-03-notes.doc](00-Class-02-2026-08-03-notes.doc) | 34 KB |
+| 筆記 | [00-Class-02-2026-08-27-notes.doc](00-Class-02-2026-08-27-notes.doc) | 35 KB |
 | 參考文件 | [01-DVP-PLC101samples_tc.pdf](01-DVP-PLC101samples_tc.pdf) | 5401 KB |
 | 程式／範例 | [20260903-test2.gx3](20260903-test2.gx3) | 493 KB |
-| 工具／安裝檔 | [90-sw1dnd-gxw3-e_117x(update).zip](90-sw1dnd-gxw3-e_117x(update).zip) | 1729235 KB |
+| 工具／壓縮包 | [90-sw1dnd-gxw3-e_117x(update).zip](90-sw1dnd-gxw3-e_117x%28update%29.zip) | 1729235 KB |
 | 程式／範例 | [EX101-LD-20260903.gx3](EX101-LD-20260903.gx3) | 536 KB |
 | 參考文件 | [GX-Works3 Operating Manual_cht.pdf](GX-Works3%20Operating%20Manual_cht.pdf) | 19598 KB |
+| 程式／範例 | [README.md](README.md) | 2 KB |

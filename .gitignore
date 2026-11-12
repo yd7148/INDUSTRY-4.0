@@ -11,5 +11,8 @@ Day7_20261112.zip
 __pycache__/
 *.pyc
 
+# Thonny portable IDE runtime logs (machine-local, rewritten on every launch)
+**/thonny-5.0.1-windows-portable-x64/user_data/*.log
+
 # Windows per-folder metadata
 desktop.ini

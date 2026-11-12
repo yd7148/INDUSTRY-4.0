@@ -11,10 +11,10 @@
 
 ## 1. 上課影片
 
-- **上課直播（YouTube）**：[工業4.0-2026-08-25](https://www.youtube.com/watch?v=18ot0-nbHtM&list=PLKvXv11lxGbo)（videoId：18ot0-nbHtM）
+- **上課直播（YouTube）**：[工業4.0-2026-08-25](https://www.youtube.com/watch?v=18ot0-nbHtM&list=PLKvXv11lxGbo)（videoId：18ot0-nbHtM，長度 2:54:37）
 
 - 可於播放清單中直接找到本堂課。[播放清單：工業4.0--工業4.0概論](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)
-- 若影片標題課次編號與資料夾編號不同，係直播存檔重新編號所致；本表以上課日期對應。
+- 頻道存檔標題的課次編號已與本庫資料夾編號一致（Class01），本表以日期對應。
 
 ## 2. 本資料夾重點
 
@@ -32,3 +32,4 @@
 | 參考文件 | [0825-teacher-I4.0-技術指引_V1.1.pdf](0825-teacher-I4.0-%E6%8A%80%E8%A1%93%E6%8C%87%E5%BC%95_V1.1.pdf) | 1408 KB |
 | 參考文件 | [0825-teacher-industry 4.0-Basic.pdf](0825-teacher-industry%204.0-Basic.pdf) | 1596 KB |
 | 參考文件 | [115-2 I4.0課表.pdf](115-2%20I4.0%E8%AA%B2%E8%A1%A8.pdf) | 92 KB |
+| 程式／範例 | [README.md](README.md) | 2 KB |

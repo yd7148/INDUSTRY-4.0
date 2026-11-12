@@ -6,7 +6,7 @@ import urllib.request
 import tempfile
 
 # 1. 您的原始路徑與資料夾設定
-base_dir = r"D:\IIOT\課程資料\Node-RED AI 學習\ch10-examples\ch10-3-3"
+base_dir = r"D:\INDUSTRY-4.0\Class-24-2026-11-12\Day7_20261112\ch10-examples\ch10-3-3"
 video_file = os.path.join(base_dir, "starwars.mp4")
 output_dir = os.path.join(base_dir, "frames")
 

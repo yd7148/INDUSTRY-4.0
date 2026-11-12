@@ -11,10 +11,10 @@
 
 ## 1. 上課影片
 
-- **上課直播（YouTube）**：[工業4.0-2026-08-27](https://www.youtube.com/watch?v=cr5l5oebU7I&list=PLKvXv11lxGbo)（videoId：cr5l5oebU7I）
+- **上課直播（YouTube）**：[工業4.0-2026-08-27](https://www.youtube.com/watch?v=cr5l5oebU7I&list=PLKvXv11lxGbo)（videoId：cr5l5oebU7I，長度 2:52:40）
 
 - 可於播放清單中直接找到本堂課。[播放清單：工業4.0--工業4.0概論](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)
-- 若影片標題課次編號與資料夾編號不同，係直播存檔重新編號所致；本表以上課日期對應。
+- 頻道存檔標題的課次編號已與本庫資料夾編號一致（Class02），本表以日期對應。
 
 ## 2. 本資料夾重點
 
@@ -31,6 +31,7 @@
 |---|---|--:|
 | 筆記 | [00-Class-03-2026-09-01-notes.doc](00-Class-03-2026-09-01-notes.doc) | 796 KB |
 | 參考文件 | [01-工業4.0概論_20260827.pdf](01-%E5%B7%A5%E6%A5%AD4.0%E6%A6%82%E8%AB%96_20260827.pdf) | 6586 KB |
-| 工具／安裝檔 | [Node_Red_server.zip](Node_Red_server.zip) | 0 KB |
-| 工具／安裝檔 | [Node_Red_setup.zip](Node_Red_setup.zip) | 0 KB |
-| 工具／安裝檔 | [自動控制工程職類共用資料-PDF.zip](%E8%87%AA%E5%8B%95%E6%8E%A7%E5%88%B6%E5%B7%A5%E7%A8%8B%E8%81%B7%E9%A1%9E%E5%85%B1%E7%94%A8%E8%B3%87%E6%96%99-PDF.zip) | 79423 KB |
+| 工具／壓縮包 | [自動控制工程職類共用資料-PDF.zip](%E8%87%AA%E5%8B%95%E6%8E%A7%E5%88%B6%E5%B7%A5%E7%A8%8B%E8%81%B7%E9%A1%9E%E5%85%B1%E7%94%A8%E8%B3%87%E6%96%99-PDF.zip) | 79423 KB |
+| 工具／壓縮包 | [Node_Red_server.zip](Node_Red_server.zip) | 0 KB |
+| 工具／壓縮包 | [Node_Red_setup.zip](Node_Red_setup.zip) | 0 KB |
+| 程式／範例 | [README.md](README.md) | 2 KB |
