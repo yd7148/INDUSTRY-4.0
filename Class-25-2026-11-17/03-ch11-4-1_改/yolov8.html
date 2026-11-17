@@ -1,0 +1,52 @@
+<script type="text/javascript">
+  RED.nodes.registerType('obj detection', {
+    category: 'function',
+    color: '#C0DEED',
+    icon: 'font-awesome/fa-eye',
+    defaults: {
+      name: { value: "" },
+      modelPath: { value: "" },
+      topk: { value: 1, required: true, validate: RED.validators.number() },
+      iouThreshold: { value: 0.45, required: true, validate: RED.validators.number() },
+      confidenceThreshold: { value: 0.25, required: true, validate: RED.validators.number() },
+    },
+    inputs: 1,
+    outputs: 1,
+    label: function () {
+      return this.name || "obj detection";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="obj detection">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-modelPath"><i class="fa fa-folder"></i> Model Path</label>
+        <input type="text" id="node-input-modelPath" placeholder="留空使用預設模型">
+    </div>
+    <div class="form-row">
+      <label for="node-input-topk"><i class="fa fa-hashtag"></i> Top-K</label>
+      <input type="text" id="node-input-topk" placeholder="1" min="1">
+    </div>
+    <div class="form-row">
+      <label for="node-input-iouThreshold"><i class="fa fa-object-group"></i> IoU Threshold</label>
+      <input type="text" id="node-input-iouThreshold" placeholder="0.45">
+    </div>
+    <div class="form-row">
+      <label for="node-input-confidenceThreshold"><i class="fa fa-star"></i> Confidence Threshold</label>
+      <input type="text" id="node-input-confidenceThreshold" placeholder="0.25">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="obj detection">
+    <p>Object detection using YOLOv8.</p>
+    <p>Input: Image</p>
+    <p>Output: Detected objects</p>
+    <p>Model Path: Folder containing best.onnx and classes.txt (empty = default model)</p>
+    <p>Top-K: Number of objects to detect</p>
+    <p>IoU Threshold: Intersection over Union threshold</p>
+    <p>Confidence Threshold: Confidence threshold</p>
+</script>
