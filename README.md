@@ -1,12 +1,12 @@
 # 工業 4.0 自動控制工程職類｜課程教材庫
 
-本倉庫收錄 **2026-08-25 ～ 2026-11-12** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **24 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類／YOLO 物件偵測）與一份網路檢測報告。
+本倉庫收錄 **2026-08-25 ～ 2026-11-17** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **25 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類／YOLO 物件偵測）與一份網路檢測報告。
 
 | 項目 | 內容 |
 |---|---|
 | 線上倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 預設分支 | `main` |
-| 課程期間 | 2026-08-25 ～ 2026-11-12（24 堂） |
+| 課程期間 | 2026-08-25 ～ 2026-11-17（25 堂） |
 | 主要工具 | GX Works3、DVP-PLC101、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP、Teachable Machine、YOLO（Ultralytics）、labelImg、Thonny |
 | 上課影片播放清單 | [工業4.0--工業4.0概論（YouTube）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo) |
 | 文件語言 | 繁體中文 |
@@ -34,14 +34,14 @@ flowchart LR
     subgraph P4["第四階段｜物聯網應用"]
         D1["Class 18-20<br/>Node-RED 網頁儀錶板<br/>MQTT．M2M 通訊"]
         D2["Class 21-22<br/>Node-RED MQTT 應用<br/>FX5U Modbus TCP 讀寫"]
-        D3["Class 23-24<br/>Teachable Machine 影像分類<br/>YOLO 物件偵測"]
+        D3["Class 23-25<br/>Teachable Machine 影像分類<br/>YOLO 物件偵測（星際大戰／蘋果）"]
     end
     A1 --> B1 --> B2 --> C1 --> D1 --> D2 --> D3
 ```
 
 ```mermaid
 flowchart TB
-    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-24<br/>逐堂教材（每資料夾附 README.md）"]
+    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-25<br/>逐堂教材（每資料夾附 README.md）"]
     REPO --> LIB["80-自動控制工程職類共用資料-PDF<br/>共用參考文件"]
     REPO --> NET["netcheck<br/>網路連線檢測報告"]
     REPO --> DOC["README.md / docs/<br/>說明、地圖與圖表"]
@@ -59,7 +59,8 @@ flowchart TB
 ![課程時間軸](docs/img/course-timeline.svg)
 
 > SVG 原檔：[docs/img/course-timeline.svg](docs/img/course-timeline.svg)。Class-22 的 Modbus＋MQTT 系統架構圖：[docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg)。
-> Class-24 的 YOLO 訓練與推論流程見該資料夾 [README.md](Class-24-2026-11-12/README.md)。
+> Class-24 的 YOLO 訓練與推論流程見該資料夾 [README.md](Class-24-2026-11-12/README.md)；
+> Class-25 的蘋果 YOLOv8 訓練與 Node-RED 推論流程見 [README.md](Class-25-2026-11-17/README.md)。
 
 ![Class-22 系統架構](docs/img/class22-modbus-mqtt.svg)
 
@@ -93,8 +94,9 @@ flowchart TB
 | 22 | 2026-11-05 | FX5U Modbus TCP 讀寫與 M2M 應用 | `Class-22-2026-11-05-29I4.0-M2M.pdf`、`fx5u_modbus_read.json`、`20261105-2.gx3` |
 | 23 | 2026-11-10 | Node-RED AI：Teachable Machine 影像分類與攝影機聯動 LED | `Node-RED AI_ch9.pdf`、`06.webcam判斷有無人開啟LED燈(填訓練link).txt`、`ch09-examples/` |
 | 24 | 2026-11-12 | Node-RED AI：YOLO 物件偵測訓練與推論 | `Node-RED AI_ch10.pdf`、`05.yolo訓練.txt`、`ch10-examples/ch10-4-2/` |
+| 25 | 2026-11-17 | Node-RED AI：Ch11 蘋果 YOLO 訓練分析與 Node-RED 推論 | `Node-RED AI_ch11.pdf`、`ch11-examples/ch11-2/`、`ch11-3-*.json`、`ch11-4-2.json` |
 
-> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class24＝2026-11-12）。
+> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17）。
 > Class-06 與 Class-07 為同一堂 LD 綜合練習的兩份素材快照；Class-05 同時收錄 09-04 與 09-08 兩次授課筆記。
 
 ---
@@ -116,6 +118,8 @@ INDUSTRY-4.0/
 │  └─ Day6_20261110/             # Ch9 講義、流程檔與範例
 ├─ Class-24-2026-11-12/          # Node-RED AI：YOLO 物件偵測訓練與推論
 │  └─ Day7_20261112/             # Ch10 講義與 ch10-examples/
+├─ Class-25-2026-11-17/          # Node-RED AI：Ch11 蘋果 YOLO 訓練與推論
+│  └─ Day8_20261117/             # Ch11 講義、ch11-examples/ 與 Thonny IDE
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
@@ -124,7 +128,7 @@ INDUSTRY-4.0/
 │  ├─ COURSE-MAP.md              # 逐堂教材清單與技能矩陣
 │  ├─ PUSH-RECORD.md             # 推送流程與檢核紀錄
 │  └─ img/
-│     ├─ course-timeline.svg     # 24 堂課時間軸圖
+│     ├─ course-timeline.svg     # 25 堂課時間軸圖
 │     └─ class22-modbus-mqtt.svg # Class-22 Modbus＋MQTT 架構圖
 ├─ netcheck/                     # 網路連線／Port／測速檢測
 ├─ README.md
@@ -175,16 +179,16 @@ flowchart LR
 |---|---|---|
 | GX Works3 | 三菱 FX5U PLC 程式編輯與模擬 | `Class-03` 起、`80-.../FX5U` |
 | ISPSoft | 台達 DVP-PLC 程式編輯 | `80-.../Delta` |
-| Node-RED | 網頁化流程與儀錶板 | `Class-15`、`Class-18`～`Class-24` |
+| Node-RED | 網頁化流程與儀錶板 | `Class-15`、`Class-18`～`Class-25` |
 | Mosquitto | MQTT Broker | `Class-18/MQTT 工具`、`Class-19/MQTT 工具`、`Class-21/MQTT 工具`、`Class-22/MQTT 工具` |
 | MQTT Explorer／MQTTBox | MQTT 訊息測試 | 同上 |
 | FX5U Modbus TCP | PLC 資料讀寫（FC1/3/5/6/15/16） | `Class-22` |
 | CIROS | 機電整合虛擬機台 | `80-.../CIROS`、`Class-17` |
 | Teachable Machine／TensorFlow.js | 影像分類模型訓練與瀏覽器端推論 | `Class-23` |
-| Ultralytics YOLOv8 | 物件偵測模型訓練與推論 | `Class-24` |
-| labelImg | 影像標註工具（產生 YOLO 格式標註檔） | `Class-24` |
-| Thonny | 攜帶版 Python IDE（執行 AI 腳本） | `Class-24` |
-| node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-23`、`Class-24` |
+| Ultralytics YOLOv8 | 物件偵測模型訓練與推論 | `Class-24`、`Class-25` |
+| labelImg | 影像標註工具（產生 YOLO 格式標註檔） | `Class-24`（Ch11 沿用已標註資料集） |
+| Thonny | 攜帶版 Python IDE（執行 AI 腳本） | `Class-24`、`Class-25` |
+| node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-23`～`Class-25` |
 
 > 教材內的 `.exe`、`.zip` 為課堂教學用安裝檔，僅供教學參考；安裝前請自行確認來源與授權。
 
@@ -197,7 +201,7 @@ flowchart LR
 | 項目 | 內容 |
 |---|---|
 | 清單名稱 | **工業4.0--工業4.0概論**（I-4.0; Industrial-4.0） |
-| 影片數 | **25 段直播**（涵蓋 2026-08-25 ～ 2026-11-12，共 24 堂課；Class-16 拆 Part-1／Part-2） |
+| 影片數 | **26 段直播**（涵蓋 2026-08-25 ～ 2026-11-17，共 25 堂課；Class-16 拆 Part-1／Part-2） |
 | 觀看方式 | 下方「播放清單網址」一次看完，或逐段點擊下表影片連結 |
 | 播放清單網址 | <https://www.youtube.com/playlist?list=PLKvXv11lxGbo> |
 
@@ -221,7 +225,7 @@ timeline
 
 ```mermaid
 timeline
-    title 下半：機電整合 → 物聯網應用（2026-10-06 ～ 2026-11-12）
+    title 下半：機電整合 → 物聯網應用（2026-10-06 ～ 2026-11-17）
     10-06 Global Label
     10-08 Global Label
     10-13 Node-RED 節點
@@ -234,6 +238,7 @@ timeline
     11-05 Modbus TCP＋M2M
     11-10 Node-RED AI（Teachable Machine）
     11-12 Node-RED AI（YOLO 物件偵測）
+    11-17 Node-RED AI（Ch11 蘋果 YOLO）
 ```
 
 | 上課日期 | 本庫資料夾 | 影片 | 長度 |
@@ -262,9 +267,10 @@ timeline
 | 2026-11-03 | Class-21 | [工業4.0-2026-11-03](https://www.youtube.com/watch?v=IDaHEhsdeMQ&list=PLKvXv11lxGbo) | 2:30:03 |
 | 2026-11-05 | Class-22 | [工業4.0-2026-11-05](https://www.youtube.com/watch?v=8_-iuXGPXtk&list=PLKvXv11lxGbo) | 2:49:30 |
 | 2026-11-10 | Class-23 | [工業4.0-2026-11-10](https://www.youtube.com/watch?v=fJ018vU6Lp8&list=PLKvXv11lxGbo) | 2:55:06 |
-| 2026-11-12 | Class-24 | [工業4.0-2026-11-12](https://www.youtube.com/watch?v=j2wnkIvPIs4&list=PLKvXv11lxGbo) | 直播中 |
+| 2026-11-12 | Class-24 | [工業4.0-2026-11-12](https://www.youtube.com/watch?v=j2wnkIvPIs4&list=PLKvXv11lxGbo) | 2:52:53 |
+| 2026-11-17 | Class-25 | [工業4.0-2026-11-17](https://www.youtube.com/watch?v=I-IKRY3jts4&list=PLKvXv11lxGbo) | 直播中 |
 
-> 2026-11-12 的 Class-24 為當日直播（頻道仍在直播，時長尚未固定），存檔上架後再更新本表。
+> 2026-11-17 的 Class-25 為當日直播（頻道尚在整理存檔，時長尚未固定），存檔上架後再更新本表。
 
 ---
 
@@ -282,12 +288,14 @@ flowchart TB
     IG -.-> X2["desktop.ini"]
     IG -.-> X3[">100MB 安裝壓縮包 zip"]
     IG -.-> X4["__pycache__ / *.pyc"]
+    IG -.-> X5["Class-24 本機新裝 Thonny 套件"]
 ```
 
 - **分支策略**：單一 `main` 分支，線性提交，每次上課或整理教材一個 commit。
-- **排除項目**：Word 鎖定檔（`~$*`）、`desktop.ini`、超過 GitHub 100 MB 上限的安裝壓縮檔、Python 位元組碼快取。
+- **排除項目**：Word 鎖定檔（`~$*`）、`desktop.ini`、超過 GitHub 100 MB 上限的安裝壓縮檔、Python 位元組碼快取、
+  `.labelImgSettings.pkl`、Thonny 執行日誌，以及 Class-24 課後本機加裝的 Thonny 套件（torch／ultralytics 等約 1.3 GB）；Class-25 的 Thonny 完整入庫。
 - **大型檔案**：`Class-21`／`Class-22` 的 MQTT 安裝檔合計約 200 MB，`Day5_20261103.zip` 約 96 MB；
-  `Class-24` 的 `Day7_20261112.zip` 為 **147 MB，超過 GitHub 100 MB 硬性上限，已排除**，內容完整保留於 `Day7_20261112/` 目錄。
+  `Class-24` 的 `Day7_20261112.zip` 為 **147 MB，超過 GitHub 100 MB 硬性上限，已排除**，內容完整保留於 `Day7_20261112/` 目錄；`Class-25` 最大單檔為 `apples.v2i.yolov8.zip`（38.0 MB），可完整入庫。
   若後續要長期保存，建議改用 Git LFS 或 Releases。
 - **重複教材**：多堂課保留同一份 PDF 快照（例如 `DVP-PLC101samples_tc.pdf`），
   這是刻意的「單堂可獨立取用」設計，不在版控中做去重。
@@ -303,7 +311,7 @@ flowchart TB
 | [README.md](README.md) | 本頁：專案總覽、課程索引、播放清單、環境與版控政策 |
 | [docs/COURSE-MAP.md](docs/COURSE-MAP.md) | 逐堂教材清單、學習路徑、技能矩陣 |
 | [docs/PUSH-RECORD.md](docs/PUSH-RECORD.md) | 推送流程、指令、檢核清單與結果紀錄 |
-| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 24 堂課時間軸圖（SVG） |
+| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 25 堂課時間軸圖（SVG） |
 | [docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg) | Class-22 Modbus＋MQTT 系統架構圖（SVG） |
 | [Class-XX/README.md](docs/COURSE-MAP.md) | 各堂課資料夾說明：YT 連結、筆記、參考文件與程式 |
 | [netcheck/REPORT.md](netcheck/REPORT.md) | 對外網路連線測試報告 |
@@ -312,4 +320,4 @@ flowchart TB
 
 ---
 
-*文件最後更新：2026-11-12（課次編號全面對齊 YouTube 頻道存檔標題、新增 Class-24（2026-11-12，Node-RED AI Ch10／YOLO 物件偵測）、播放清單更新為 25 段）*
+*文件最後更新：2026-11-17（新增 Class-25（2026-11-17，Node-RED AI Ch11／蘋果 YOLO 訓練與推論）、播放清單更新為 26 段、Class-24 存檔時長入表）*
