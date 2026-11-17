@@ -18,7 +18,7 @@
 | 推送範圍 | `50ed88e3..62029a20`（2 個 commit） |
 | 本次新增 | **Class-25-2026-11-17**（Day 8／Ch11 蘋果 YOLOv8 物件偵測）、Class-24 Ch10 課後補充教材（BBox 標註、frames、train/val、yolov8n.pt、ch10-4/、`runs/`）、根 README／COURSE-MAP／SVG 同步更新（25 堂、26 段影片） |
 | 提交內容 | `49f394b2` 教材（16,196 檔）、`62029a20` 文件（3 檔） |
-| 授權方式 | 於 OpenCode Review pane 以 GitHub 網頁建立 fine-grained PAT（`Contents: Read and write`、`Metadata: Read-only`，僅限 `yd7148/INDUSTRY-4.0`，有效期至 2026-12-17），仅作為本次 `GH_TOKEN` 環境變數使用，未寫入 repo |
+| 授權方式 | 於 OpenCode Review pane 以 GitHub 網頁建立 fine-grained PAT（`Contents: Read and write`、`Metadata: Read-only`，僅限 `yd7148/INDUSTRY-4.0`，有效期至 2026-12-17），僅作為本次 `GH_TOKEN` 環境變數使用，未寫入 repo |
 | 傳輸結果 | **成功**；GitHub 回報 `50ed88e3..62029a20  main -> main` |
 | 遠端驗證 | `git ls-remote origin main` 回傳 `62029a208df3ba7905e247933f248109071b1683`，與本機 HEAD 完全一致；`git rev-list --left-right --count origin/main...HEAD` 為 `0 0` |
 | 工作區狀態 | 教材與文件均已入庫；另有教師原始 `.doc` 講義因 Word 仍開啟而於推送後產生本機微幅變動（見第 5 節） |
@@ -32,6 +32,19 @@ flowchart LR
     D -->|失敗| F["保留本機 commit<br/>排除後重試"]
     E --> G["ls-remote / rev-list / 網頁雙重驗證"]
 ```
+
+### 1.1 補充推送（同日晚間）
+
+首次推送後，於 `Class-25-2026-11-17/` 又發現兩批新增教材與已穩定的教師筆記，故再補一次推送：
+
+| 項目 | 內容 |
+|---|---|
+| 提交 | `544b252b`（教材 26 檔）→ `8e0065f0`（文件 3 檔）→ 本文件定稿 commit |
+| 新增教材 | `02-images/`（9 檔／約 0.4 MB，蘋果／貓／狗／馬／人物推論測試影像）；`03-ch11-4-1_改/`（16 檔／約 41.6 MB，`Step2_convert2onnx.py`、自訓 `best.pt`／`best.onnx`、`classes.txt`、`node-red-contrib-yolov8` 節點原始碼與 ONNX 模型） |
+| 更新檔案 | `Class-25-2026-11-17.doc`（12,607,522 → 12,769,362 bytes）；Word 已關閉、鎖定檔 `~$ass-25-2026-11-17.doc` 已消失，內容穩定後入庫 |
+| 同步文件 | Class-25 `README.md`（新增 ONNX 流程章節、Mermaid 圖、檔案清單）、根 `README.md`（目錄結構與說明）、`docs/COURSE-MAP.md`（檔數容量與特殊資料夾註記） |
+| 規模變化 | Class-25 由 15,985 檔／342.0 MB 增至 **16,010 檔／383.9 MB**；全庫追蹤檔案由 34,223 增至 34,249 |
+| 與既有流程的關係 | `03-ch11-4-1_改/` 為 Ch11-4-1 課後改良版：把 PyTorch 權重轉成 ONNX，透過自製 `node-red-contrib-yolov8` 以 onnxruntime 推論，與 `ch11-4-2.json` 的 PyTorch 做法互補 |
 
 ---
 
@@ -61,6 +74,9 @@ gitGraph
     commit id: "50ed88e 11-14 YOLO labels"
     commit id: "49f394b 11-17 Class25 materials"
     commit id: "62029a2 11-17 docs sync"
+    commit id: "bbf9ae9 11-17 push record"
+    commit id: "544b252 11-17 ONNX flow"
+    commit id: "8e0065f 11-17 docs sync"
 ```
 
 | Commit | 日期時間 | 說明 |
@@ -87,6 +103,9 @@ gitGraph
 | `50ed88e` | 2026-11-14 | 補上 Ch10 star-wars 資料集 YOLO 標註檔（本次推送前遠端 HEAD） |
 | `49f394b` | 2026-11-17 | **新增 Class-25-2026-11-17（Ch11 蘋果 YOLOv8 物件偵測）完整教材**、Class-24 Ch10 課後補充檔、`runs/`、`.gitignore` 排除規則；共 16,196 檔 |
 | `62029a2` | 2026-11-17 | 更新根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（24 → 25 堂、25 → 26 段影片、圖例加入 YOLO）；共 3 檔 |
+| `bbf9ae9` | 2026-11-17 | 推送紀錄定稿（寫入實際 hash、檢核結果、PAT 授權與撤銷說明） |
+| `544b252` | 2026-11-17 | 補上 Class-25 `02-images/`（9 檔）、`03-ch11-4-1_改/`（16 檔，ONNX 匯出與自製 Node-RED 節點）及更新後的教師筆記；共 26 檔 |
+| `8e0065f` | 2026-11-17 | 同步 Class-25 README、根 README、`docs/COURSE-MAP.md`（檔數、容量、ONNX 流程章節） |
 
 > 本次推送前本機與遠端同點（`50ed88e3`），推送範圍為本次新增的 2 個 commit。
 
@@ -180,7 +199,7 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（皆為 `62029a20`） |
 | 8 | 分支同步 | `git rev-list --left-right --count origin/main...HEAD` | ✅（`0 0`） |
 | 9 | 推送後工作區乾淨 | `git status --short --branch` | ⚠️ 僅剩教师原始 `.doc` 本機變動（Word 仍開啟，見第 5 節） |
-| 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials`、環境變數 | ✅（PAT 仅存在於本次行程記憶體，用完撤銷） |
+| 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials`、環境變數 | ✅（PAT 僅存在於本次行程記憶體，用完撤銷） |
 | 11 | 上課影片清單與實況一致 | YouTube 播放清單共 26 段（Class01～Class25），逐支 oEmbed 驗證 | ✅（Class-25 仍為直播中，`lengthSeconds = 0`） |
 | 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（25 堂全數具備） |
 | 13 | 課次編號與頻道一致 | 比對播放清單標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class25 全數相符） |
@@ -191,12 +210,13 @@ $env:GIT_TERMINAL_PROMPT = '0'
 
 | 指標 | 數值 |
 |---|---:|
-| 追蹤檔案數 | 34,223（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
+| 追蹤檔案數 | 34,249（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
 | 追蹤內容合計 | 約 3.5 GB |
-| commit 總數 | 42（以 `git rev-list --count HEAD` 為準） |
+| commit 總數 | 45（以 `git rev-list --count HEAD` 為準） |
 | 單檔最大 | 96.06 MiB（`Class-21`／`Class-22/Day5_20261103.zip`） |
-| 本次推送檔案數 | 16,199（教材 16,196 + 文件 3） |
-| Class-25 新增規模 | 15,985 檔／342.0 MB（教材 3,228 檔／197.1 MB、Thonny 12,757 檔／144.9 MB） |
+| 首次推送檔案數 | 16,199（教材 16,196 + 文件 3） |
+| 補充推送檔案數 | 29（教材 26 + 文件 3，另加本文件定稿 commit） |
+| Class-25 最終規模 | 16,010 檔／383.9 MB（教材 3,253 檔／239.0 MB、Thonny 12,757 檔／144.9 MB） |
 
 ---
 
@@ -212,7 +232,8 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 大於 100 MB 的安裝包 | GX Works3 更新包、`Day7_20261112.zip`（147 MB）無法推送 | 已加至 `.gitignore`；內容完整保留於解壓縮目錄 |
 | 課次重新編號 | 原 Class-05～Class-24 編號與日期錯位 | 已全面重新編號為 Class-01～Class-25，與 YouTube 存檔標題一致 |
 | 授課筆記檔名與資料夾編號不一致 | 例：`Class-25-2026-11-17/Class-25-2026-11-17.doc`（教師原始命名） | 保留教師原始命名，以檔案內容日期為準 |
-| `.doc` 本機變動 | 推送後 `Class-25-2026-11-17/Class-25-2026-11-17.doc` 由 12,607,522 bytes 變為 12,769,362 bytes，且存在 Word 鎖定檔 `~$ass-25-2026-11-17.doc` | 推測為 Word 仍開啟時自動儲存；確認文件内容無誤並关闭 Word 後再另行 commit |
+| `.doc` 本機變動（已解決） | 首次推送後教師筆記由 12,607,522 → 12,769,362 bytes，並有 Word 鎖定檔 | Word 已關閉、鎖定檔消失，已於 `544b252` 連同新教材一併入庫 |
+| `03-ch11-4-1_改/` 與 `ch11-4-2.json` 並存 | 前者為 ONNX／onnxruntime 改良流程，後者為 PyTorch 自訓模型流程 | 刻意保留兩種作法對照；於 Class-25 README 第 3 節說明差異 |
 | Class-25 影片狀態 | 直播中，`lengthSeconds = 0` | 直播結束後更新 YouTube 長度與本文件 |
 
 > 本次 `git push` 在 PowerShell 中因遠端進度輸出到 stderr 而顯示為錯誤物件，
@@ -233,7 +254,10 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 2026-11-12 | `94f0bc9a..9a1e5155` | 成功 | 課次重新編號（Class-01～Class-24）＋ 新增 Class-24（2026-11-12）＋ 全部文件同步 |
 | 2026-11-14 | `9a1e5155..50ed88e3` | 成功 | 補上 Ch10 star-wars 資料集 YOLO 標註檔 |
 | 2026-11-17 | `50ed88e3..62029a20` | 成功 | 新增 Class-25（Ch11 蘋果 YOLOv8 物件偵測，15,985 檔／342 MB）＋ Class-24 Ch10 課後補充教材＋ `runs/`＋ 文件同步（25 堂、26 段影片、SVG 圖例更新）；共 16,199 檔 |
-| 2026-11-17 | `62029a20..`（本文件定稿 commit） | 成功 | 寫入實際 commit hash、檢核結果、PAT 授權與撤銷說明、Class-25 注意事項 |
+| 2026-11-17 | `62029a20..bbf9ae92` | 成功 | 推送紀錄定稿（實際 hash、檢核結果、PAT 授權與撤銷說明） |
+| 2026-11-17 | `bbf9ae92..544b252b` | 成功 | 補上 Class-25 `02-images/`（9 檔）、`03-ch11-4-1_改/`（16 檔，ONNX 匯出與自製 Node-RED 節點）及更新後的教師筆記；共 26 檔 |
+| 2026-11-17 | `544b252b..8e0065f0` | 成功 | 同步 Class-25 README、根 README、`docs/COURSE-MAP.md`（檔數 16,010／383.9 MB、ONNX 流程章節） |
+| 2026-11-17 | `8e0065f0..`（本文件定稿 commit） | 成功 | 補登本次推送範圍、規模變化與注意事項 |
 
 ---
 
