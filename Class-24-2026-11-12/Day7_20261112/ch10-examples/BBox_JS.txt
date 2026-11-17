@@ -1,0 +1,42 @@
+// 取得檔案內容的陣列, 一行是一個元素, 使用 "\n" 切割 Buffer 或字串
+let annotations = msg.annotations.toString().split('\n');
+
+// 初始化 msg.annotations 陣列
+msg.annotations = [];
+
+// 確保有取得圖片寬高（若前級 Image info 存在 msg.imageInfo，可自動補齊防呆）
+let imgW = msg.width || (msg.imageInfo && msg.imageInfo.width);
+let imgH = msg.height || (msg.imageInfo && msg.imageInfo.height);
+
+for (let i = 0; i < annotations.length; i++) {
+    let line = annotations[i].trim(); // 刪除前後空白與 \r
+    if (!line) continue; // 跳過空白行
+
+    // 使用空白字元分割成數字陣列
+    let parts = line.split(/\s+/).map(Number);
+    let classIndex = parts[0];
+    let centerX = parts[1];
+    let centerY = parts[2];
+    let width = parts[3];
+    let height = parts[4];
+
+    // 將 YOLO 格式轉換為 BBox 格式 (左上角 x, y, 寬, 高)
+    let bbox_x = Math.round((centerX - width / 2) * imgW);
+    let bbox_y = Math.round((centerY - height / 2) * imgH);
+    let bbox_width = Math.round(width * imgW);
+    let bbox_height = Math.round(height * imgH);
+
+    // 建立標註物件（同時相容 label 與 className 屬性）
+    let jsondata = {
+        label: msg.classNames[classIndex] || `class_${classIndex}`,
+        bbox: [bbox_x, bbox_y, bbox_width, bbox_height],
+        labelLocation: "top"
+    };
+
+    msg.annotations.push(jsondata);
+}
+
+// 【關鍵必加】將一開始暫存的原始圖片 Buffer 放回 msg.payload，供 annotate image plus 畫框
+msg.payload = msg.imageBuffer;
+
+return msg;

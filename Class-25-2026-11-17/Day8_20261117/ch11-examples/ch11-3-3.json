@@ -1,0 +1,161 @@
+[
+    {
+        "id": "1bb2a0f5ff119cbd",
+        "type": "fileinject",
+        "z": "c75b7d1c39b68e7b",
+        "name": "",
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "94e87f5572d1fa83"
+            ]
+        ]
+    },
+    {
+        "id": "4959045b81936cb6",
+        "type": "annotate-image-plus",
+        "z": "c75b7d1c39b68e7b",
+        "name": "",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "10",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "9b8c8ec6d44649be"
+            ]
+        ]
+    },
+    {
+        "id": "e196612e3dcf055e",
+        "type": "debug",
+        "z": "c75b7d1c39b68e7b",
+        "name": "指定分類數量計數",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2e9e7b9ba9fc1937",
+        "type": "debug",
+        "z": "c75b7d1c39b68e7b",
+        "name": "偵測結果的分類數",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "detected.length",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "18e9e215c57abe6b",
+        "type": "function",
+        "z": "c75b7d1c39b68e7b",
+        "name": "分類數量計數",
+        "func": "// 設定欲統計的分類和信心指數\nvar className = \"person\"; // 您可以根據需要更改為任何類別\nvar probability = 0.9;    // 請更改信心指數的門檻\n\n// 設定欲統計的類別 - 如果msg.topic不是空的，使用msg.topic作為目標分類\nvar targetClass = (msg.topic && msg.topic !== \"\") ? msg.topic : className;\n// 設定信心指數的門檻 - 如果msg.prob不是空的，使用msg.prob作為信心指數的門檻\nvar targetProb = (msg.prob && msg.prob !== \"\") ? msg.prob : probability;\n// 初始化計數器\nvar count = 0;\n// 檢查是否有偵測到的物體陣列\nif (msg.annotations && Array.isArray(msg.annotations)) {\n    // 走訪annotations陣列並統計指定分類的數量, 並且需超過指定的信心指數門檻\n    for (var i = 0; i < msg.annotations.length; i++) {\n        if (msg.annotations[i].className === targetClass &&\n            msg.annotations[i].probability >= targetProb) {\n            count++;\n        }\n    }\n}\nvar new_msg = {};\n// 顯示統計訊息\nnew_msg.payload = count;\nnew_msg.topic = targetClass;\n\nreturn new_msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "e196612e3dcf055e"
+            ]
+        ]
+    },
+    {
+        "id": "cdd92265a7b046b9",
+        "type": "change",
+        "z": "c75b7d1c39b68e7b",
+        "name": "指定分類與可能性",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "person",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "prob",
+                "pt": "msg",
+                "to": "0.5",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "18e9e215c57abe6b"
+            ]
+        ]
+    },
+    {
+        "id": "94e87f5572d1fa83",
+        "type": "obj detection",
+        "z": "c75b7d1c39b68e7b",
+        "name": "",
+        "modelPath": "",
+        "topk": "10",
+        "iouThreshold": 0.45,
+        "confidenceThreshold": 0.25,
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "2e9e7b9ba9fc1937",
+                "cdd92265a7b046b9",
+                "4959045b81936cb6"
+            ]
+        ]
+    },
+    {
+        "id": "9b8c8ec6d44649be",
+        "type": "image viewer",
+        "z": "c75b7d1c39b68e7b",
+        "name": "",
+        "width": "300",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 670,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    }
+]

@@ -3,7 +3,7 @@ from ultralytics import YOLO
 
 if __name__ == "__main__":
     # 1. 切換工作目錄至資料集資料夾
-    dataset_dir = r"D:\IIOT\課程資料\Node-RED AI 學習\ch10-examples\ch10-4-2"
+    dataset_dir = r"D:\INDUSTRY-4.0\Class-24-2026-11-12\Day7_20261112\ch10-examples\ch10-4-2"
     os.chdir(dataset_dir)
     print(f"目前工作目錄已切換至: {os.getcwd()}")
 

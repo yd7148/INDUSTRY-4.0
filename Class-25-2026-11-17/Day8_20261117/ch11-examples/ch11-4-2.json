@@ -1,0 +1,105 @@
+[
+    {
+        "id": "14d46bcdc22abbdc",
+        "type": "fileinject",
+        "z": "73f9b76e6c494001",
+        "name": "",
+        "x": 240,
+        "y": 100,
+        "wires": [
+            [
+                "fc24e25ff4385fb1"
+            ]
+        ]
+    },
+    {
+        "id": "fc24e25ff4385fb1",
+        "type": "obj detection",
+        "z": "73f9b76e6c494001",
+        "name": "",
+        "modelPath": "C:\\AIoT\\ch11\\AppleModel",
+        "topk": "3",
+        "iouThreshold": 0.45,
+        "confidenceThreshold": 0.25,
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "d2701226dc13deb3",
+                "5b4795964c932730",
+                "f80bacc623be9d4b"
+            ]
+        ]
+    },
+    {
+        "id": "d2701226dc13deb3",
+        "type": "annotate-image-plus",
+        "z": "73f9b76e6c494001",
+        "name": "",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "10",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "e6fc8a200ea40bbe"
+            ]
+        ]
+    },
+    {
+        "id": "5b4795964c932730",
+        "type": "debug",
+        "z": "73f9b76e6c494001",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f80bacc623be9d4b",
+        "type": "image viewer",
+        "z": "73f9b76e6c494001",
+        "name": "",
+        "width": "300",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 210,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6fc8a200ea40bbe",
+        "type": "image viewer",
+        "z": "73f9b76e6c494001",
+        "name": "",
+        "width": "300",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]

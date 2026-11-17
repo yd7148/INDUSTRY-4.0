@@ -14,5 +14,14 @@ __pycache__/
 # Thonny portable IDE runtime logs (machine-local, rewritten on every launch)
 **/thonny-5.0.1-windows-portable-x64/user_data/*.log
 
+# Class-24 machine-local Thonny additions (torch / ultralytics etc., ~1.3 GB)
+# The originally committed site-packages are still tracked; only new local installs are excluded.
+Class-24-2026-11-12/Day7_20261112/ch10-examples/thonny-5.0.1-windows-portable-x64/Lib/site-packages/
+Class-24-2026-11-12/Day7_20261112/ch10-examples/thonny-5.0.1-windows-portable-x64/Scripts/*.exe
+Class-24-2026-11-12/Day7_20261112/ch10-examples/thonny-5.0.1-windows-portable-x64/share/
+
+# labelImg machine-local settings
+**/.labelImgSettings.pkl
+
 # Windows per-folder metadata
 desktop.ini

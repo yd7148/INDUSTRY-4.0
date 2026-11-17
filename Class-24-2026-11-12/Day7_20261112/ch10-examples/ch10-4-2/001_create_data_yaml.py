@@ -1,7 +1,7 @@
 import os
 
 # 1. 指定 YAML 內容
-yaml_content = """path: D:/IIOT/課程資料/Node-RED AI 學習/ch10-examples/ch10-4-2
+yaml_content = """path: D:\INDUSTRY-4.0\Class-24-2026-11-12\Day7_20261112\ch10-examples\ch10-4-2
 train: train/images
 val: val/images
 
@@ -11,7 +11,7 @@ names:
 """
 
 # 2. 指定存檔目錄與檔名
-target_dir = r"D:\IIOT\課程資料\Node-RED AI 學習\ch10-examples\ch10-4-2"
+target_dir = r"D:\INDUSTRY-4.0\Class-24-2026-11-12\Day7_20261112\ch10-examples\ch10-4"
 file_path = os.path.join(target_dir, "data.yaml")
 
 # 3. 如果目錄不存在則自動建立

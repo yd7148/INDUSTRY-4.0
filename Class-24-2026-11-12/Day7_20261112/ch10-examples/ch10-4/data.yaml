@@ -1,0 +1,7 @@
+path: D:\INDUSTRY-4.0\Class-24-2026-11-12\Day7_20261112\ch10-examples\ch10-4-2
+train: train/images
+val: val/images
+
+names:
+  0: Millennium Falcon
+  1: Tie Fighter

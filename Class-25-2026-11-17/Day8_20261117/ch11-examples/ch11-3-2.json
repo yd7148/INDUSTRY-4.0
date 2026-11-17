@@ -1,0 +1,184 @@
+[
+    {
+        "id": "552098beee57c523",
+        "type": "fileinject",
+        "z": "605d33d6962f8ec2",
+        "name": "",
+        "x": 220,
+        "y": 260,
+        "wires": [
+            [
+                "60dbc3a5e51f2b2e"
+            ]
+        ]
+    },
+    {
+        "id": "b317332a097b4f8c",
+        "type": "annotate-image-plus",
+        "z": "605d33d6962f8ec2",
+        "name": "",
+        "lineWidth": "",
+        "fontSize": "",
+        "minFontSize": "10",
+        "stroke": "#ffC000",
+        "stroke-opacity": 1,
+        "fontColor": "#ff0000",
+        "fontColor-opacity": 1,
+        "textBackground": "#ffffff",
+        "textBackground-opacity": 1,
+        "data": "payload",
+        "dataType": "msg",
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "54ca6393089cbae8"
+            ]
+        ]
+    },
+    {
+        "id": "504bf4acf6a44adf",
+        "type": "debug",
+        "z": "605d33d6962f8ec2",
+        "name": "偵測到分類名稱",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "annotations[0].className",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "54ca6393089cbae8",
+        "type": "image viewer",
+        "z": "605d33d6962f8ec2",
+        "name": "顯示偵測結果",
+        "width": "200",
+        "data": "payload",
+        "dataType": "msg",
+        "active": true,
+        "x": 700,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "72650329963ecbdf",
+        "type": "switch",
+        "z": "605d33d6962f8ec2",
+        "name": "",
+        "property": "annotations.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 340,
+        "wires": [
+            [
+                "504bf4acf6a44adf",
+                "b317332a097b4f8c",
+                "35e2ac7edaaea758"
+            ],
+            [
+                "a3b31b4db9be73c2"
+            ]
+        ]
+    },
+    {
+        "id": "a3b31b4db9be73c2",
+        "type": "change",
+        "z": "605d33d6962f8ec2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "no detection",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 400,
+        "wires": [
+            [
+                "9f75e1e61fd15372"
+            ]
+        ]
+    },
+    {
+        "id": "9f75e1e61fd15372",
+        "type": "debug",
+        "z": "605d33d6962f8ec2",
+        "name": "沒有偵測到",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "60dbc3a5e51f2b2e",
+        "type": "obj detection",
+        "z": "605d33d6962f8ec2",
+        "name": "",
+        "modelPath": "",
+        "topk": "1",
+        "iouThreshold": 0.45,
+        "confidenceThreshold": "0.25",
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "72650329963ecbdf"
+            ]
+        ]
+    },
+    {
+        "id": "35e2ac7edaaea758",
+        "type": "debug",
+        "z": "605d33d6962f8ec2",
+        "name": "可能性的信心指數",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "annotations[0].probability",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    }
+]
