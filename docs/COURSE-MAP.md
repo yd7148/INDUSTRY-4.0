@@ -56,14 +56,15 @@ flowchart TD
 | 22 | `Class-22-2026-11-05` | 2026-11-05 | 81 | 548.7 MB | FX5U Modbus TCP 讀／寫流程 JSON、`20261105-2.gx3`、M2M 講義、`Day5_20261103.zip` |
 | 23 | `Class-23-2026-11-10` | 2026-11-10 | 28 | 38.1 MB | Teachable Machine 訓練、Ch9 講義 PDF、`ch09-examples/` 7 個範例流程、Webcam 判斷 LED 流程 |
 | 24 | `Class-24-2026-11-12` | 2026-11-12 | 14,506 | 581.3 MB | Ch10 講義 PDF、`ch10-examples/`（YOLO 標註、訓練、推論腳本）、Thonny 攜帶版 IDE、labelImg 工具 |
-| 25 | `Class-25-2026-11-17` | 2026-11-17 | 15,985 | 342.0 MB | Ch11 講義 PDF、`ch11-examples/`（蘋果資料集、YOLOv8 訓練／推論腳本、訓練曲線與 Node-RED 流程）、Thonny 攜帶版 IDE |
+| 25 | `Class-25-2026-11-17` | 2026-11-17 | 16,010 | 383.9 MB | Ch11 講義 PDF、`ch11-examples/`（蘋果資料集、YOLOv8 訓練／推論腳本、訓練曲線與 Node-RED 流程）、`02-images/` 測試影像、`03-ch11-4-1_改/`（ONNX 匯出與自製 `node-red-contrib-yolov8`）、Thonny 攜帶版 IDE |
 | — | `80-自動控制工程職類共用資料-PDF` | — | 11 | 85.9 MB | Delta／FX5U／CIROS 共用手冊與規範 |
 | — | `netcheck` | — | 24 | 0.2 MB | 網路 Port、測速、網站連線診斷腳本與報告 |
 
 > 容量以資料夾實體檔案計算，包含未納入 Git 的 1.69 GB 更新包，因此 Class-03／04 的數字遠高於其他堂課。
 > Class-24 的容量含 Thonny 攜帶版 IDE（13,325 個檔案）與 labelImg 工具原始碼；
 > `Day7_20261112.zip`（147 MB）超過 GitHub 單檔上限，已排除於版控之外，內容由 `Day7_20261112/` 目錄完整保留。
-> Class-25 的 15,985 檔中含 Thonny 攜帶版 IDE 12,757 檔（144.9 MB）；教材本體 3,228 檔／197.1 MB，
+> Class-25 的 16,010 檔中含 Thonny 攜帶版 IDE 12,757 檔（144.9 MB）；教材本體 3,253 檔／239.0 MB，
+> 其中課後補充的 `02-images/`（9 檔／0.4 MB）與 `03-ch11-4-1_改/`（16 檔／41.6 MB）已於 2026-11-17 補推送入庫。
 > 最大單檔 `apples.v2i.yolov8.zip` 為 38.0 MB，低於 100 MB 上限。
 
 ```mermaid
@@ -170,6 +171,8 @@ flowchart LR
 | `thonny-5.0.1-windows-portable-x64/` | 攜帶版 Python IDE；Class-24 為 13,325 檔基準，Class-25 為 12,757 檔 | 依專案需求保留；Class-24 課後本機加裝套件已由 `.gitignore` 排除，Class-25 完整入庫 |
 | `labelImg/` | 第三方標註工具原始碼 | 保留（Ch10 實作需要）；其自身 `.gitignore` 已排除 `__pycache__`／`*.pyc` |
 | `Class-25/AppleModel/` | Node-RED `obj detection` 節點預留的模型資料夾，目前為空 | 保留空資料夾並於該堂 README 註明；實際權重位於 `ch11-2/best.pt` 與 `runs/detect/train*/weights/best.pt`，使用前需複製並修改 `modelPath` |
+| `Class-25/03-ch11-4-1_改/` | 課後改良流程：自訓模型匯出 ONNX、自製 `node-red-contrib-yolov8` 節點；與 `ch11-4-2.json` 的 PyTorch 作法互補 | 保留；`best.onnx`（11.7 MB）為蘋果自訓模型，`lib/model/yolov8n.onnx`（12.2 MB）為 COCO 預訓練模型 |
+| `Class-25/02-images/` | 9 張推論測試影像（蘋果、貓、狗、馬、人物） | 保留，供 Node-RED `obj detection` 流程驗證 |
 | `Class-25` Ch11 PDF | root 與 `Day8_20261117/` 各一份 | 刻意保留，方便流程包單獨攜帶 |
 
 ---

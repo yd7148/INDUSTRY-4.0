@@ -10,7 +10,7 @@
 | 上課直播 | [https://www.youtube.com/watch?v=I-IKRY3jts4](https://www.youtube.com/watch?v=I-IKRY3jts4)（頻道存檔標題為 工業4.0-2026-11-17-Class25） |
 | 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 26 段，Class01～Class25） |
 | 對應章節 | Node-RED 程式設計 ─ AI 應用 ─ Ch11 |
-| 教材規模 | 15,985 個檔案／約 342.0 MB（其中 Thonny 攜帶版 IDE 12,757 檔；教材本體 3,228 檔／197.1 MB） |
+| 教材規模 | 16,010 個檔案／約 383.9 MB（其中 Thonny 攜帶版 IDE 12,757 檔；教材本體 3,253 檔／239.0 MB） |
 
 ## 1. 上課影片
 
@@ -64,6 +64,32 @@ flowchart LR
 | [Node-RED AI應用_ch11_講義.pdf](Node-RED%20AI%E6%87%89%E7%94%A8_ch11_%E8%AC%9B%E7%BE%A9.pdf) | 本堂中文講義／投影片（2.9 MB） |
 | [Node_Red_setup.bat](Node_Red_setup.bat) | `npm install -g node-red`（Node-RED 安裝） |
 | [Node_Red_server.bat](Node_Red_server.bat) | `node-red`（啟動 Node-RED 伺服器） |
+| [02-images/](02-images/) | 物件偵測測試影像（9 檔／約 0.4 MB）：`apple-01.jpg`～`apple-04.jpg`、`cat.jpg`、`dog.jpg`、`horse.jpg`、`people.jpg`、`images.jfif`，供 Node-RED `obj detection`、`annotate-image-plus` 與推論結果對照使用 |
+| [03-ch11-4-1_改/](03-ch11-4-1_改/) | **Ch11-4-1 課後改良流程**（16 檔／約 41.6 MB）：將自訓模型匯出為 ONNX 並搭配自製 `node-red-contrib-yolov8` 節點，在 Node-RED 中直接以 onnxruntime 推論，不依賴 PyTorch |
+
+### 03-ch11-4-1_改：ONNX 模型匯出與自製 Node-RED 節點
+
+| 檔名／資料夾 | 說明 |
+|---|---|
+| `best.pt` | 蘋果 YOLOv8 訓練權重（6.0 MB，類別 `fresh_apple`／`rotten_apple`） |
+| `Step2_convert2onnx.py` | 以 `ultralytics` 將 `best.pt` 匯出為 `best.onnx`，輸入尺寸 640×640、opset 12、FP32，並同時寫出 `classes.txt`；固定隨機種子 42 以確保結果可重現 |
+| `best.onnx` | 匯出後的 ONNX 模型（11.7 MB），供 `node-red-contrib-yolov8` 使用 |
+| `classes.txt` | 類別對照：`fresh_apple`、`rotten_apple`（不同於 `ch11-examples/classes.txt` 的 COCO 80 類） |
+| `yolov8.html` / `yolov8.js` | Node-RED 節點的編輯器介面與執行邏輯（獨立份） |
+| `node-red-contrib-yolov8/` | 自製 Node-RED 節點套件原始碼：`index.js`、`package.json`、`README.md`、`yolov8.html`、`yolov8.js`，以及 `lib/classes.js`、`lib/yolov8.js`、`lib/model/`（`yolov8n.onnx`、`yolov8n(old).onnx`、`nms-yolov8.onnx`） |
+
+```mermaid
+flowchart LR
+    A["best.pt<br/>YOLOv8 自訓權重"] --> B["Step2_convert2onnx.py<br/>ultralytics.export(onnx)"]
+    B --> C["best.onnx + classes.txt"]
+    C --> D["node-red-contrib-yolov8<br/>lib/model/*.onnx"]
+    D --> E["Node-RED obj detection<br/>onnxruntime 推論"]
+    F["02-images/ 測試影像"] --> E
+    E --> G["annotate-image-plus<br/>畫框＋類別＋信心"]
+```
+
+> `node-red-contrib-yolov8` 可透過 Node-RED「Manage Palette」安裝，或直接取用本資料夾內的原始碼；
+> `lib/model/yolov8n.onnx` 為 COCO 預訓練模型（12.2 MB），`best.onnx` 為本堂蘋果自訓模型。
 
 ### ch11-examples 範例
 
@@ -91,6 +117,9 @@ flowchart LR
   - `ch11-1/Step3_annotation_image_viewer.py` ─ 標註框視覺化。
   - `ch11-2/Step1_YOLO_yaml_generator.py`、`Step2_YOLO_model_trainer.py`、`Step4_YOLO_model_object_detection.py` ─ YAML 產生、訓練／驗證、推論畫框。
   - `ch11-3-1.json`、`ch11-3-2.json`、`ch11-3-3.json`、`ch11-4-2.json` ─ Node-RED 推論流程。
+  - `03-ch11-4-1_改/Step2_convert2onnx.py` ─ 自訓模型匯出 ONNX 並產生 `classes.txt`。
+  - `03-ch11-4-1_改/node-red-contrib-yolov8/` ─ 自製 Node-RED `obj detection` 節點原始碼與 ONNX 模型。
+- **測試影像**：`02-images/`（蘋果、貓、狗、馬、人物等 9 張），可搭配上述任一推論流程驗證結果。
 - **環境啟動腳本**（與 Class-20～24 同系列）：`Node_Red_setup.bat`（安裝 Node-RED）、`Node_Red_server.bat`（啟動 Node-RED）。
 
 ## 5. 檔案清單
@@ -104,6 +133,12 @@ flowchart LR
 | 參考文件 | [Day8_20261117/Node-RED AI應用_ch11_講義.pdf](Day8_20261117/Node-RED%20AI%E6%87%89%E7%94%A8_ch11_%E8%AC%9B%E7%BE%A9.pdf) | 2989 KB |
 | 程式／範例 | [Node_Red_server.bat](Node_Red_server.bat) | 0 KB |
 | 程式／範例 | [Node_Red_setup.bat](Node_Red_setup.bat) | 0 KB |
+| 測試影像 | [02-images/apple-01.jpg](02-images/apple-01.jpg) 等 9 檔 | 合計 390 KB |
+| 模型 | [03-ch11-4-1_改/best.pt](03-ch11-4-1_改/best.pt) | 6,100 KB |
+| 模型 | [03-ch11-4-1_改/best.onnx](03-ch11-4-1_改/best.onnx) | 11,954 KB |
+| 模型 | [03-ch11-4-1_改/node-red-contrib-yolov8/lib/model/yolov8n.onnx](03-ch11-4-1_改/node-red-contrib-yolov8/lib/model/yolov8n.onnx) | 12,519 KB |
+| 程式／範例 | [03-ch11-4-1_改/Step2_convert2onnx.py](03-ch11-4-1_改/Step2_convert2onnx.py) | 2 KB |
+| 套件原始碼 | [03-ch11-4-1_改/node-red-contrib-yolov8/](03-ch11-4-1_改/node-red-contrib-yolov8/) | 8 檔／約 25.8 MB |
 
 > 本堂單一最大檔案為 `apples.v2i.yolov8.zip`（38.0 MB），低於 GitHub 100 MB 上限，全數納入版控。
 > Word 鎖定檔 `~$ass-25-2026-11-17.doc`、`__pycache__/`、`*.pyc` 依 `.gitignore` 排除。

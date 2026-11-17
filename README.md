@@ -60,7 +60,7 @@ flowchart TB
 
 > SVG 原檔：[docs/img/course-timeline.svg](docs/img/course-timeline.svg)。Class-22 的 Modbus＋MQTT 系統架構圖：[docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg)。
 > Class-24 的 YOLO 訓練與推論流程見該資料夾 [README.md](Class-24-2026-11-12/README.md)；
-> Class-25 的蘋果 YOLOv8 訓練與 Node-RED 推論流程見 [README.md](Class-25-2026-11-17/README.md)。
+> Class-25 的蘋果 YOLOv8 訓練、Node-RED 推論流程，以及課後補充的 ONNX 匯出與自製 `node-red-contrib-yolov8` 節點，見 [README.md](Class-25-2026-11-17/README.md)。
 
 ![Class-22 系統架構](docs/img/class22-modbus-mqtt.svg)
 
@@ -119,7 +119,9 @@ INDUSTRY-4.0/
 ├─ Class-24-2026-11-12/          # Node-RED AI：YOLO 物件偵測訓練與推論
 │  └─ Day7_20261112/             # Ch10 講義與 ch10-examples/
 ├─ Class-25-2026-11-17/          # Node-RED AI：Ch11 蘋果 YOLO 訓練與推論
-│  └─ Day8_20261117/             # Ch11 講義、ch11-examples/ 與 Thonny IDE
+│  ├─ Day8_20261117/             # Ch11 講義、ch11-examples/ 與 Thonny IDE
+│  ├─ 02-images/                 # 9 張物件偵測測試影像
+│  └─ 03-ch11-4-1_改/            # ONNX 匯出與自製 node-red-contrib-yolov8 節點
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
