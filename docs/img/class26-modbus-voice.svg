@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2333"/>
+      <stop offset="1" stop-color="#26324e"/>
+    </linearGradient>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#7aa8ff"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ecc8f"/>
+      <stop offset="1" stop-color="#6be3b3"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b06cff"/>
+      <stop offset="1" stop-color="#d0a1ff"/>
+    </linearGradient>
+    <linearGradient id="gD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffd268"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="440" fill="url(#bg)"/>
+  <text x="40" y="46" fill="#ffffff" font-size="24" font-weight="bold">Class-26（2026-11-18）｜Node-RED Modbus TCP 語音聲控（IP 140／SM402）</text>
+  <text x="40" y="72" fill="#9fb2d8" font-size="13">流程來源：json.txt.txt（Flow「20261118-1／20261118-2」）。語音辨識 → 指令轉換 → FC5 寫入線圈 → FX5U 輸出。</text>
+
+  <!-- 主流程 -->
+  <g text-anchor="middle">
+    <rect x="35" y="130" width="175" height="104" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="122" y="160" fill="#ffffff" font-size="15" font-weight="bold">語音輸入</text>
+    <text x="122" y="185" fill="#eaf1ff" font-size="11">ui_microphone</text>
+    <text x="122" y="205" fill="#eaf1ff" font-size="11">recog／maxLength 5</text>
+
+    <rect x="250" y="130" width="175" height="104" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="337" y="160" fill="#ffffff" font-size="15" font-weight="bold">指令轉換</text>
+    <text x="337" y="185" fill="#eaf1ff" font-size="11">function</text>
+    <text x="337" y="205" fill="#eaf1ff" font-size="11">語音 → Y0／D100</text>
+
+    <rect x="465" y="130" width="175" height="104" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="552" y="160" fill="#ffffff" font-size="15" font-weight="bold">Modbus 訊框</text>
+    <text x="552" y="185" fill="#eafff6" font-size="11">FC5 Force Single Coil</text>
+    <text x="552" y="205" fill="#eafff6" font-size="11">unitid 1／address 0</text>
+
+    <rect x="680" y="130" width="175" height="104" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="767" y="160" fill="#ffffff" font-size="15" font-weight="bold">TCP 寫入</text>
+    <text x="767" y="185" fill="#eafff6" font-size="11">modbus-flex-write</text>
+    <text x="767" y="205" fill="#eafff6" font-size="11">IP 140</text>
+
+    <rect x="895" y="130" width="175" height="104" rx="12" fill="url(#gD)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="982" y="160" fill="#ffffff" font-size="15" font-weight="bold">PLC 輸出</text>
+    <text x="982" y="185" fill="#fff6e0" font-size="11">172.16.7.140:502</text>
+    <text x="982" y="205" fill="#fff6e0" font-size="11">FX5U／SM402 Y0</text>
+  </g>
+
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M210,182 L245,182"/>
+    <path d="M425,182 L460,182"/>
+    <path d="M640,182 L675,182"/>
+    <path d="M855,182 L890,182"/>
+  </g>
+
+  <!-- 輔助輸入／輸出 -->
+  <path d="M122,268 L122,238" stroke="#7aa8ff" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="40" y="268" width="250" height="56" rx="10" fill="#23324a" stroke="#7aa8ff" stroke-width="1.5"/>
+  <text x="165" y="290" fill="#a8c6ff" font-size="13" font-weight="bold" text-anchor="middle">Dashboard「語音聲控」</text>
+  <text x="165" y="310" fill="#9fb2d8" font-size="11" text-anchor="middle">ui_text／ui_text_input（手動輸入對照）</text>
+
+  <path d="M552,268 L552,238" stroke="#6be3b3" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="430" y="268" width="245" height="56" rx="10" fill="#23324a" stroke="#6be3b3" stroke-width="1.5"/>
+  <text x="552" y="290" fill="#6be3b3" font-size="13" font-weight="bold" text-anchor="middle">PLC 專案（GX Works3）</text>
+  <text x="552" y="310" fill="#9fb2d8" font-size="11" text-anchor="middle">20261118-1--SM402(-140).gx3</text>
+
+  <path d="M982,268 L982,238" stroke="#ffd268" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="845" y="268" width="275" height="56" rx="10" fill="#23324a" stroke="#ffd268" stroke-width="1.5"/>
+  <text x="982" y="290" fill="#ffd268" font-size="13" font-weight="bold" text-anchor="middle">debug 1／2 監看</text>
+  <text x="982" y="310" fill="#9fb2d8" font-size="11" text-anchor="middle">語音內容與寫入結果回饋</text>
+
+  <!-- 圖例 -->
+  <g font-size="12">
+    <rect x="40" y="372" width="16" height="16" rx="4" fill="url(#gA)"/>
+    <text x="64" y="385" fill="#a8c6ff">Node-RED 輸入／邏輯</text>
+    <rect x="230" y="372" width="16" height="16" rx="4" fill="url(#gB)"/>
+    <text x="254" y="385" fill="#6be3b3">Modbus TCP 寫入</text>
+    <rect x="420" y="372" width="16" height="16" rx="4" fill="url(#gD)"/>
+    <text x="444" y="385" fill="#ffd268">PLC 實體輸出</text>
+    <text x="650" y="385" fill="#9fb2d8">※ 影片：youtube.com/watch?v=3i-ECZ0QnoU（Class26，2026-11-18）</text>
+  </g>
+</svg>
