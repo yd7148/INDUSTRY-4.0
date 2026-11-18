@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2333"/>
+      <stop offset="1" stop-color="#26324e"/>
+    </linearGradient>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#7aa8ff"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ecc8f"/>
+      <stop offset="1" stop-color="#6be3b3"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b06cff"/>
+      <stop offset="1" stop-color="#d0a1ff"/>
+    </linearGradient>
+    <linearGradient id="gD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffd268"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="430" fill="url(#bg)"/>
+  <text x="40" y="48" fill="#ffffff" font-size="24" font-weight="bold">Class-26（2026-11-18）｜Ch11 蘋果 YOLO 複習與教材入庫</text>
+  <text x="40" y="74" fill="#9fb2d8" font-size="13">延續 Class-25 的 Ch11 教材：講義、教師筆記、環境腳本 → Node-RED 推論流程 → Git 版本控制 → 文件同步</text>
+
+  <!-- 主流程 -->
+  <g text-anchor="middle">
+    <!-- 1 教材來源 -->
+    <rect x="40" y="130" width="200" height="104" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="140" y="160" fill="#ffffff" font-size="16" font-weight="bold">教材來源</text>
+    <text x="140" y="185" fill="#eaf1ff" font-size="12">Ch11 講義 PDF ×2</text>
+    <text x="140" y="206" fill="#eaf1ff" font-size="12">教師筆記 .doc（11-18）</text>
+
+    <!-- 2 環境準備 -->
+    <rect x="290" y="130" width="200" height="104" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="390" y="160" fill="#ffffff" font-size="16" font-weight="bold">環境準備</text>
+    <text x="390" y="185" fill="#eaf1ff" font-size="12">Node_Red_setup.bat</text>
+    <text x="390" y="206" fill="#eaf1ff" font-size="12">Node_Red_server.bat</text>
+
+    <!-- 3 流程複習 -->
+    <rect x="540" y="130" width="200" height="104" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="640" y="160" fill="#ffffff" font-size="16" font-weight="bold">Node-RED 流程複習</text>
+    <text x="640" y="185" fill="#eafff6" font-size="12">obj detection（topk／IoU）</text>
+    <text x="640" y="206" fill="#eafff6" font-size="12">annotate-image-plus</text>
+
+    <!-- 4 成果確認 -->
+    <rect x="790" y="130" width="200" height="104" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="890" y="160" fill="#ffffff" font-size="16" font-weight="bold">成果確認</text>
+    <text x="890" y="185" fill="#f4eaff" font-size="12">image viewer／debug</text>
+    <text x="890" y="206" fill="#f4eaff" font-size="12">測試影像對照</text>
+
+    <!-- 5 教材入庫 -->
+    <rect x="1040" y="130" width="130" height="104" rx="12" fill="url(#gD)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="1105" y="160" fill="#ffffff" font-size="16" font-weight="bold">教材入庫</text>
+    <text x="1105" y="188" fill="#fff6e0" font-size="12">git push</text>
+    <text x="1105" y="208" fill="#fff6e0" font-size="12">origin/main</text>
+  </g>
+
+  <!-- 箭頭 -->
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M240,182 L285,182"/>
+    <path d="M490,182 L535,182"/>
+    <path d="M740,182 L785,182"/>
+    <path d="M990,182 L1035,182"/>
+  </g>
+
+  <!-- 沿用 Class-25 教材（輸入） -->
+  <path d="M640,268 L640,238" stroke="#6be3b3" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="470" y="268" width="340" height="56" rx="10" fill="#23324a" stroke="#6be3b3" stroke-width="1.5"/>
+  <text x="640" y="290" fill="#6be3b3" font-size="13" font-weight="bold" text-anchor="middle">沿用 Class-25／Ch11 完整教材</text>
+  <text x="640" y="310" fill="#9fb2d8" font-size="11" text-anchor="middle">ch11-examples／ch11-3-*.json／best.pt／02-images／03-ch11-4-1_改</text>
+
+  <!-- 文件同步（輸出） -->
+  <path d="M1105,238 L1105,268" stroke="#ffd268" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="830" y="268" width="340" height="56" rx="10" fill="#23324a" stroke="#ffd268" stroke-width="1.5"/>
+  <text x="1000" y="290" fill="#ffd268" font-size="13" font-weight="bold" text-anchor="middle">文件同步</text>
+  <text x="1000" y="310" fill="#9fb2d8" font-size="11" text-anchor="middle">README／COURSE-MAP／course-timeline.svg／PUSH-RECORD</text>
+
+  <!-- 圖例 -->
+  <g font-size="12">
+    <rect x="40" y="368" width="16" height="16" rx="4" fill="url(#gA)"/>
+    <text x="64" y="381" fill="#a8c6ff">教材與環境</text>
+    <rect x="190" y="368" width="16" height="16" rx="4" fill="url(#gB)"/>
+    <text x="214" y="381" fill="#6be3b3">Node-RED 流程</text>
+    <rect x="370" y="368" width="16" height="16" rx="4" fill="url(#gC)"/>
+    <text x="394" y="381" fill="#cdb8ff">成果確認</text>
+    <rect x="520" y="368" width="16" height="16" rx="4" fill="url(#gD)"/>
+    <text x="544" y="381" fill="#ffd268">版控與文件</text>
+    <text x="700" y="381" fill="#9fb2d8">※ 影片：youtube.com/watch?v=3i-ECZ0QnoU（Class26，2026-11-18）</text>
+  </g>
+</svg>
