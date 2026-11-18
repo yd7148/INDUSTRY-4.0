@@ -61,9 +61,11 @@ flowchart TB
 > SVG 原檔：[docs/img/course-timeline.svg](docs/img/course-timeline.svg)。Class-22 的 Modbus＋MQTT 系統架構圖：[docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg)。
 > Class-24 的 YOLO 訓練與推論流程見該資料夾 [README.md](Class-24-2026-11-12/README.md)；
 > Class-25 的蘋果 YOLOv8 訓練、Node-RED 推論流程，以及課後補充的 ONNX 匯出與自製 `node-red-contrib-yolov8` 節點，見 [README.md](Class-25-2026-11-17/README.md)；
-> Class-26 的 Ch11 複習與教材入庫流程見 [README.md](Class-26-2026-11-18/README.md) 與 [class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg)。
+> Class-26 的 Modbus TCP 語音聲控與 Ch11 教材延伸見 [README.md](Class-26-2026-11-18/README.md)、[class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) 與 [class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg)。
 
 ![Class-22 系統架構](docs/img/class22-modbus-mqtt.svg)
+
+![Class-26 Modbus 語音聲控](docs/img/class26-modbus-voice.svg)
 
 ![Class-26 Ch11 複習與入庫流程](docs/img/class26-ch11-flow.svg)
 
@@ -98,7 +100,7 @@ flowchart TB
 | 23 | 2026-11-10 | Node-RED AI：Teachable Machine 影像分類與攝影機聯動 LED | `Node-RED AI_ch9.pdf`、`06.webcam判斷有無人開啟LED燈(填訓練link).txt`、`ch09-examples/` |
 | 24 | 2026-11-12 | Node-RED AI：YOLO 物件偵測訓練與推論 | `Node-RED AI_ch10.pdf`、`05.yolo訓練.txt`、`ch10-examples/ch10-4-2/` |
 | 25 | 2026-11-17 | Node-RED AI：Ch11 蘋果 YOLO 訓練分析與 Node-RED 推論 | `Node-RED AI_ch11.pdf`、`ch11-examples/ch11-2/`、`ch11-3-*.json`、`ch11-4-2.json` |
-| 26 | 2026-11-18 | Node-RED AI：Ch11 蘋果 YOLO 流程複習與學期教材入庫 | `Node-RED AI_ch11.pdf`、`Node-RED AI應用_ch11_講義.pdf`、`Class-26-2026-11-18.doc`、`Node_Red_setup.bat` |
+| 26 | 2026-11-18 | Node-RED Modbus TCP 語音聲控（IP 140／SM402）與 Ch11 教材延伸、學期教材入庫 | `json.txt.txt`（`ui_microphone`→FC5→`172.16.7.140:502`）、`20261118-1--SM402.gx3`、`20261118-1--SM402-140.gx3`、`Node-RED AI_ch11.pdf` |
 
 > 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18）。
 > Class-06 與 Class-07 為同一堂 LD 綜合練習的兩份素材快照；Class-05 同時收錄 09-04 與 09-08 兩次授課筆記。
@@ -126,7 +128,10 @@ INDUSTRY-4.0/
 │  ├─ Day8_20261117/             # Ch11 講義、ch11-examples/ 與 Thonny IDE
 │  ├─ 02-images/                 # 9 張物件偵測測試影像
 │  └─ 03-ch11-4-1_改/            # ONNX 匯出與自製 node-red-contrib-yolov8 節點
-├─ Class-26-2026-11-18/          # Node-RED AI：Ch11 複習與學期教材入庫
+├─ Class-26-2026-11-18/          # Node-RED Modbus 語音聲控與 Ch11 教材延伸
+│  ├─ json.txt.txt               # Node-RED 流程：語音辨識→FC5→IP 140
+│  ├─ 20261118-1--SM402.gx3      # FX5U／SM402 PLC 專案
+│  ├─ 20261118-1--SM402-140.gx3  # FX5U／SM402 PLC 專案（IP 140）
 │  ├─ Class-26-2026-11-18.doc     # 教師累積筆記（含 11-18 紀錄）
 │  ├─ Node-RED AI_ch11.pdf       # Ch11 原始章節教材
 │  ├─ Node-RED AI應用_ch11_講義.pdf  # Ch11 中文講義
@@ -141,7 +146,8 @@ INDUSTRY-4.0/
 │  └─ img/
 │     ├─ course-timeline.svg     # 26 堂課時間軸圖
 │     ├─ class22-modbus-mqtt.svg # Class-22 Modbus＋MQTT 架構圖
-│     └─ class26-ch11-flow.svg   # Class-26 Ch11 複習與教材入庫流程圖
+│     ├─ class26-ch11-flow.svg   # Class-26 Ch11 複習與教材入庫流程圖
+│     └─ class26-modbus-voice.svg # Class-26 Modbus TCP 語音聲控流程圖
 ├─ netcheck/                     # 網路連線／Port／測速檢測
 ├─ README.md
 └─ .gitignore
@@ -251,7 +257,7 @@ timeline
     11-10 Node-RED AI（Teachable Machine）
     11-12 Node-RED AI（YOLO 物件偵測）
     11-17 Node-RED AI（Ch11 蘋果 YOLO）
-    11-18 Ch11 複習與教材入庫
+    11-18 Modbus 語音聲控與教材入庫
 ```
 
 | 上課日期 | 本庫資料夾 | 影片 | 長度 |
@@ -328,6 +334,7 @@ flowchart TB
 | [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 26 堂課時間軸圖（SVG） |
 | [docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg) | Class-22 Modbus＋MQTT 系統架構圖（SVG） |
 | [docs/img/class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg) | Class-26 Ch11 複習與教材入庫流程圖（SVG） |
+| [docs/img/class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) | Class-26 Modbus TCP 語音聲控流程圖（SVG） |
 | [Class-XX/README.md](docs/COURSE-MAP.md) | 各堂課資料夾說明：YT 連結、筆記、參考文件與程式 |
 | [netcheck/REPORT.md](netcheck/REPORT.md) | 對外網路連線測試報告 |
 | [netcheck/network-check-report.md](netcheck/network-check-report.md) | 網路連線詳細檢測 |
@@ -335,4 +342,4 @@ flowchart TB
 
 ---
 
-*文件最後更新：2026-11-18（新增 Class-26（2026-11-18，Node-RED AI Ch11 複習與學期教材入庫）、播放清單更新為 27 段、Class-25 存檔時長 3:07:36 入表、新增 Class-26 SVG 流程圖）*
+*文件最後更新：2026-11-18（新增 Class-26（Node-RED Modbus TCP 語音聲控 IP 140／SM402，9 檔／24.2 MB）、播放清單 27 段、Class-25 時長 3:07:36、兩張 Class-26 SVG 流程圖）*
