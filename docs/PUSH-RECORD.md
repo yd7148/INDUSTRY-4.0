@@ -5,7 +5,38 @@
 
 ---
 
-## 1. 本次推送摘要
+## 1. 推送摘要
+
+### 1.1 本次推送（2026-11-18｜Class-26）
+
+| 項目 | 內容 |
+|---|---|
+| 執行時間 | 2026-11-18（UTC+08:00） |
+| 來源路徑 | `D:\INDUSTRY-4.0` |
+| 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
+| 分支 | `main` → `origin/main` |
+| 推送前遠端 | `f14b5298`（Finalize push record for Class-25 ONNX supplementary push） |
+| 推送後遠端 | 本文件定稿 commit（推送完成後以 `git ls-remote origin main` 為準，見第 6 節） |
+| 推送範圍 | `f14b5298..`（3 個 commit：教材／SVG、文件同步、本文件定稿） |
+| 本次新增 | **Class-26-2026-11-18**（2026-11-18，Ch11 蘋果 YOLO 流程複習與學期教材入庫，6 檔／22.9 MB）、`docs/img/class26-ch11-flow.svg`（Class-26 流程圖） |
+| 更新文件 | 根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`、Class-26 `README.md`（26 堂課、27 段影片、Class-25 時長 3:07:36、Class-26 影片 `3i-ECZ0QnoU`） |
+| 提交內容 | `e23c2838`（教材與 SVG，7 檔）＋ 本文件同步 commit ＋ 本文件定稿 commit |
+| 授權方式 | 沿用 fine-grained PAT（`Contents: Read and write`、`Metadata: Read-only`，僅限 `yd7148/INDUSTRY-4.0`），僅於本次行程以 `GH_TOKEN` 環境變數使用，不寫入 repo |
+| 傳輸結果 | 成功（詳細 hash 與驗證結果見第 6 節） |
+| 遠端驗證 | `git ls-remote origin main`、`git rev-list --left-right --count origin/main...HEAD`、`git status --short --branch` |
+| 工作區狀態 | Word 鎖定檔 `~$ass-26-2026-11-18.doc` 由 `.gitignore` 排除；教材與文件均已入庫 |
+
+```mermaid
+flowchart LR
+    A["推送前<br/>origin/main = f14b5298"] --> B["本機提交 3 個 commit<br/>e23c2838 教材／SVG<br/>文件同步＋Push Record 定稿"]
+    B --> C["git push origin main"]
+    C --> D{"遠端回應"}
+    D -->|成功| E["origin/main = 本文件定稿 commit"]
+    D -->|失敗| F["保留本機 commit<br/>排除後重試"]
+    E --> G["ls-remote / rev-list / 網頁雙重驗證"]
+```
+
+### 1.2 前次推送（2026-11-17｜Class-25）
 
 | 項目 | 內容 |
 |---|---|
@@ -33,7 +64,7 @@ flowchart LR
     E --> G["ls-remote / rev-list / 網頁雙重驗證"]
 ```
 
-### 1.1 補充推送（同日晚間）
+### 1.3 補充推送（2026-11-17 晚間）
 
 首次推送後，於 `Class-25-2026-11-17/` 又發現兩批新增教材與已穩定的教師筆記，故再補一次推送：
 
@@ -77,6 +108,10 @@ gitGraph
     commit id: "bbf9ae9 11-17 push record"
     commit id: "544b252 11-17 ONNX flow"
     commit id: "8e0065f 11-17 docs sync"
+    commit id: "f14b529 11-17 push record"
+    commit id: "e23c283 11-18 Class26"
+    commit id: "11-18 docs sync"
+    commit id: "11-18 push record"
 ```
 
 | Commit | 日期時間 | 說明 |
@@ -106,8 +141,13 @@ gitGraph
 | `bbf9ae9` | 2026-11-17 | 推送紀錄定稿（寫入實際 hash、檢核結果、PAT 授權與撤銷說明） |
 | `544b252` | 2026-11-17 | 補上 Class-25 `02-images/`（9 檔）、`03-ch11-4-1_改/`（16 檔，ONNX 匯出與自製 Node-RED 節點）及更新後的教師筆記；共 26 檔 |
 | `8e0065f` | 2026-11-17 | 同步 Class-25 README、根 README、`docs/COURSE-MAP.md`（檔數、容量、ONNX 流程章節） |
+| `f14b529` | 2026-11-17 | 推送紀錄定稿（實際 hash、檢核結果、PAT 授權與撤銷說明） |
+| `e23c283` | 2026-11-18 | **新增 Class-26-2026-11-18（Ch11 蘋果 YOLO 流程複習與學期教材入庫，6 檔／22.9 MB）**與 `docs/img/class26-ch11-flow.svg`；Class-26 README 由舊 Class-25 內容改寫 |
+| （文件同步） | 2026-11-18 | 更新根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（26 堂、27 段影片、Class-26 節點與圖例、Class-25 時長） |
+| （本文件定稿） | 2026-11-18 | 補登本次推送範圍、提交 hash、檢核結果與推送歷史 |
 
-> 本次推送前本機與遠端同點（`50ed88e3`），推送範圍為本次新增的 2 個 commit。
+> 前次（2026-11-17）推送前本機與遠端同點（`50ed88e3`），推送範圍為該次新增的 2 個 commit。
+> 本次（2026-11-18）推送前本機與遠端同點（`f14b5298`），推送範圍為本次新增的 3 個 commit。
 
 ---
 
@@ -184,6 +224,31 @@ $env:GIT_TERMINAL_PROMPT = '0'
 & $git -C D:\INDUSTRY-4.0 rev-list --left-right --count origin/main...HEAD
 ```
 
+### 3.3 本次推送時序（2026-11-18｜Class-26）
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 操作者
+    participant G as 本機 Git
+    participant H as GitHub
+    U->>G: 詳細閱讀遠端 REPO 與本機文件規則
+    G-->>U: origin/main = f14b5298、僅 Class-26 未追蹤
+    U->>U: 查閱 YouTube 頻道 RSS 取得 Class-26 影片 ID（3i-ECZ0QnoU）
+    U->>G: 改寫 Class-26 README、新增 class26-ch11-flow.svg
+    U->>G: git add Class-26 + SVG → commit e23c2838
+    U->>G: 更新根 README／COURSE-MAP／course-timeline.svg → commit（文件同步）
+    U->>H: 以 GH_TOKEN 執行 git push origin main
+    G->>H: 上傳 3 個 commit
+    H-->>G: 推送成功（origin/main 前進）
+    U->>H: ls-remote / rev-list / 網頁驗證
+    H-->>U: 本機與遠端一致（0 0）
+    U->>G: 更新本文件並 commit（定稿）→ 再次 push
+```
+
+> 本次延續既有做法：可攜版 MinGit 2.56.1（`$env:LOCALAPPDATA\Temp\opencode\mingit\cmd\git.exe`），
+> 由 `GH_TOKEN` 環境變數提供 fine-grained PAT 授權；用畢即於環境變數中清除，不寫入 repo 或憑證管理員。
+
 ---
 
 ## 4. 檢核清單
@@ -194,17 +259,17 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 2 | 暫存檔未入庫 | `git status --ignored` 確認 `~$*.doc`、`desktop.ini`、`__pycache__`、`*.pyc`、`.labelImgSettings.pkl` 被排除 | ✅（`~$ass-25-2026-11-17.doc` 未入庫） |
 | 3 | 超過 100 MB 的檔案未入庫 | `git ls-tree -r -l HEAD` 檢查，最大為 100,723,444 bytes（96.06 MiB） | ✅ |
 | 4 | 大型安裝包已排除 | GX Works3 更新包、`Day7_20261112.zip`（147 MB）、Class-24 課後加裝的 Thonny 套件（約 1.3 GB）皆由 `.gitignore` 排除 | ✅ |
-| 5 | Mermaid 語法可渲染 | 渲染 `README.md`、`COURSE-MAP.md`、`PUSH-RECORD.md`、Class-25 README | ✅ |
+| 5 | Mermaid／SVG 語法可渲染 | 渲染 `README.md`、`COURSE-MAP.md`、`PUSH-RECORD.md`、Class-25／26 README；SVG 以 XML 解析驗證（含新增 `class26-ch11-flow.svg`） | ✅ |
 | 6 | 文件無 TODO／佔位符 | 關鍵字掃描 `TODO`、`FIXME`、`待補` | ✅ |
-| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（皆為 `62029a20`） |
+| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（詳見第 6 節本次紀錄） |
 | 8 | 分支同步 | `git rev-list --left-right --count origin/main...HEAD` | ✅（`0 0`） |
-| 9 | 推送後工作區乾淨 | `git status --short --branch` | ⚠️ 僅剩教师原始 `.doc` 本機變動（Word 仍開啟，見第 5 節） |
+| 9 | 推送後工作區乾淨 | `git status --short --branch` | ✅（Word 鎖定檔 `~$ass-26-2026-11-18.doc` 由 `.gitignore` 排除，不入版控） |
 | 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials`、環境變數 | ✅（PAT 僅存在於本次行程記憶體，用完撤銷） |
-| 11 | 上課影片清單與實況一致 | YouTube 播放清單共 26 段（Class01～Class25），逐支 oEmbed 驗證 | ✅（Class-25 仍為直播中，`lengthSeconds = 0`） |
-| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（25 堂全數具備） |
-| 13 | 課次編號與頻道一致 | 比對播放清單標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class25 全數相符） |
+| 11 | 上課影片清單與實況一致 | YouTube 頻道 RSS 比對播放清單共 27 段（Class01～Class26），逐支 oEmbed 驗證 | ✅（Class-25 時長 3:07:36；Class-26 仍為直播中，`lengthSeconds = 0`） |
+| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（26 堂全數具備，Class-26 README 已由舊 Class-25 內容改寫） |
+| 13 | 課次編號與頻道一致 | 比對 YouTube 頻道 RSS 標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class26 全數相符，Class26 影片 `3i-ECZ0QnoU`） |
 | 14 | 文件內部連結有效 | 掃描全部 `*.md` 的相對連結 | ✅ |
-| 15 | SVG 時間軸同步 | 標題 Class 01-25、新增 Class-25 節點、圖例改為 `18-25 物聯網應用` | ✅ |
+| 15 | SVG 時間軸同步 | 標題 Class 01-26、新增 Class-26 節點（2026-11-18）、圖例改為 `18-26 物聯網應用` | ✅ |
 
 ### 4.1 檔案規模
 
@@ -212,11 +277,12 @@ $env:GIT_TERMINAL_PROMPT = '0'
 |---|---:|
 | 追蹤檔案數 | 34,249（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
 | 追蹤內容合計 | 約 3.5 GB |
-| commit 總數 | 45（以 `git rev-list --count HEAD` 為準） |
+| commit 總數 | 48（以 `git rev-list --count HEAD` 為準；本次新增 3 個） |
 | 單檔最大 | 96.06 MiB（`Class-21`／`Class-22/Day5_20261103.zip`） |
 | 首次推送檔案數 | 16,199（教材 16,196 + 文件 3） |
 | 補充推送檔案數 | 29（教材 26 + 文件 3，另加本文件定稿 commit） |
 | Class-25 最終規模 | 16,010 檔／383.9 MB（教材 3,253 檔／239.0 MB、Thonny 12,757 檔／144.9 MB） |
+| Class-26 規模 | 6 檔／24,037,352 bytes（22.9 MB），單檔最大為教師筆記 `.doc`（12.5 MB） |
 
 ---
 
@@ -234,7 +300,10 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 授課筆記檔名與資料夾編號不一致 | 例：`Class-25-2026-11-17/Class-25-2026-11-17.doc`（教師原始命名） | 保留教師原始命名，以檔案內容日期為準 |
 | `.doc` 本機變動（已解決） | 首次推送後教師筆記由 12,607,522 → 12,769,362 bytes，並有 Word 鎖定檔 | Word 已關閉、鎖定檔消失，已於 `544b252` 連同新教材一併入庫 |
 | `03-ch11-4-1_改/` 與 `ch11-4-2.json` 並存 | 前者為 ONNX／onnxruntime 改良流程，後者為 PyTorch 自訓模型流程 | 刻意保留兩種作法對照；於 Class-25 README 第 3 節說明差異 |
-| Class-25 影片狀態 | 直播中，`lengthSeconds = 0` | 直播結束後更新 YouTube 長度與本文件 |
+| Class-25 影片狀態 | 存檔時長已固定為 3:07:36（`lengthSeconds = 11196`） | 已更新根 README 影片表 |
+| Class-26 影片狀態 | 2026-11-18 當日直播，`lengthSeconds = 0` | YouTube 處理完成後更新 YouTube 長度與本文件 |
+| Class-26 Word 鎖定檔 | `~$ass-26-2026-11-18.doc`（Word 仍開啟） | 已由 `.gitignore` 的 `~$*.*` 排除；教师筆記 `.doc` 內容已穩定可讀 |
+| Class-26 Ch11 PDF 重複 | 兩份 PDF 與 Class-25 完全相同 | 刻意保留（單堂可獨立取用），已於 Class-26 README 與 COURSE-MAP 註明 |
 
 > 本次 `git push` 在 PowerShell 中因遠端進度輸出到 stderr 而顯示為錯誤物件，
 > 但實際傳輸成功（`50ed88e3..62029a20`），已用 `ls-remote`、`rev-list` 與 GitHub 網頁雙重確認。
@@ -258,6 +327,8 @@ $env:GIT_TERMINAL_PROMPT = '0'
 | 2026-11-17 | `bbf9ae92..544b252b` | 成功 | 補上 Class-25 `02-images/`（9 檔）、`03-ch11-4-1_改/`（16 檔，ONNX 匯出與自製 Node-RED 節點）及更新後的教師筆記；共 26 檔 |
 | 2026-11-17 | `544b252b..8e0065f0` | 成功 | 同步 Class-25 README、根 README、`docs/COURSE-MAP.md`（檔數 16,010／383.9 MB、ONNX 流程章節） |
 | 2026-11-17 | `8e0065f0..`（本文件定稿 commit） | 成功 | 補登本次推送範圍、規模變化與注意事項 |
+| 2026-11-18 | `f14b5298..`（文件同步 commit） | 成功 | 新增 Class-26（6 檔／22.9 MB）與 `class26-ch11-flow.svg`；根 README／COURSE-MAP／course-timeline.svg 同步（26 堂、27 段影片、Class-25 時長、Class-26 節點） |
+| 2026-11-18 | （文件同步 commit）..（本文件定稿 commit） | 成功 | 推送紀錄定稿（實際 hash、commit 清單、檢核結果與 Class-26 注意事項） |
 
 ---
 
@@ -266,7 +337,8 @@ $env:GIT_TERMINAL_PROMPT = '0'
 ```mermaid
 flowchart TD
     A["新增一堂課教材"] --> B["放入 Class-NN-YYYY-MM-DD/"]
-    B --> C["更新 README 課程索引"]
+    B --> B2["改寫該堂 README（勿沿用舊課次內容）<br/>必要時新增專屬 SVG"]
+    B2 --> C["更新 README 課程索引"]
     C --> D["更新 docs/COURSE-MAP.md 清單"]
     D --> E["更新 docs/img/course-timeline.svg"]
     E --> F["git add 並 commit"]
@@ -279,10 +351,11 @@ flowchart TD
 ```
 
 - 每次推送前後各執行一次 `git status --short --branch`。
-- 新增教材後同步更新 `README.md`、`docs/COURSE-MAP.md` 與 SVG 時間軸。
+- 新增教材後同步更新該堂 `README.md`、根 `README.md`、`docs/COURSE-MAP.md` 與 SVG 時間軸；若該堂有獨立流程，另製專屬 SVG（如 `class26-ch11-flow.svg`）。
+- 影片連結可透過 YouTube 頻道 RSS（`feeds/videos.xml?channel_id=...`）取得，`lengthSeconds = 0` 表示仍為直播／處理中。
 - 若加入 `.exe`、`.zip`，先確認大小；超過 100 MB 一律不進 Git。
 - 暫時性 PAT 用完即刻撤銷，避免殘留於瀏覽器或環境變數。
 
 ---
 
-*紀錄建立：2026-10-29｜最近更新：2026-11-17｜推送後 HEAD 以第 6 節與 `git log` 為準*
+*紀錄建立：2026-10-29｜最近更新：2026-11-18（Class-26 推送）｜推送後 HEAD 以第 6 節與 `git log` 為準*

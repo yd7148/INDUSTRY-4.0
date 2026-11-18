@@ -8,7 +8,7 @@
 | 課次／日期 | Class-25／2026-11-17（Node-RED 線上課程 **Day 8**） |
 | 主題 | YOLOv8 物件偵測：蘋果新鮮／腐爛分類（fresh_apple / rotten_apple）、資料集整理、模型訓練與評估、Node-RED `obj detection` 流程串接 |
 | 上課直播 | [https://www.youtube.com/watch?v=I-IKRY3jts4](https://www.youtube.com/watch?v=I-IKRY3jts4)（頻道存檔標題為 工業4.0-2026-11-17-Class25） |
-| 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 26 段，Class01～Class25） |
+| 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 27 段，Class01～Class26；Class-26 為 2026-11-18 的 Ch11 複習課） |
 | 對應章節 | Node-RED 程式設計 ─ AI 應用 ─ Ch11 |
 | 教材規模 | 16,010 個檔案／約 383.9 MB（其中 Thonny 攜帶版 IDE 12,757 檔；教材本體 3,253 檔／239.0 MB） |
 
