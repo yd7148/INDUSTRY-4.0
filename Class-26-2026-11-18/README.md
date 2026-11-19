@@ -11,7 +11,7 @@
 | 上課直播 | [https://www.youtube.com/watch?v=3i-ECZ0QnoU](https://www.youtube.com/watch?v=3i-ECZ0QnoU)（頻道存檔標題為 工業4.0-2026-11-18-Class26） |
 | 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 27 段，Class01～Class26） |
 | 對應章節 | Node-RED 程式設計 ─ Modbus TCP／M2M 應用（並延伸 AI 應用 ─ Ch11 教材） |
-| 教材規模 | 9 個檔案／約 24.2 MB（Word 鎖定檔如出現由 `.gitignore` 排除） |
+| 教材規模 | 11 個檔案／約 24.6 MB（含 `1118/` 補充流程包；Word 鎖定檔如出現由 `.gitignore` 排除） |
 
 ## 1. 上課影片
 
@@ -69,6 +69,7 @@ flowchart TB
 | [Node-RED AI應用_ch11_講義.pdf](Node-RED%20AI%E6%87%89%E7%94%A8_ch11_%E8%AC%9B%E7%BE%A9.pdf) | Ch11 中文講義／投影片（2.9 MB） |
 | [Node_Red_setup.bat](Node_Red_setup.bat) | `npm install -g node-red`（Node-RED 安裝） |
 | [Node_Red_server.bat](Node_Red_server.bat) | `node-red`（啟動 Node-RED 伺服器） |
+| [1118/](1118/) | 補充流程包：`flows.json`（5 KB，`ui_microphone` 語音聲控 Flow／Groups 版）與 `voice control.gx3`（477 KB，PLC 專案） |
 | [README.md](README.md) | 本說明頁 |
 
 > 兩份 Ch11 PDF 與 Class-25 重複，屬刻意的「單堂可獨立取用」設計，詳見 [COURSE-MAP.md 第 5 節](../docs/COURSE-MAP.md#5-重複與待整理項目)。
@@ -94,9 +95,11 @@ flowchart TB
 | 參考文件 | [Node-RED AI應用_ch11_講義.pdf](Node-RED%20AI%E6%87%89%E7%94%A8_ch11_%E8%AC%9B%E7%BE%A9.pdf) | 2,920 KB |
 | 程式／範例 | [Node_Red_setup.bat](Node_Red_setup.bat) | < 1 KB |
 | 程式／範例 | [Node_Red_server.bat](Node_Red_server.bat) | < 1 KB |
+| 補充流程 | [1118/flows.json](1118/flows.json) | 5 KB |
+| PLC 專案 | [1118/voice control.gx3](1118/voice%20control.gx3) | 477 KB |
 | 說明 | [README.md](README.md) | 7 KB |
 
-> 資料夾合計 9 檔／25,331,701 bytes（約 24.2 MB），單檔最大為教師筆記 `.doc`（12.5 MB），低於 GitHub 100 MB 上限，全數納入版控。
+> 資料夾合計 11 檔／25,814,060 bytes（約 24.6 MB），單檔最大為教師筆記 `.doc`（12.5 MB），低於 GitHub 100 MB 上限，全數納入版控。
 
 ---
 

@@ -102,6 +102,34 @@ flowchart LR
     E --> F["ls-remote／rev-list 驗證 → 撤銷 PAT"]
 ```
 
+### 1.5 本次推送（2026-11-19｜Class-27 與 Class-26 補充包）
+
+| 項目 | 內容 |
+|---|---|
+| 執行時間 | 2026-11-19（UTC+08:00） |
+| 來源路徑 | `D:\INDUSTRY-4.0` |
+| 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
+| 分支 | `main` → `origin/main` |
+| 推送前遠端 | `24bd39fc`（首次 Class-26 推送後 HEAD；本機另有 `ed229b2e`、`1f777e4c` 兩筆待推送） |
+| 推送後遠端 | 本文件定稿 commit（以 `git ls-remote origin main` 為準，見第 6 節） |
+| 本次新增 | **Class-27-2026-11-19**（11 檔／28.8 MB：Teachable Machine `.tm` 專案＋匯出模型 zip、Node-RED 語音聲控流程、PLC 專案 ×2、Ch11 講義 ×2、教師筆記、`.bat` ×2、README）、**Class-26 `1118/`**（`flows.json`＋`voice control.gx3`）、`docs/img/class27-tm-modbus.svg` |
+| 更新檔案 | Class-27 README（原為 Class-26 舊內容，已改寫）、Class-26 README（補登 `1118/` 與 11 檔／24.6 MB）、根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（27 堂、28 段影片、Class-27 節點） |
+| 影片資訊 | Class-27 videoId `qsbAr0oddyU`（3:59:17）；Class-26 時長更新為 3:13:44；頻道另一段 3 秒重複上傳 `-61uXegbv4M` 不計入 |
+| 提交內容 | `ed229b2e`（Class-26 Modbus 語音聲控教材＋新 SVG）、`1f777e4c`（文件同步）、`222f50ad`（Class-27 教材＋`1118/`＋新 SVG，14 檔）、文件同步 commit、本文件定稿 commit |
+| 授權方式 | 再次以瀏覽器建立短期 fine-grained PAT（Contents 讀寫、僅限本 repo），HTTPS URL 推送，完成後撤銷 |
+| 遠端驗證 | `git fetch` 後 `git ls-remote origin main` 與本機 HEAD 一致；`rev-list --left-right --count origin/main...HEAD` 為 `0 0`；工作區乾淨 |
+
+```mermaid
+flowchart LR
+    A["推送前<br/>origin/main = 24bd39fc"] --> B["本機待推送<br/>ed229b2e／1f777e4c<br/>＋ Class-27 教材與文件"]
+    B --> C["建立短期 PAT → git push origin main"]
+    C --> D{"遠端回應"}
+    D -->|成功| E["origin/main = 本文件定稿 commit"]
+    D -->|失敗| F["保留本機 commit<br/>排除後重試"]
+    E --> G["fetch／ls-remote／rev-list／網頁驗證"]
+    G --> H["撤銷 PAT"]
+```
+
 ---
 
 ## 2. 提交歷史
@@ -138,8 +166,11 @@ gitGraph
     commit id: "5938ef9 11-18 docs sync"
     commit id: "24bd39f 11-18 push record"
     commit id: "ed229b2 11-18 Modbus voice"
-    commit id: "11-18 docs sync 2"
+    commit id: "1f777e4 11-18 docs sync"
     commit id: "11-18 push record 2"
+    commit id: "222f50a 11-19 Class27"
+    commit id: "11-19 docs sync 3"
+    commit id: "11-19 push record 3"
 ```
 
 | Commit | 日期時間 | 說明 |
@@ -176,6 +207,9 @@ gitGraph
 | `ed229b2` | 2026-11-18 | **補上 Class-26 Modbus 語音聲控教材**：`json.txt.txt`、兩份 `20261118-1--SM402*.gx3`、更新後教師筆記與 Class-26 README、新增 `class26-modbus-voice.svg`；共 6 檔 |
 | （文件同步 2） | 2026-11-18 | 更新根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg` 與本文件（9 檔／24.2 MB、技能矩陣新增 Modbus 語音聲控） |
 | （本文件定稿 2） | 2026-11-18 | 補登補充推送的實際 hash 與推送歷史 |
+| `222f50a` | 2026-11-19 | **新增 Class-27-2026-11-19**（Teachable Machine 模型＋Modbus 語音聲控延續，11 檔／28.8 MB）、Class-26 `1118/` 補充包、`class27-tm-modbus.svg`；Class-27 README 由舊 Class-26 內容改寫；共 14 檔 |
+| （文件同步 3） | 2026-11-19 | 更新根 README、COURSE-MAP、course-timeline.svg（27 堂、28 段影片、Class-27 節點）、Class-26 README、本文件 |
+| （本文件定稿 3） | 2026-11-19 | 補登本次推送 hash、規模與注意事項 |
 
 > 前次（2026-11-17）推送前本機與遠端同點（`50ed88e3`），推送範圍為該次新增的 2 個 commit。
 > 本次（2026-11-18）推送前本機與遠端同點（`f14b5298`），推送範圍為 `f14b5298..5938ef98`（2 個 commit）＋ 本文件定稿 commit。
@@ -298,10 +332,10 @@ sequenceDiagram
 | 9 | 推送後工作區乾淨 | `git status --short --branch` | ✅（推送瞬間曾有 3 檔因本機程序移除而顯示刪除，已由 `git restore` 還原並再次確認乾淨；Word 鎖定檔由 `.gitignore` 排除） |
 | 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials`、環境變數 | ✅（PAT 僅存在於本次行程記憶體，用完撤銷） |
 | 11 | 上課影片清單與實況一致 | YouTube 頻道 RSS 比對播放清單共 27 段（Class01～Class26），逐支 oEmbed 驗證 | ✅（Class-25 時長 3:07:36；Class-26 仍為直播中，`lengthSeconds = 0`） |
-| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（26 堂全數具備，Class-26 README 已由舊 Class-25 內容改寫） |
-| 13 | 課次編號與頻道一致 | 比對 YouTube 頻道 RSS 標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class26 全數相符，Class26 影片 `3i-ECZ0QnoU`） |
+| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（27 堂全數具備，Class-27 README 已由舊 Class-26 內容改寫） |
+| 13 | 課次編號與頻道一致 | 比對 YouTube 頻道 RSS 標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class27 全數相符；Class27 影片 `qsbAr0oddyU`，3 秒重複版不計） |
 | 14 | 文件內部連結有效 | 掃描全部 `*.md` 的相對連結 | ✅ |
-| 15 | SVG 時間軸同步 | 標題 Class 01-26、新增 Class-26 節點（2026-11-18）、圖例改為 `18-26 物聯網應用` | ✅ |
+| 15 | SVG 時間軸同步 | 標題 Class 01-27、新增 Class-27 節點（2026-11-18／19）、圖例改為 `18-27 物聯網應用`，並新增 `class27-tm-modbus.svg` | ✅ |
 
 ### 4.1 檔案規模
 
@@ -309,12 +343,13 @@ sequenceDiagram
 |---|---:|
 | 追蹤檔案數 | 34,249（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
 | 追蹤內容合計 | 約 3.5 GB |
-| commit 總數 | 51（以 `git rev-list --count HEAD` 為準；含補充推送 3 個） |
+| commit 總數 | 54（以 `git rev-list --count HEAD` 為準；含 11-19 推送 3 個） |
 | 單檔最大 | 96.06 MiB（`Class-21`／`Class-22/Day5_20261103.zip`） |
 | 首次推送檔案數 | 16,199（教材 16,196 + 文件 3） |
 | 補充推送檔案數 | 29（教材 26 + 文件 3，另加本文件定稿 commit） |
 | Class-25 最終規模 | 16,010 檔／383.9 MB（教材 3,253 檔／239.0 MB、Thonny 12,757 檔／144.9 MB） |
-| Class-26 最終規模 | **9 檔／25,331,701 bytes（24.2 MB）**，單檔最大為教師筆記 `.doc`（13,113,620 bytes／12.5 MB）；PLC 專案 2 檔共 950,464 bytes，Node-RED 流程 8,157 bytes |
+| Class-26 最終規模 | **11 檔／25,814,060 bytes（24.6 MB）**，含 `1118/`（`flows.json` 5,373 bytes＋`voice control.gx3` 476,986 bytes）；單檔最大為教師筆記 `.doc`（13,113,620 bytes／12.5 MB） |
+| Class-27 規模 | **11 檔／30,179,807 bytes（28.8 MB）**，`.tm` 專案 2,237,272 bytes、匯出模型 zip 2,246,830 bytes、教師筆記 `.doc` 13,475,320 bytes |
 
 ---
 
@@ -339,6 +374,9 @@ sequenceDiagram
 | 推送後本機 3 檔消失 | `Node-RED AI_ch11.pdf`、中文講義 PDF、Class-26 README 於推送後短暫自建工作區消失（推測為本機其他程序所為） | 遠端 Commit `e23c2838` 內容完整；已用 `git restore` 還原，`git status` 回復乾淨，無需重新推送 |
 | `json.txt.txt` 編碼 | Node-RED 流程匯出為 UTF-8；若以 Big5／純文字編輯器開啟，中文（如「語音聲控」）會顯示亂碼 | 以 UTF-8 編碼開啟，或直接於 Node-RED「Import → Clipboard」貼上匯入 |
 | Class-26 Modbus 與 Class-22 重疊 | 兩堂皆有 Modbus TCP 教材（Class-22 讀寫 FC1/3/5/6/15/16；Class-26 語音觸發 FC5） | 刻意保留為不同實作，已於 Class-26 README 與 COURSE-MAP 註明 |
+| Class-27 與 Class-25／26 教材重複 | Ch11 PDF ×2、`json.txt.txt`、PLC 專案與 Class-26 高度重複 | 刻意保留（單堂可獨立取用）；Class-27 新增重點為 Teachable Machine `.tm` 與匯出模型 zip |
+| Class-27 影片重複上傳 | 頻道有兩段同標題影片，其中 `-61uXegbv4M` 僅 3 秒 | 以 `qsbAr0oddyU`（3:59:17）為正式影片，3 秒版不計入段數，已於根 README 註明 |
+| Class-27 Teachable Machine 模型連結 | 外部網址 <https://teachablemachine.withgoogle.com/models/RfDYSkt0A/>（記錄於教師筆記 11-19 段） | 模型本體已隨 `.tm` 專案及 zip 入庫，外部連結僅供對照 |
 
 > 本次 `git push` 在 PowerShell 中因遠端進度輸出到 stderr 而顯示為錯誤物件，
 > 但實際傳輸成功（`50ed88e3..62029a20`），已用 `ls-remote`、`rev-list` 與 GitHub 網頁雙重確認。
@@ -366,6 +404,8 @@ sequenceDiagram
 | 2026-11-18 | `5938ef98..24bd39fc` | 成功 | 首次 Class-26 推送紀錄定稿（實際 hash、commit 清單、檢核結果與注意事項） |
 | 2026-11-18 | `24bd39fc..`（文件同步 2） | 成功 | 補上 Class-26 Modbus 語音聲控教材（3 新增檔＋更新筆記／README＋新 SVG），Class-26 增至 9 檔／24.2 MB；同步 README／COURSE-MAP／時間軸 SVG |
 | 2026-11-18 | （文件同步 2）..（本文件定稿 2） | 成功 | 補登補充推送 hash、規模與注意事項 |
+| 2026-11-19 | `24bd39fc..`（文件同步 3） | 成功 | `24bd39fc..ed229b2e`（Class-26 Modbus 語音聲控教材）、`ed229b2e..1f777e4c`（文件同步）、`1f777e4c..222f50ad`（Class-27 教材＋`1118/`＋新 SVG，14 檔）與文件同步 |
+| 2026-11-19 | （文件同步 3）..（本文件定稿 3） | 成功 | 補登本次推送 hash、規模與注意事項 |
 
 ---
 
@@ -395,4 +435,4 @@ flowchart TD
 
 ---
 
-*紀錄建立：2026-10-29｜最近更新：2026-11-18（Class-26 補充推送：Modbus 語音聲控與 PLC 專案）｜推送後 HEAD 以第 6 節與 `git log` 為準*
+*紀錄建立：2026-10-29｜最近更新：2026-11-19（Class-27：Teachable Machine 模型＋Modbus 語音聲控延續；Class-26 補充 `1118/`）｜推送後 HEAD 以第 6 節與 `git log` 為準*
