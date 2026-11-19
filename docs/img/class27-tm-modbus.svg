@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2333"/>
+      <stop offset="1" stop-color="#26324e"/>
+    </linearGradient>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b06cff"/>
+      <stop offset="1" stop-color="#d0a1ff"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#7aa8ff"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ecc8f"/>
+      <stop offset="1" stop-color="#6be3b3"/>
+    </linearGradient>
+    <linearGradient id="gD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffd268"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="460" fill="url(#bg)"/>
+  <text x="40" y="46" fill="#ffffff" font-size="24" font-weight="bold">Class-27（2026-11-19）｜Teachable Machine 影像分類＋Modbus 語音聲控</text>
+  <text x="40" y="72" fill="#9fb2d8" font-size="13">上半：TM 模型訓練／匯出／瀏覽器推論；下半：延續 Class-26 的 Node-RED 語音→FC5→FX5U 控制</text>
+
+  <!-- 上半：Teachable Machine -->
+  <g text-anchor="middle">
+    <rect x="40" y="110" width="230" height="92" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="155" y="138" fill="#ffffff" font-size="15" font-weight="bold">TM 專案</text>
+    <text x="155" y="162" fill="#f4eaff" font-size="11">2026-11-19-2-project.tm</text>
+    <text x="155" y="182" fill="#f4eaff" font-size="11">影像分類訓練（2.1 MB）</text>
+
+    <rect x="330" y="110" width="230" height="92" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="445" y="138" fill="#ffffff" font-size="15" font-weight="bold">匯出模型</text>
+    <text x="445" y="162" fill="#f4eaff" font-size="11">tm-my-image-model.zip</text>
+    <text x="445" y="182" fill="#f4eaff" font-size="11">model.json／weights.bin</text>
+
+    <rect x="620" y="110" width="230" height="92" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="735" y="138" fill="#ffffff" font-size="15" font-weight="bold">瀏覽器端推論</text>
+    <text x="735" y="162" fill="#eaf1ff" font-size="11">tfjs + teachablemachine</text>
+    <text x="735" y="182" fill="#eaf1ff" font-size="11">tmImage.Webcam</text>
+
+    <rect x="910" y="110" width="250" height="92" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="1035" y="138" fill="#ffffff" font-size="15" font-weight="bold">即時結果</text>
+    <text x="1035" y="162" fill="#eaf1ff" font-size="11">model.predict(canvas)</text>
+    <text x="1035" y="182" fill="#eaf1ff" font-size="11">顯示類別與機率</text>
+  </g>
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M270,156 L325,156"/>
+    <path d="M560,156 L615,156"/>
+    <path d="M850,156 L905,156"/>
+  </g>
+
+  <!-- 下半：Modbus 語音聲控 -->
+  <g text-anchor="middle">
+    <rect x="40" y="270" width="210" height="92" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="145" y="298" fill="#ffffff" font-size="15" font-weight="bold">語音輸入</text>
+    <text x="145" y="322" fill="#eafff6" font-size="11">ui_microphone</text>
+    <text x="145" y="342" fill="#eafff6" font-size="11">json.txt.txt（Class-26 系列）</text>
+
+    <rect x="300" y="270" width="210" height="92" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="405" y="298" fill="#ffffff" font-size="15" font-weight="bold">指令轉換</text>
+    <text x="405" y="322" fill="#eafff6" font-size="11">function</text>
+    <text x="405" y="342" fill="#eafff6" font-size="11">語音 → Y0／D100</text>
+
+    <rect x="560" y="270" width="210" height="92" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="665" y="298" fill="#ffffff" font-size="15" font-weight="bold">Modbus 寫入</text>
+    <text x="665" y="322" fill="#eafff6" font-size="11">FC5／unitid 1／addr 0</text>
+    <text x="665" y="342" fill="#eafff6" font-size="11">modbus-flex-write</text>
+
+    <rect x="820" y="270" width="210" height="92" rx="12" fill="url(#gD)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="925" y="298" fill="#ffffff" font-size="15" font-weight="bold">PLC 輸出</text>
+    <text x="925" y="322" fill="#fff6e0" font-size="11">172.16.7.140:502</text>
+    <text x="925" y="342" fill="#fff6e0" font-size="11">FX5U／SM402 Y0</text>
+  </g>
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M250,316 L295,316"/>
+    <path d="M510,316 L555,316"/>
+    <path d="M770,316 L815,316"/>
+  </g>
+
+  <!-- PLC 專案輸入 -->
+  <path d="M925,262 L925,238" stroke="#ffd268" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <rect x="720" y="204" width="410" height="34" rx="8" fill="#23324a" stroke="#ffd268" stroke-width="1.5"/>
+  <text x="925" y="227" fill="#ffd268" font-size="11" text-anchor="middle">20261118-1--SM402.gx3／20261119-1--SM402-140.gx3</text>
+
+  <!-- 圖例 -->
+  <g font-size="12">
+    <rect x="40" y="398" width="16" height="16" rx="4" fill="url(#gA)"/>
+    <text x="64" y="411" fill="#cdb8ff">TM 模型</text>
+    <rect x="170" y="398" width="16" height="16" rx="4" fill="url(#gB)"/>
+    <text x="194" y="411" fill="#a8c6ff">瀏覽器推論</text>
+    <rect x="330" y="398" width="16" height="16" rx="4" fill="url(#gC)"/>
+    <text x="354" y="411" fill="#6be3b3">Node-RED 語音流程</text>
+    <rect x="530" y="398" width="16" height="16" rx="4" fill="url(#gD)"/>
+    <text x="554" y="411" fill="#ffd268">PLC 輸出</text>
+    <text x="720" y="411" fill="#9fb2d8">※ 影片：youtube.com/watch?v=qsbAr0oddyU（Class27，2026-11-19，3:59:17）</text>
+  </g>
+</svg>
