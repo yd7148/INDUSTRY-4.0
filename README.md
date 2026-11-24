@@ -1,12 +1,12 @@
 # 工業 4.0 自動控制工程職類｜課程教材庫
 
-本倉庫收錄 **2026-08-25 ～ 2026-11-19** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **27 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類／YOLO 物件偵測）與一份網路檢測報告。
+本倉庫收錄 **2026-08-25 ～ 2026-11-24** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **28 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類／YOLO 物件偵測）與一份網路檢測報告。
 
 | 項目 | 內容 |
 |---|---|
 | 線上倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 預設分支 | `main` |
-| 課程期間 | 2026-08-25 ～ 2026-11-19（27 堂） |
+| 課程期間 | 2026-08-25 ～ 2026-11-24（28 堂） |
 | 主要工具 | GX Works3、DVP-PLC101、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP、Teachable Machine、YOLO（Ultralytics）、labelImg、Thonny |
 | 上課影片播放清單 | [工業4.0--工業4.0概論（YouTube）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo) |
 | 文件語言 | 繁體中文 |
@@ -41,7 +41,7 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-27<br/>逐堂教材（每資料夾附 README.md）"]
+    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-28<br/>逐堂教材（每資料夾附 README.md）"]
     REPO --> LIB["80-自動控制工程職類共用資料-PDF<br/>共用參考文件"]
     REPO --> NET["netcheck<br/>網路連線檢測報告"]
     REPO --> DOC["README.md / docs/<br/>說明、地圖與圖表"]
@@ -63,6 +63,7 @@ flowchart TB
 > Class-25 的蘋果 YOLOv8 訓練、Node-RED 推論流程，以及課後補充的 ONNX 匯出與自製 `node-red-contrib-yolov8` 節點，見 [README.md](Class-25-2026-11-17/README.md)；
 > Class-26 的 Modbus TCP 語音聲控與 Ch11 教材延伸見 [README.md](Class-26-2026-11-18/README.md)、[class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) 與 [class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg)；
 > Class-27 的 Teachable Machine 模型與 Modbus 語音聲控延續見 [README.md](Class-27-2026-11-19/README.md) 與 [class27-tm-modbus.svg](docs/img/class27-tm-modbus.svg)。
+> Class-28 的 TM 影像分類（Rectangle／Circle）→ Modbus FC15 寫入 M200／M201 與機丙 1 PLC 練習見 [README.md](Class-28-2026-11-24/README.md) 與 [class28-tm-modbus-fc15.svg](docs/img/class28-tm-modbus-fc15.svg)。
 
 ![Class-22 系統架構](docs/img/class22-modbus-mqtt.svg)
 
@@ -71,6 +72,8 @@ flowchart TB
 ![Class-26 Ch11 複習與入庫流程](docs/img/class26-ch11-flow.svg)
 
 ![Class-27 Teachable Machine 與 Modbus 語音聲控](docs/img/class27-tm-modbus.svg)
+
+![Class-28 TM 影像分類與 Modbus FC15](docs/img/class28-tm-modbus-fc15.svg)
 
 ---
 
@@ -105,8 +108,9 @@ flowchart TB
 | 25 | 2026-11-17 | Node-RED AI：Ch11 蘋果 YOLO 訓練分析與 Node-RED 推論 | `Node-RED AI_ch11.pdf`、`ch11-examples/ch11-2/`、`ch11-3-*.json`、`ch11-4-2.json` |
 | 26 | 2026-11-18 | Node-RED Modbus TCP 語音聲控（IP 140／SM402）與 Ch11 教材延伸、學期教材入庫 | `json.txt.txt`（`ui_microphone`→FC5→`172.16.7.140:502`）、`20261118-1--SM402.gx3`、`1118/voice control.gx3`、`Node-RED AI_ch11.pdf` |
 | 27 | 2026-11-19 | Teachable Machine 影像分類模型（`.tm`／匯出 zip）＋ Modbus 語音聲控延續 | `2026-11-19-2-project.tm`、`2026-11-19-2-tm-my-image-model.zip`、`json.txt.txt`、`20261119-1--SM402-140.gx3` |
+| 28 | 2026-11-24 | TM 影像分類（Rectangle／Circle）→ Modbus FC15 寫入 M200／M201、機丙 1 PLC 練習 | `2026-11-19-2-project.tm`、`json.txt.txt`、`機丙1 tutorial-1020.gx3`、`機丙1 tutorial-1124.gx3`、`Class-28-2026-11-24.doc` |
 
-> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19）。
+> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19、Class28＝2026-11-24）。
 > Class-06 與 Class-07 為同一堂 LD 綜合練習的兩份素材快照；Class-05 同時收錄 09-04 與 09-08 兩次授課筆記。
 
 ---
@@ -146,7 +150,13 @@ INDUSTRY-4.0/
 │  ├─ 2026-11-19-2-tm-my-image-model.zip  # 匯出模型（tfjs 格式）
 │  ├─ json.txt.txt               # Node-RED 語音→FC5 流程
 │  ├─ 20261119-1--SM402-140.gx3  # FX5U／SM402 PLC 專案（IP 140）
-│  └─ Class-27-2026-11-19.doc     # 教師累積筆記（含 11-19 TM 模型連結）
+│  ├─ Class-27-2026-11-19.doc     # 教師累積筆記（含 11-19 TM 模型連結）
+├─ Class-28-2026-11-24/          # TM 影像分類→Modbus FC15（M200／M201）＋機丙 1 PLC 練習
+│  ├─ 2026-11-19-2-project.tm    # Teachable Machine 專案檔（沿用 11-19）
+│  ├─ json.txt.txt               # Node-RED 推論流程（base64 影像＋FC15 寫入）
+│  ├─ 機丙1 tutorial-1020.gx3    # 機電整合丙級 PLC 練習（10-20 版）
+│  ├─ 機丙1 tutorial-1124.gx3    # 機電整合丙級 PLC 練習（11-24 更新版）
+│  └─ Class-28-2026-11-24.doc    # 教師累積筆記（含 11-24 模型 G4A8FVg5i）
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
@@ -155,11 +165,12 @@ INDUSTRY-4.0/
 │  ├─ COURSE-MAP.md              # 逐堂教材清單與技能矩陣
 │  ├─ PUSH-RECORD.md             # 推送流程與檢核紀錄
 │  └─ img/
-│     ├─ course-timeline.svg     # 27 堂課時間軸圖
+│     ├─ course-timeline.svg     # 28 堂課時間軸圖
 │     ├─ class22-modbus-mqtt.svg # Class-22 Modbus＋MQTT 架構圖
 │     ├─ class26-ch11-flow.svg   # Class-26 Ch11 複習與教材入庫流程圖
 │     ├─ class26-modbus-voice.svg # Class-26 Modbus TCP 語音聲控流程圖
-│     └─ class27-tm-modbus.svg   # Class-27 TM 模型＋Modbus 語音聲控流程圖
+│     ├─ class27-tm-modbus.svg   # Class-27 TM 模型＋Modbus 語音聲控流程圖
+│     └─ class28-tm-modbus-fc15.svg  # Class-28 TM 影像分類→FC15 流程圖
 ├─ netcheck/                     # 網路連線／Port／測速檢測
 ├─ README.md
 └─ .gitignore
@@ -209,16 +220,16 @@ flowchart LR
 |---|---|---|
 | GX Works3 | 三菱 FX5U PLC 程式編輯與模擬 | `Class-03` 起、`80-.../FX5U` |
 | ISPSoft | 台達 DVP-PLC 程式編輯 | `80-.../Delta` |
-| Node-RED | 網頁化流程與儀錶板 | `Class-15`、`Class-18`～`Class-27` |
+| Node-RED | 網頁化流程與儀錶板 | `Class-15`、`Class-18`～`Class-28` |
 | Mosquitto | MQTT Broker | `Class-18/MQTT 工具`、`Class-19/MQTT 工具`、`Class-21/MQTT 工具`、`Class-22/MQTT 工具` |
 | MQTT Explorer／MQTTBox | MQTT 訊息測試 | 同上 |
-| FX5U Modbus TCP | PLC 資料讀寫（FC1/3/5/6/15/16） | `Class-22` |
+| FX5U Modbus TCP | PLC 資料讀寫（FC1/3/5/6/15/16） | `Class-22`、`Class-28`（FC15 寫入 M200／M201） |
 | CIROS | 機電整合虛擬機台 | `80-.../CIROS`、`Class-17` |
-| Teachable Machine／TensorFlow.js | 影像分類模型訓練與瀏覽器端推論 | `Class-23`、`Class-27`（`.tm` 專案＋匯出模型） |
+| Teachable Machine／TensorFlow.js | 影像分類模型訓練與瀏覽器端推論 | `Class-23`、`Class-27`（`.tm` 專案＋匯出模型）、`Class-28`（Rectangle／Circle→FC15） |
 | Ultralytics YOLOv8 | 物件偵測模型訓練與推論 | `Class-24`、`Class-25`（Class-26 沿用流程） |
 | labelImg | 影像標註工具（產生 YOLO 格式標註檔） | `Class-24`（Ch11 沿用已標註資料集） |
 | Thonny | 攜帶版 Python IDE（執行 AI 腳本） | `Class-24`、`Class-25` |
-| node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-23`～`Class-26` |
+| node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-23`～`Class-28` |
 
 > 教材內的 `.exe`、`.zip` 為課堂教學用安裝檔，僅供教學參考；安裝前請自行確認來源與授權。
 
@@ -231,7 +242,7 @@ flowchart LR
 | 項目 | 內容 |
 |---|---|
 | 清單名稱 | **工業4.0--工業4.0概論**（I-4.0; Industrial-4.0） |
-| 影片數 | **28 段直播**（涵蓋 2026-08-25 ～ 2026-11-19，共 27 堂課；Class-16 拆 Part-1／Part-2） |
+| 影片數 | **29 段直播**（涵蓋 2026-08-25 ～ 2026-11-24，共 28 堂課；Class-16 拆 Part-1／Part-2） |
 | 觀看方式 | 下方「播放清單網址」一次看完，或逐段點擊下表影片連結 |
 | 播放清單網址 | <https://www.youtube.com/playlist?list=PLKvXv11lxGbo> |
 
@@ -255,7 +266,7 @@ timeline
 
 ```mermaid
 timeline
-    title 下半：機電整合 → 物聯網應用（2026-10-06 ～ 2026-11-19）
+    title 下半：機電整合 → 物聯網應用（2026-10-06 ～ 2026-11-24）
     10-06 Global Label
     10-08 Global Label
     10-13 Node-RED 節點
@@ -271,6 +282,7 @@ timeline
     11-17 Node-RED AI（Ch11 蘋果 YOLO）
     11-18 Modbus 語音聲控與教材入庫
     11-19 Teachable Machine 模型
+    11-24 影像分類→Modbus FC15
 ```
 
 | 上課日期 | 本庫資料夾 | 影片 | 長度 |
@@ -303,9 +315,11 @@ timeline
 | 2026-11-17 | Class-25 | [工業4.0-2026-11-17](https://www.youtube.com/watch?v=I-IKRY3jts4&list=PLKvXv11lxGbo) | 3:07:36 |
 | 2026-11-18 | Class-26 | [工業4.0-2026-11-18](https://www.youtube.com/watch?v=3i-ECZ0QnoU&list=PLKvXv11lxGbo) | 3:13:44 |
 | 2026-11-19 | Class-27 | [工業4.0-2026-11-19](https://www.youtube.com/watch?v=qsbAr0oddyU&list=PLKvXv11lxGbo) | 3:59:17 |
+| 2026-11-24 | Class-28 | [工業4.0-2026-11-24](https://www.youtube.com/watch?v=C792O5ZDcqA&list=PLKvXv11lxGbo) | 3:02:40 |
 
 > Class-25／26 存檔時長已分別更新為 3:07:36／3:13:44；Class-27 影片為 2026-11-19 當日直播存檔。
 > 頻道另有一段 3 秒的 Class-27 重複上傳（`videoId=-61uXegbv4M`），不計入正式段數。
+> Class-28 影片為 2026-11-24 當日直播存檔（3:02:40）。
 
 ---
 
@@ -346,11 +360,12 @@ flowchart TB
 | [README.md](README.md) | 本頁：專案總覽、課程索引、播放清單、環境與版控政策 |
 | [docs/COURSE-MAP.md](docs/COURSE-MAP.md) | 逐堂教材清單、學習路徑、技能矩陣 |
 | [docs/PUSH-RECORD.md](docs/PUSH-RECORD.md) | 推送流程、指令、檢核清單與結果紀錄 |
-| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 27 堂課時間軸圖（SVG） |
+| [docs/img/course-timeline.svg](docs/img/course-timeline.svg) | 28 堂課時間軸圖（SVG） |
 | [docs/img/class22-modbus-mqtt.svg](docs/img/class22-modbus-mqtt.svg) | Class-22 Modbus＋MQTT 系統架構圖（SVG） |
 | [docs/img/class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg) | Class-26 Ch11 複習與教材入庫流程圖（SVG） |
 | [docs/img/class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) | Class-26 Modbus TCP 語音聲控流程圖（SVG） |
 | [docs/img/class27-tm-modbus.svg](docs/img/class27-tm-modbus.svg) | Class-27 Teachable Machine＋Modbus 語音聲控流程圖（SVG） |
+| [docs/img/class28-tm-modbus-fc15.svg](docs/img/class28-tm-modbus-fc15.svg) | Class-28 TM 影像分類→Modbus FC15 流程圖（SVG） |
 | [Class-XX/README.md](docs/COURSE-MAP.md) | 各堂課資料夾說明：YT 連結、筆記、參考文件與程式 |
 | [netcheck/REPORT.md](netcheck/REPORT.md) | 對外網路連線測試報告 |
 | [netcheck/network-check-report.md](netcheck/network-check-report.md) | 網路連線詳細檢測 |
@@ -358,4 +373,4 @@ flowchart TB
 
 ---
 
-*文件最後更新：2026-11-19（新增 Class-27（Teachable Machine 模型＋Modbus 語音聲控延續，11 檔／28.8 MB）、Class-26 補充 1118/ 流程包、播放清單 28 段、Class-26 時長 3:13:44、新增 class27-tm-modbus.svg）*
+*文件最後更新：2026-11-24（新增 Class-28（TM 影像分類→Modbus FC15 寫入 M200／M201 與機丙 1 PLC 練習，9 檔／18.5 MB）、播放清單 29 段、Class-28 影片 3:02:40、新增 class28-tm-modbus-fc15.svg）*
