@@ -130,6 +130,50 @@ flowchart LR
     G --> H["撤銷 PAT"]
 ```
 
+### 1.6 本次推送（2026-11-24｜Class-28，補記）
+
+| 項目 | 內容 |
+|---|---|
+| 執行時間 | 2026-11-24（UTC+08:00） |
+| 推送前遠端 | `c60f088c`（Class-27 文件同步 commit） |
+| 推送後遠端 | `fdc1c5ac`（Class-28 文件同步 commit） |
+| 推送範圍 | `c60f088c..fdc1c5ac`（2 個 commit） |
+| 本次新增 | **Class-28-2026-11-24**（9 檔／19,431,336 bytes，18.5 MB：TM 專案、FC15 流程、機丙 1 專案 ×2、教師筆記、環境 `.bat` ×2、README）、`class28-tm-modbus-fc15.svg` |
+| 更新文件 | 根 `README.md`、`docs/COURSE-MAP.md`（28 堂、29 段影片、Class-28 影片 `C792O5ZDcqA` 3:02:40、模型 `G4A8FVg5i`） |
+| 提交內容 | `1bf05995`（教材 9 檔）、`fdc1c5ac`（文件同步 3 檔） |
+| 結果 | 成功；本次推送後未即時補登本文件，已於 2026-11-26 補記 |
+
+### 1.7 本次推送（2026-11-26｜Class-28 `1124/` 補充＋Class-29／30）
+
+| 項目 | 內容 |
+|---|---|
+| 執行時間 | 2026-11-26（UTC+08:00） |
+| 來源路徑 | `D:\INDUSTRY-4.0` |
+| 遠端倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
+| 分支 | `main` → `origin/main` |
+| 推送前遠端 | `fdc1c5ac`（Class-28 文件同步 commit） |
+| 推送後遠端 | `26962498`（本節 2 個 commit；本文件定稿 commit 已於其後推送，見第 6 節） |
+| 推送範圍 | `fdc1c5ac..26962498`（2 個 commit）＋ 本文件定稿 commit |
+| 本次新增 | `Class-28-2026-11-24/1124/`（2 檔：AI 機丙 1 流程 JSON、PLC 專案）；**Class-29-2026-11-25**（11 檔／20.7 MB，Node-RED＋MySQL）、**Class-30-2026-11-26**（11 檔／20.7 MB，教材沿用說明）；`docs/img/class29-mysql-flow.svg` |
+| 更新檔案 | Class-28／29／30 三份 README（Class-29／30 為改寫，非沿用舊課次）；根 `README.md`、`docs/COURSE-MAP.md`、`docs/img/course-timeline.svg`（30 堂、31 段影片、Class-29／30 節點、MySQL 圖例） |
+| 影片資訊 | Class-29 videoId `8VXwFDkzmqA`（1:08:11）；Class-30 videoId `UAx0M-blTvw`（上傳時 `lengthSeconds = 0`，直播／處理中） |
+| 提交內容 | `1fc3dc94`（教材 26 檔，含三份 README 與新 SVG）、`26962498`（文件同步 3 檔） |
+| 授權方式 | 於瀏覽器建立 7 天期 fine-grained PAT「`INDUSTRY-4.0 push 2026-11-26`」（`Contents: Read and write`、`Metadata: Read-only`，僅限本 repo），以 HTTPS URL 一次性推送；令牌未寫入 repo／`.git-credentials`／環境變數檔案，用完即於網頁撤銷 |
+| 傳輸結果 | **成功**；GitHub 回報 `fdc1c5ac..26962498  main -> main`（PowerShell 將 stderr 進度顯示為錯誤物件，實際 EXIT=0） |
+| 遠端驗證 | `git fetch` 後 `git ls-remote origin main` 回傳 `26962498e47eef852c48692dd3fc341b32d3e336`（與本機 HEAD 一致）；`git rev-list --left-right --count origin/main...HEAD` 為 `0 0`；`git status --short --branch` 乾淨 |
+| 工作區狀態 | Word 鎖定檔 `~$ass-30-2026-11-26.doc` 由 `.gitignore` 排除；教材與文件均已入庫 |
+
+```mermaid
+flowchart LR
+    A["推送前<br/>origin/main = fdc1c5ac"] --> B["本機提交 2 個 commit<br/>1fc3dc94 教材／SVG／README<br/>26962498 文件同步"]
+    B --> C["git push origin main"]
+    C --> D{"遠端回應"}
+    D -->|成功| E["origin/main = 26962498 → 定稿 commit"]
+    D -->|失敗| F["保留本機 commit<br/>排除後重試"]
+    E --> G["fetch／ls-remote／rev-list／網頁驗證"]
+    G --> H["撤銷 PAT"]
+```
+
 ---
 
 ## 2. 提交歷史
@@ -210,9 +254,15 @@ gitGraph
 | `222f50a` | 2026-11-19 | **新增 Class-27-2026-11-19**（Teachable Machine 模型＋Modbus 語音聲控延續，11 檔／28.8 MB）、Class-26 `1118/` 補充包、`class27-tm-modbus.svg`；Class-27 README 由舊 Class-26 內容改寫；共 14 檔 |
 | （文件同步 3） | 2026-11-19 | 更新根 README、COURSE-MAP、course-timeline.svg（27 堂、28 段影片、Class-27 節點）、Class-26 README、本文件 |
 | （本文件定稿 3） | 2026-11-19 | 補登本次推送 hash、規模與注意事項 |
+| `1bf05995` | 2026-11-24 | **新增 Class-28-2026-11-24**（TM 影像分類→FC15、機丙 1 練習，9 檔／18.5 MB） |
+| `fdc1c5ac` | 2026-11-24 | 更新根 README、COURSE-MAP（28 堂、29 段影片）並新增 `class28-tm-modbus-fc15.svg` |
+| `1fc3dc94` | 2026-11-26 | **補上 Class-28 `1124/`（AI 機丙 1 流程＋PLC 專案）、新增 Class-29（Node-RED＋MySQL）與 Class-30（教材沿用說明）**，改寫兩堂 README 並新增 `class29-mysql-flow.svg`；共 26 檔 |
+| `26962498` | 2026-11-26 | 更新根 README、COURSE-MAP、`course-timeline.svg`（30 堂、31 段影片、Class-29／30 節點與 MySQL 圖例）；共 3 檔 |
+| （本文件定稿 4） | 2026-11-26 | 補登 11-24／11-26 推送 hash、規模、影片資訊與注意事項 |
 
 > 前次（2026-11-17）推送前本機與遠端同點（`50ed88e3`），推送範圍為該次新增的 2 個 commit。
 > 本次（2026-11-18）推送前本機與遠端同點（`f14b5298`），推送範圍為 `f14b5298..5938ef98`（2 個 commit）＋ 本文件定稿 commit。
+> 2026-11-24 推送範圍為 `c60f088c..fdc1c5ac`（2 個 commit）；2026-11-26 推送範圍為 `fdc1c5ac..26962498`（2 個 commit）＋ 本文件定稿 commit。
 
 ---
 
@@ -315,6 +365,31 @@ sequenceDiagram
 > 本次延續既有做法：可攜版 MinGit 2.56.1（`$env:LOCALAPPDATA\Temp\opencode\mingit\cmd\git.exe`），
 > 由 `GH_TOKEN` 環境變數提供 fine-grained PAT 授權；用畢即於環境變數中清除，不寫入 repo 或憑證管理員。
 
+### 3.4 本次推送時序（2026-11-26｜Class-29／30）
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 操作者
+    participant G as 本機 Git
+    participant H as GitHub
+    U->>G: 詳細閱讀遠端 REPO 與本機文件規則
+    G-->>U: origin/main = fdc1c5ac、Class-28/1124 與 Class-29/30 未追蹤、時間軸 SVG 有本機修改
+    U->>U: 查閱 YouTube 頻道 RSS 取得 Class-29（8VXwFDkzmqA）、Class-30（UAx0M-blTvw）
+    U->>U: 解析教師 .doc 筆記，改寫 Class-28／29／30 README、製作 class29-mysql-flow.svg
+    U->>G: git add 教材＋README＋新 SVG → commit 1fc3dc94
+    U->>G: git add 根 README／COURSE-MAP／course-timeline.svg → commit 26962498
+    U->>H: 以瀏覽器建立 7 天期短期 PAT，透過 HTTPS URL 執行 git push origin main
+    G->>H: 上傳 2 個 commit（1fc3dc94、26962498）
+    H-->>G: fdc1c5ac..26962498 main -> main
+    U->>G: fetch / ls-remote / rev-list / status 驗證（0 0、乾淨）
+    U->>G: 更新本文件並 commit（定稿）→ 再次 push
+    U->>H: 於 Developer Settings 撤銷短期 PAT
+```
+
+> 本次 MinGit 2.56.1 可攜版已於工作階段間消失，重新由 Git for Windows 官方 release 下載至 `%LOCALAPPDATA%\Temp\opencode\mingit`；
+> PAT 僅存在於推送行程的 PowerShell 變數中，未落地到 repo 或憑證管理員。
+
 ---
 
 ## 4. 檢核清單
@@ -323,33 +398,35 @@ sequenceDiagram
 |:--:|---|---|:--:|
 | 1 | 提交內容完整 | `git status --short` 確認教材與文件均已入庫 | ✅ |
 | 2 | 暫存檔未入庫 | `git status --ignored` 確認 `~$*.doc`、`desktop.ini`、`__pycache__`、`*.pyc`、`.labelImgSettings.pkl` 被排除 | ✅（`~$ass-25-2026-11-17.doc` 未入庫） |
-| 3 | 超過 100 MB 的檔案未入庫 | `git ls-tree -r -l HEAD` 檢查，最大為 100,723,444 bytes（96.06 MiB） | ✅ |
+| 3 | 超過 100 MB 的檔案未入庫 | `git ls-tree -r -l HEAD` 檢查，最大仍為 100,723,444 bytes（96.06 MiB，`Day5_20261103.zip`） | ✅ |
 | 4 | 大型安裝包已排除 | GX Works3 更新包、`Day7_20261112.zip`（147 MB）、Class-24 課後加裝的 Thonny 套件（約 1.3 GB）皆由 `.gitignore` 排除 | ✅ |
-| 5 | Mermaid／SVG 語法可渲染 | 渲染 `README.md`、`COURSE-MAP.md`、`PUSH-RECORD.md`、Class-25／26 README；SVG 以 XML 解析驗證（含新增 `class26-ch11-flow.svg`） | ✅ |
+| 5 | Mermaid／SVG 語法可渲染 | 渲染根 README、COURSE-MAP、PUSH-RECORD 與 Class-28／29／30 README；SVG 以 XML 解析驗證（含新增 `class29-mysql-flow.svg`、更新 `course-timeline.svg`） | ✅ |
 | 6 | 文件無 TODO／佔位符 | 關鍵字掃描 `TODO`、`FIXME`、`待補` | ✅ |
-| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（皆為 `5938ef98`，定稿後見第 6 節） |
+| 7 | 遠端 HEAD 與本機一致 | `git ls-remote origin main` vs `git rev-parse HEAD` | ✅（皆為 `26962498`，定稿後見第 6 節） |
 | 8 | 分支同步 | `git fetch` 後 `git rev-list --left-right --count origin/main...HEAD` | ✅（`0 0`） |
 | 9 | 推送後工作區乾淨 | `git status --short --branch` | ✅（推送瞬間曾有 3 檔因本機程序移除而顯示刪除，已由 `git restore` 還原並再次確認乾淨；Word 鎖定檔由 `.gitignore` 排除） |
 | 10 | 憑證未寫入版控 | 檢查 `.git/config`、`.git-credentials`、環境變數 | ✅（PAT 僅存在於本次行程記憶體，用完撤銷） |
-| 11 | 上課影片清單與實況一致 | YouTube 頻道 RSS 比對播放清單共 27 段（Class01～Class26），逐支 oEmbed 驗證 | ✅（Class-25 時長 3:07:36；Class-26 仍為直播中，`lengthSeconds = 0`） |
-| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（27 堂全數具備，Class-27 README 已由舊 Class-26 內容改寫） |
-| 13 | 課次編號與頻道一致 | 比對 YouTube 頻道 RSS 標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class27 全數相符；Class27 影片 `qsbAr0oddyU`，3 秒重複版不計） |
+| 11 | 上課影片清單與實況一致 | YouTube 頻道 RSS 比對播放清單共 31 段（Class01～Class30，3 秒重複版不計），以 watch 頁 player response 驗證 | ✅（Class-29 時長 1:08:11；Class-30 `lengthSeconds = 0`，直播／處理中） |
+| 12 | 新增檔案已附說明 | 每個 `Class-XX` 資料夾均有 `README.md` | ✅（30 堂全數具備；Class-29／30 README 已改寫，非沿用舊課次內容） |
+| 13 | 課次編號與頻道一致 | 比對 YouTube 頻道 RSS 標題 `ClassNN` 與資料夾編號 | ✅（Class01～Class30 全數相符；Class-29 `8VXwFDkzmqA`、Class-30 `UAx0M-blTvw`） |
 | 14 | 文件內部連結有效 | 掃描全部 `*.md` 的相對連結 | ✅ |
-| 15 | SVG 時間軸同步 | 標題 Class 01-27、新增 Class-27 節點（2026-11-18／19）、圖例改為 `18-27 物聯網應用`，並新增 `class27-tm-modbus.svg` | ✅ |
+| 15 | SVG 時間軸同步 | 標題 Class 01-30、新增 Class-28／29／30 節點（2026-11-24／25／26）、圖例改為 `18-30 物聯網應用（…／MySQL）`，並新增 `class29-mysql-flow.svg` | ✅ |
 
 ### 4.1 檔案規模
 
 | 指標 | 數值 |
 |---|---:|
-| 追蹤檔案數 | 34,249（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
+| 追蹤檔案數 | 34,308（含各堂 Thonny 攜帶版 IDE 與 labelImg 工具原始碼） |
 | 追蹤內容合計 | 約 3.5 GB |
-| commit 總數 | 54（以 `git rev-list --count HEAD` 為準；含 11-19 推送 3 個） |
+| commit 總數 | 56（以 `git rev-list --count HEAD` 為準；定稿後為 57） |
 | 單檔最大 | 96.06 MiB（`Class-21`／`Class-22/Day5_20261103.zip`） |
 | 首次推送檔案數 | 16,199（教材 16,196 + 文件 3） |
 | 補充推送檔案數 | 29（教材 26 + 文件 3，另加本文件定稿 commit） |
 | Class-25 最終規模 | 16,010 檔／383.9 MB（教材 3,253 檔／239.0 MB、Thonny 12,757 檔／144.9 MB） |
 | Class-26 最終規模 | **11 檔／25,814,060 bytes（24.6 MB）**，含 `1118/`（`flows.json` 5,373 bytes＋`voice control.gx3` 476,986 bytes）；單檔最大為教師筆記 `.doc`（13,113,620 bytes／12.5 MB） |
 | Class-27 規模 | **11 檔／30,179,807 bytes（28.8 MB）**，`.tm` 專案 2,237,272 bytes、匯出模型 zip 2,246,830 bytes、教師筆記 `.doc` 13,475,320 bytes |
+| Class-28 最終規模 | **11 檔／20,014,995 bytes（19.1 MB）**，含課後補入 `1124/`（10,144 bytes 流程 JSON＋573,086 bytes PLC 專案） |
+| Class-29／30 規模 | 各 **11 檔／21,689,496 bytes（20.7 MB）**，單檔最大為教師筆記 `.doc`（16,279,832 bytes／15.5 MB）；Class-30 另有 Word 鎖定檔但已排除 |
 
 ---
 
@@ -377,6 +454,11 @@ sequenceDiagram
 | Class-27 與 Class-25／26 教材重複 | Ch11 PDF ×2、`json.txt.txt`、PLC 專案與 Class-26 高度重複 | 刻意保留（單堂可獨立取用）；Class-27 新增重點為 Teachable Machine `.tm` 與匯出模型 zip |
 | Class-27 影片重複上傳 | 頻道有兩段同標題影片，其中 `-61uXegbv4M` 僅 3 秒 | 以 `qsbAr0oddyU`（3:59:17）為正式影片，3 秒版不計入段數，已於根 README 註明 |
 | Class-27 Teachable Machine 模型連結 | 外部網址 <https://teachablemachine.withgoogle.com/models/RfDYSkt0A/>（記錄於教師筆記 11-19 段） | 模型本體已隨 `.tm` 專案及 zip 入庫，外部連結僅供對照 |
+
+| Class-28 `1124/` 模型與主流程不同 | `20261124 AI機丙1.json` 使用 TM 線上模型 `_XeV4RQKE`，主流程使用 `G4A8FVg5i` | 刻意保留兩版對照，已於 Class-28 README 第 2 節說明 |
+| Class-30 尚無專屬新教材 | 11-26 資料夾目前沿用 Class-29 的 `1125/` 流程包與 TM／FC15／機丙 1 教材，教師筆記內容仍為 `@2026-11-25-WEDNESDAY` | 已於 Class-30 README 明確註記；後續補入 11-26 筆記或教材時再更新並推送 |
+| Class-30 Word 鎖定檔 | `~$ass-30-2026-11-26.doc`（Word 開啟時產生） | 已由 `.gitignore` 的 `~$*.*` 排除，不入版控 |
+| Class-30 影片時長 | 上傳時 `lengthSeconds = 0`（直播／處理中） | YouTube 處理完成後更新根 README 影片表 |
 
 > 本次 `git push` 在 PowerShell 中因遠端進度輸出到 stderr 而顯示為錯誤物件，
 > 但實際傳輸成功（`50ed88e3..62029a20`），已用 `ls-remote`、`rev-list` 與 GitHub 網頁雙重確認。
@@ -407,6 +489,11 @@ sequenceDiagram
 | 2026-11-19 | `24bd39fc..`（文件同步 3） | 成功 | `24bd39fc..ed229b2e`（Class-26 Modbus 語音聲控教材）、`ed229b2e..1f777e4c`（文件同步）、`1f777e4c..222f50ad`（Class-27 教材＋`1118/`＋新 SVG，14 檔）與文件同步 |
 | 2026-11-19 | （文件同步 3）..（本文件定稿 3） | 成功 | 補登本次推送 hash、規模與注意事項 |
 
+| 2026-11-24 | `c60f088c..fdc1c5ac` | 成功 | 新增 Class-28（9 檔／18.5 MB）與 `class28-tm-modbus-fc15.svg`；根 README／COURSE-MAP 同步（28 堂、29 段影片）「補記」 |
+| 2026-11-26 | `fdc1c5ac..1fc3dc94` | 成功 | 新增 Class-28 `1124/`（2 檔）、Class-29／30（各 11 檔／20.7 MB）教材與三份 README、`class29-mysql-flow.svg`；共 26 檔 |
+| 2026-11-26 | `1fc3dc94..26962498` | 成功 | 同步根 README、COURSE-MAP、`course-timeline.svg`（30 堂、31 段影片、MySQL 圖例）；共 3 檔 |
+| 2026-11-26 | `26962498..`（本文件定稿 commit 4） | 成功 | 補登 11-24／11-26 推送 hash、規模、影片資訊與注意事項 |
+
 ---
 
 ## 7. 後續維護
@@ -435,4 +522,4 @@ flowchart TD
 
 ---
 
-*紀錄建立：2026-10-29｜最近更新：2026-11-19（Class-27：Teachable Machine 模型＋Modbus 語音聲控延續；Class-26 補充 `1118/`）｜推送後 HEAD 以第 6 節與 `git log` 為準*
+*紀錄建立：2026-10-29｜最近更新：2026-11-26（Class-28 `1124/` 補充、Class-29 Node-RED＋MySQL、Class-30 教材沿用說明；30 堂／31 段影片）｜推送後 HEAD 以第 6 節與 `git log` 為準*
