@@ -1,7 +1,7 @@
 # 課程教材地圖（Course Map）
 
-本文件逐一列出 28 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
-統計時間：2026-11-24；僅計入工作目錄實體檔案（含被 `.gitignore` 排除的大型壓縮檔）。Class-24 的數字為 2026-11-12 盤點基準，課後本機加裝的 Thonny 套件不列入。
+本文件逐一列出 30 堂課的資料夾、檔案數量、容量與主要教材，作為快速查找與點名核對的依據。
+統計時間：2026-11-26；僅計入工作目錄實體檔案（含被 `.gitignore` 排除的大型壓縮檔）。Class-24 的數字為 2026-11-12 盤點基準，課後本機加裝的 Thonny 套件不列入。
 
 ---
 
@@ -27,6 +27,8 @@ flowchart TD
     Q --> R["Class 26<br/>11-18<br/>Modbus 語音聲控與教材入庫"]
     R --> S["Class 27<br/>11-19<br/>Teachable Machine 模型＋語音聲控延續"]
     S --> T["Class 28<br/>11-24<br/>TM 影像分類→Modbus FC15"]
+    T --> U["Class 29<br/>11-25<br/>Node-RED＋MySQL"]
+    U --> V["Class 30<br/>11-26<br/>MySQL 教材延續"]
 ```
 
 ---
@@ -62,7 +64,9 @@ flowchart TD
 | 25 | `Class-25-2026-11-17` | 2026-11-17 | 16,010 | 383.9 MB | Ch11 講義 PDF、`ch11-examples/`（蘋果資料集、YOLOv8 訓練／推論腳本、訓練曲線與 Node-RED 流程）、`02-images/` 測試影像、`03-ch11-4-1_改/`（ONNX 匯出與自製 `node-red-contrib-yolov8`）、Thonny 攜帶版 IDE |
 | 26 | `Class-26-2026-11-18` | 2026-11-18 | 11 | 24.6 MB | Node-RED `json.txt.txt`（`ui_microphone` → FC5 → `172.16.7.140:502`）、`20261118-1--SM402*.gx3` PLC 專案、補充包 `1118/`（`flows.json`＋`voice control.gx3`）、Ch11 講義 PDF ×2、教師筆記 `.doc`、環境 `.bat` ×2 |
 | 27 | `Class-27-2026-11-19` | 2026-11-19 | 11 | 28.8 MB | Teachable Machine `2026-11-19-2-project.tm`（2.1 MB）與 `2026-11-19-2-tm-my-image-model.zip`（2.1 MB）、Node-RED `json.txt.txt` 語音聲控、`20261119-1--SM402-140.gx3` 等 PLC 專案 ×2、Ch11 講義 PDF ×2、教師筆記 `.doc`、環境 `.bat` ×2 |
-| 28 | `Class-28-2026-11-24` | 2026-11-24 | 9 | 18.5 MB | Teachable Machine 專案（沿用 11-19）、Node-RED 影像分類→FC15 寫入 M200／M201 流程、機丙 1 PLC 練習 `1020`／`1124`、教師筆記（11-24 模型 `G4A8FVg5i`） |
+| 28 | `Class-28-2026-11-24` | 2026-11-24 | 11 | 19.1 MB | Teachable Machine 專案（沿用 11-19）、Node-RED 影像分類→FC15 寫入 M200／M201 流程、機丙 1 PLC 練習 `1020`／`1124`、教師筆記（11-24 模型 `G4A8FVg5i`）、課後補充 `1124/`（AI 機丙 1：FC1 讀 M100→TM `_XeV4RQKE`→FC15） |
+| 29 | `Class-29-2026-11-25` | 2026-11-25 | 11 | 20.7 MB | Node-RED＋MySQL：`1125/mySQL-tutorial.pdf`（1.5 MB）與 `1125/mysql flows.json`（8.6 KB，`INSERT`／`SELECT`／條件查詢／`UPDATE deleted=1`、`ui_table`）；沿用 TM 專案、FC15 流程、IP140 PLC 與機丙 1 專案 |
+| 30 | `Class-30-2026-11-26` | 2026-11-26 | 11 | 20.7 MB | 11-26 教材資料夾，沿用 Class-29 的 `1125/` MySQL 講義與流程、TM／FC15 與機丙 1 教材；教師筆記內容仍為 `@2026-11-25-WEDNESDAY`，Word 鎖定檔由 `.gitignore` 排除 |
 | — | `80-自動控制工程職類共用資料-PDF` | — | 11 | 85.9 MB | Delta／FX5U／CIROS 共用手冊與規範 |
 | — | `netcheck` | — | 24 | 0.2 MB | 網路 Port、測速、網站連線診斷腳本與報告 |
 
@@ -75,11 +79,13 @@ flowchart TD
 > Class-26 共 11 檔／25,814,060 bytes（24.6 MB），單檔最大為教師筆記 `.doc`（12.5 MB）；`1118/` 為 11-18 補充流程包（`flows.json`＋`voice control.gx3`）。
 > `json.txt.txt` 為 Node-RED 流程匯出（8 KB），含 `modbus-client 172.16.7.140:502`、`modbus-flex-write` FC5（`unitid=1`、`address=0`）與 Dashboard「語音聲控」，搭配兩份 FX5U／SM402 `.gx3` 專案；另兩份 Ch11 PDF 為教材延伸，AI 流程本體仍見 Class-25。
 > Class-27 共 11 檔／30,179,807 bytes（28.8 MB）：`.tm` 專案與匯出模型 zip 各 2.1 MB，教師筆記 `.doc` 12.9 MB；11-19 筆記記錄 Teachable Machine 模型連結 <https://teachablemachine.withgoogle.com/models/RfDYSkt0A/>。
-> Class-28 共 9 檔／19,431,336 bytes（18.5 MB）：教師筆記 `.doc` 14.8 MB、TM 專案 2.1 MB、機丙 1 專案 ×2 各約 0.54 MB；11-24 筆記記錄模型 <https://teachablemachine.withgoogle.com/models/G4A8FVg5i/>，判定 Circle／Rectangle（`score > 0.6`）後以 Modbus FC15（`unitid=1`、`address=8392`、`quantity=2`）寫入 M200／M201。
+> Class-28 共 11 檔／20,014,995 bytes（19.1 MB，含課後補入的 `1124/`）：教師筆記 `.doc` 14.8 MB、TM 專案 2.1 MB、機丙 1 專案 ×2 各約 0.54 MB；11-24 筆記記錄模型 <https://teachablemachine.withgoogle.com/models/G4A8FVg5i/>，判定 Circle／Rectangle（`score > 0.6`）後以 Modbus FC15（`unitid=1`、`address=8392`、`quantity=2`）寫入 M200／M201。`1124/` 為另一版 AI 機丙 1 流程（`_XeV4RQKE` 模型、FC1 讀 M100 觸發、FC15 寫入）與對應 PLC 專案。
+> Class-29 共 11 檔／21,689,496 bytes（20.7 MB）：教師筆記 `.doc` 15.5 MB、`1125/mySQL-tutorial.pdf` 1.5 MB、`1125/mysql flows.json` 8.6 KB；流程使用 `node-red-node-mysql` 2.0.0 與 `node-red-node-ui-table` 0.4.5，資料庫 `127.0.0.1:3306`，`mymqtt`（精簡版）／`mymqtt2`（進階版），資料表 `mytable`。
+> Class-30 共 11 檔／21,689,496 bytes（20.7 MB，更新 README 前）：與 Class-29 同樣的 11 檔教材，僅筆記檔名改為 `Class-30-2026-11-26.doc`；影片 videoId `UAx0M-blTvw`，上傳時 `lengthSeconds = 0`（直播／處理中）。
 
 ```mermaid
 gantt
-    title 課程時程（2026-08-25 ～ 2026-11-24）
+    title 課程時程（2026-08-25 ～ 2026-11-26）
     dateFormat YYYY-MM-DD
     axisFormat %m/%d
     section 觀念建立
@@ -114,6 +120,8 @@ gantt
     Class 26 Modbus語音聲控  :c26, 2026-11-18, 1d
     Class 27 TM模型與語音    :c27, 2026-11-19, 1d
     Class 28 TM→FC15        :c28, 2026-11-24, 1d
+    Class 29 Node-RED/MySQL :c29, 2026-11-25, 1d
+    Class 30 MySQL 延續      :c30, 2026-11-26, 1d
 ```
 
 > 註：Class-05 同時收錄 2026-09-04 與 2026-09-08 兩次授課筆記；Class-06 與 Class-07 為 LD 綜合練習的兩份素材快照。
@@ -132,7 +140,7 @@ gantt
 | 順序控制（SFC） | 10 | SFC 講義與選單章節 |
 | 標籤化程式設計 | 13、14 | Global Label 教材與範例 |
 | 機電整合丙級實作 | 16、17、28 | 機丙 1 tutorial、CIROS IO 表與規範 |
-| Node-RED 流程設計 | 15、18～28 | 基本節點、儀錶板、Chart、LED 控制、Flow 匯出、`obj detection` 推論流程、Modbus 語音聲控 |
+| Node-RED 流程設計 | 15、18～30 | 基本節點、儀錶板、Chart、LED 控制、Flow 匯出、`obj detection` 推論流程、Modbus 語音聲控 |
 | MQTT／M2M 通訊 | 18、19、20、21、22 | Mosquitto 安裝檔、MQTT Explorer、M2M 講義、Web Chart 進階 |
 | Modbus TCP PLC 通訊 | 22、26、28 | `fx5u_modbus_read.json`／`fx5u_modbus_write.json`、`20261105-2.gx3`；Class-26 `json.txt.txt`（FC5／Y0／`172.16.7.140:502`）與 `20261118-1--SM402*.gx3`；Class-28 FC15（`address=8392`／`quantity=2`，M200～M201） |
 | AI 影像分類（Teachable Machine） | 23、27、28 | Ch9 講義、`ch09-examples/` 範例流程、Webcam 判斷 LED 流程；Class-27 `.tm` 專案與匯出模型 zip（`tfjs` 格式），瀏覽器端 `tmImage` 即時推論；Class-28 模型 `G4A8FVg5i` 的 Rectangle／Circle 分類→FC15 |
@@ -141,6 +149,7 @@ gantt
 | 訓練結果分析與模型調參 | 25 | `ch11-2.txt`（results.csv＋AI 提問）、`runs/detect/train*/results.csv` 與 mAP 曲線 |
 | Node-RED AI 推論應用 | 25（26 僅講義延伸） | `ch11-3-1/2/3.json`、`ch11-4-2.json`（topk／IoU／信心門檻、類別計數） |
 | Node-RED 語音聲控（Modbus） | 26、28（沿用） | `json.txt.txt`：`ui_microphone` → `function` → `modbus-flex-write` FC5 → `172.16.7.140:502`，搭配 FX5U／SM402 PLC 專案 |
+| MySQL 資料庫存取（寫入／查詢／表格） | 29、30 | `1125/mySQL-tutorial.pdf`、`1125/mysql flows.json`（`INSERT`／`SELECT`／`WHERE ... BETWEEN`／`UPDATE deleted=1`、`ui_table`） |
 | 網路診斷 | netcheck | Port 測試、測速、網站連線報告 |
 
 ---
@@ -149,7 +158,7 @@ gantt
 
 ```mermaid
 flowchart LR
-    A["Class-NN-YYYY-MM-DD"] --> B["NN：課程序號（01～28）"]
+    A["Class-NN-YYYY-MM-DD"] --> B["NN：課程序號（01～30）"]
     A --> C["YYYY-MM-DD：上課日期"]
     D["教材檔名"] --> E["NN-描述_YYYYMMDD.pdf<br/>例：01-工業4.0概論_20260827.pdf"]
     D --> F["YYYYMMDD-testN.gx3<br/>課堂練習"]
@@ -163,10 +172,11 @@ flowchart LR
 | `YYYYMMDD-testN.gx3` | 當日第 N 個練習 | `20260908-test3.gx3` |
 | `Class-NN-YYYY-MM-DD.doc` | 教師授課筆記 | `Class-22-2026-11-05.doc` |
 | `json.txt.txt` | Node-RED 流程匯出（文字，可貼入 Import／Clipboard） | `Class-26/json.txt.txt` |
+| `mysql flows.json` | Node-RED＋MySQL 流程匯出 | `Class-29/1125/mysql flows.json` |
 | `YYYYMMDD-1--*.gx3` | 當日 PLC 專案（含 IP 標記） | `20261118-1--SM402-140.gx3` |
 | `*teacher*.gx3` | 教師示範版 | `0929-teacher-EX101 STL.gx3` |
 
-> **課次編號對應**：課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19、Class28＝2026-11-24）。
+> **課次編號對應**：課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19、Class28＝2026-11-24、Class29＝2026-11-25、Class30＝2026-11-26）。
 > 授課筆記的檔名沿用原始命名（例如 `Class-05-2026-09-04-notes.doc` 為 09-04 該次授課的筆記），
 > 與所在資料夾的編號不一定相同，請以檔案內容的日期為準。
 
@@ -197,7 +207,10 @@ flowchart LR
 | `Class-27` Ch11 PDF ×2 與 `json.txt.txt` | 與 Class-25／26 的 Ch11 PDF、Node-RED 流程重複 | 刻意保留（單堂可獨立取用）；TM 模型為本堂新增重點 |
 | `Class-27` PLC 專案 | `20261118-1--SM402.gx3` 與 Class-26 同名同內容 | 保留於兩堂課，方便單堂取用；更新版為 `20261119-1--SM402-140.gx3` |
 | `Class-28` 教材 | TM 專案、`json.txt.txt` 與 `20261119-1--SM402-140.gx3` 沿用 Class-27／26 | 刻意保留（單堂可獨立取用）；11-24 新增的是模型 `G4A8FVg5i`、base64 影像顯示、FC15 寫入 M200／M201 與兩份機丙 1 專案 |
+| `Class-28/1124/` | 課後補充 AI 機丙 1 流程（`_XeV4RQKE` 模型、FC1 讀 M100 觸發）與 PLC 專案 | 與主流程的 `G4A8FVg5i` 模型不同，保留兩版對照；已於該堂 README 第 2 節說明 |
+| `Class-29`／`Class-30` 教材 | 11-25 的 MySQL 講義與流程在 11-26 資料夾再存一份；大量 TM／FC15／機丙 1 教材沿用 | 刻意保留（單堂可獨立取用）；Class-30 筆記尚為 11-25 內容，待教師補入 `@2026-11-26` 段落 |
+| `Class-30` Word 鎖定檔 | `~$ass-30-2026-11-26.doc`（Word 開啟時產生） | 已由 `.gitignore` 的 `~$*.*` 排除，不入版控 |
 
 ---
 
-*本文件由教材目錄自動盤點後人工整理（最近盤點：2026-11-24，新增 Class-28 共 9 檔／18.5 MB）；若新增課程，請同步更新本表與 [README.md](../README.md) 的課程索引。*
+*本文件由教材目錄自動盤點後人工整理（最近盤點：2026-11-26，新增 Class-28 `1124/` 補充、Class-29／30 各 11 檔／20.7 MB）；若新增課程，請同步更新本表與 [README.md](../README.md) 的課程索引。*

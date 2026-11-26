@@ -1,13 +1,13 @@
 # 工業 4.0 自動控制工程職類｜課程教材庫
 
-本倉庫收錄 **2026-08-25 ～ 2026-11-24** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **28 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊與 Node-RED AI 影像分類／YOLO 物件偵測）與一份網路檢測報告。
+本倉庫收錄 **2026-08-25 ～ 2026-11-26** 期間「工業 4.0／自動控制工程職類」課程的教材、範例程式與課後補充資料，共 **30 堂課**、四大主題（PLC 程式設計、機電整合、Node-RED／MQTT 物聯網應用、FX5U Modbus TCP／M2M 通訊、Node-RED AI 影像分類／YOLO 物件偵測與 Node-RED／MySQL 資料庫整合）與一份網路檢測報告。
 
 | 項目 | 內容 |
 |---|---|
 | 線上倉庫 | <https://github.com/yd7148/INDUSTRY-4.0> |
 | 預設分支 | `main` |
-| 課程期間 | 2026-08-25 ～ 2026-11-24（28 堂） |
-| 主要工具 | GX Works3、DVP-PLC101、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP、Teachable Machine、YOLO（Ultralytics）、labelImg、Thonny |
+| 課程期間 | 2026-08-25 ～ 2026-11-26（30 堂） |
+| 主要工具 | GX Works3、DVP-PLC101、Node-RED、Mosquitto、MQTT Explorer、FX5U Modbus TCP、Teachable Machine、YOLO（Ultralytics）、labelImg、Thonny、MySQL／node-red-node-mysql、node-red-node-ui-table |
 | 上課影片播放清單 | [工業4.0--工業4.0概論（YouTube）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo) |
 | 文件語言 | 繁體中文 |
 
@@ -34,14 +34,14 @@ flowchart LR
     subgraph P4["第四階段｜物聯網應用"]
         D1["Class 18-20<br/>Node-RED 網頁儀錶板<br/>MQTT．M2M 通訊"]
         D2["Class 21-22<br/>Node-RED MQTT 應用<br/>FX5U Modbus TCP 讀寫"]
-        D3["Class 23-27<br/>Teachable Machine 影像分類<br/>YOLO 物件偵測（星際大戰／蘋果）＋Modbus 語音聲控"]
+        D3["Class 23-30<br/>TM／YOLO 影像分類與物件偵測<br/>Modbus 語音聲控、FC15、MySQL 資料庫"]
     end
     A1 --> B1 --> B2 --> C1 --> D1 --> D2 --> D3
 ```
 
 ```mermaid
 flowchart TB
-    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-28<br/>逐堂教材（每資料夾附 README.md）"]
+    REPO["INDUSTRY-4.0"] --> CLS["Class-01 ～ Class-30<br/>逐堂教材（每資料夾附 README.md）"]
     REPO --> LIB["80-自動控制工程職類共用資料-PDF<br/>共用參考文件"]
     REPO --> NET["netcheck<br/>網路連線檢測報告"]
     REPO --> DOC["README.md / docs/<br/>說明、地圖與圖表"]
@@ -52,6 +52,7 @@ flowchart TB
     CLS --> TOOL["MQTT 工具 / Node-RED<br/>安裝檔與範例流程"]
     CLS --> JSON["*.json / *.bat<br/>Modbus 流程與啟動腳本"]
     CLS --> AI["Node-RED AI 範例<br/>Teachable Machine／YOLO"]
+    CLS --> DB["1124/・1125/<br/>AI 機丙 1 與 MySQL 流程"]
 ```
 
 ### 課程時間軸（SVG）
@@ -63,7 +64,8 @@ flowchart TB
 > Class-25 的蘋果 YOLOv8 訓練、Node-RED 推論流程，以及課後補充的 ONNX 匯出與自製 `node-red-contrib-yolov8` 節點，見 [README.md](Class-25-2026-11-17/README.md)；
 > Class-26 的 Modbus TCP 語音聲控與 Ch11 教材延伸見 [README.md](Class-26-2026-11-18/README.md)、[class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) 與 [class26-ch11-flow.svg](docs/img/class26-ch11-flow.svg)；
 > Class-27 的 Teachable Machine 模型與 Modbus 語音聲控延續見 [README.md](Class-27-2026-11-19/README.md) 與 [class27-tm-modbus.svg](docs/img/class27-tm-modbus.svg)。
-> Class-28 的 TM 影像分類（Rectangle／Circle）→ Modbus FC15 寫入 M200／M201 與機丙 1 PLC 練習見 [README.md](Class-28-2026-11-24/README.md) 與 [class28-tm-modbus-fc15.svg](docs/img/class28-tm-modbus-fc15.svg)。
+> Class-28 的 TM 影像分類（Rectangle／Circle）→ Modbus FC15 寫入 M200／M201、機丙 1 PLC 練習及課後補充 `1124/`（FC1 讀 M100→TM `_XeV4RQKE`→FC15）見 [README.md](Class-28-2026-11-24/README.md) 與 [class28-tm-modbus-fc15.svg](docs/img/class28-tm-modbus-fc15.svg)。
+> Class-29 的 Node-RED＋MySQL（`mytable` 寫入／查詢／`ui_table`）見 [README.md](Class-29-2026-11-25/README.md)；Class-30 的教材沿用說明見 [README.md](Class-30-2026-11-26/README.md)；流程圖見 [class29-mysql-flow.svg](docs/img/class29-mysql-flow.svg)。
 
 ![Class-22 系統架構](docs/img/class22-modbus-mqtt.svg)
 
@@ -74,6 +76,8 @@ flowchart TB
 ![Class-27 Teachable Machine 與 Modbus 語音聲控](docs/img/class27-tm-modbus.svg)
 
 ![Class-28 TM 影像分類與 Modbus FC15](docs/img/class28-tm-modbus-fc15.svg)
+
+![Class-29／30 Node-RED 與 MySQL 流程](docs/img/class29-mysql-flow.svg)
 
 ---
 
@@ -109,8 +113,10 @@ flowchart TB
 | 26 | 2026-11-18 | Node-RED Modbus TCP 語音聲控（IP 140／SM402）與 Ch11 教材延伸、學期教材入庫 | `json.txt.txt`（`ui_microphone`→FC5→`172.16.7.140:502`）、`20261118-1--SM402.gx3`、`1118/voice control.gx3`、`Node-RED AI_ch11.pdf` |
 | 27 | 2026-11-19 | Teachable Machine 影像分類模型（`.tm`／匯出 zip）＋ Modbus 語音聲控延續 | `2026-11-19-2-project.tm`、`2026-11-19-2-tm-my-image-model.zip`、`json.txt.txt`、`20261119-1--SM402-140.gx3` |
 | 28 | 2026-11-24 | TM 影像分類（Rectangle／Circle）→ Modbus FC15 寫入 M200／M201、機丙 1 PLC 練習 | `2026-11-19-2-project.tm`、`json.txt.txt`、`機丙1 tutorial-1020.gx3`、`機丙1 tutorial-1124.gx3`、`Class-28-2026-11-24.doc` |
+| 29 | 2026-11-25 | Node-RED 與 MySQL 資料庫整合：`mytable` 寫入／查詢／條件篩選／軟刪除、`ui_table` 呈現 | `1125/mySQL-tutorial.pdf`、`1125/mysql flows.json`、`Class-29-2026-11-25.doc` |
+| 30 | 2026-11-26 | MySQL／Node-RED 教材延續（沿用 11-25 流程包，AI→FC15 與機丙 1 練習） | `1125/mysql flows.json`、`Class-30-2026-11-26.doc`、`機丙1 tutorial-1124.gx3` |
 
-> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19、Class28＝2026-11-24）。
+> 課次編號已與 YouTube 頻道存檔標題一致（Class01＝2026-08-25 … Class25＝2026-11-17、Class26＝2026-11-18、Class27＝2026-11-19、Class28＝2026-11-24、Class29＝2026-11-25、Class30＝2026-11-26）。
 > Class-06 與 Class-07 為同一堂 LD 綜合練習的兩份素材快照；Class-05 同時收錄 09-04 與 09-08 兩次授課筆記。
 
 ---
@@ -156,7 +162,12 @@ INDUSTRY-4.0/
 │  ├─ json.txt.txt               # Node-RED 推論流程（base64 影像＋FC15 寫入）
 │  ├─ 機丙1 tutorial-1020.gx3    # 機電整合丙級 PLC 練習（10-20 版）
 │  ├─ 機丙1 tutorial-1124.gx3    # 機電整合丙級 PLC 練習（11-24 更新版）
-│  └─ Class-28-2026-11-24.doc    # 教師累積筆記（含 11-24 模型 G4A8FVg5i）
+│  ├─ Class-28-2026-11-24.doc    # 教師累積筆記（含 11-24 模型 G4A8FVg5i）
+│  └─ 1124/                      # 課後補充：AI 機丙 1 流程 JSON＋PLC 專案
+├─ Class-29-2026-11-25/          # Node-RED＋MySQL（mytable 寫入／查詢／ui_table）
+│  └─ 1125/                      # mySQL-tutorial.pdf＋mysql flows.json
+├─ Class-30-2026-11-26/          # MySQL 教材延續（沿用 11-25 流程包）
+│  └─ 1125/                      # 同上講義與流程
 ├─ 80-自動控制工程職類共用資料-PDF/
 │  ├─ Delta/                     # DVP-PLC、ISPSoft 手冊
 │  ├─ FX5U/                      # FX5U、GX Works3、ST 指南
@@ -170,7 +181,8 @@ INDUSTRY-4.0/
 │     ├─ class26-ch11-flow.svg   # Class-26 Ch11 複習與教材入庫流程圖
 │     ├─ class26-modbus-voice.svg # Class-26 Modbus TCP 語音聲控流程圖
 │     ├─ class27-tm-modbus.svg   # Class-27 TM 模型＋Modbus 語音聲控流程圖
-│     └─ class28-tm-modbus-fc15.svg  # Class-28 TM 影像分類→FC15 流程圖
+│     ├─ class28-tm-modbus-fc15.svg  # Class-28 TM 影像分類→FC15 流程圖
+│     └─ class29-mysql-flow.svg     # Class-29／30 Node-RED＋MySQL 流程圖
 ├─ netcheck/                     # 網路連線／Port／測速檢測
 ├─ README.md
 └─ .gitignore
@@ -189,6 +201,7 @@ INDUSTRY-4.0/
 | 講義／手冊 | `.pdf` | 觀念說明與操作步驟 | 任意 PDF 閱讀器 |
 | 課程筆記 | `.doc`、`.docx` | 教師授課重點 | Word 或 LibreOffice |
 | Node-RED 流程 | `.txt`、`.json` | 匯入節點流程 | Node-RED 編輯器 |
+| MySQL 講義／流程 | `.pdf`、`.json` | 資料庫安裝、SQL 語法與 Node-RED 讀寫流程 | MySQL＋Node-RED |
 | AI 範例流程 | `.json`、`.html`、`.ttf` | Teachable Machine／YOLO 分類與物件偵測 | Node-RED 編輯器 |
 | Python 腳本 | `.py` | 影片切格、資料集處理、YOLO 訓練與推論 | Thonny／Python |
 | 工具安裝檔 | `.exe`、`.zip` | MQTT／Node-RED／Thonny 環境 | 詳見各資料夾說明 |
@@ -205,11 +218,13 @@ flowchart LR
     D -->|物聯網| G["Node-RED 匯入流程<br/>Mosquitto 測試"]
     D -->|Modbus TCP| H["20261105-2.gx3 設為 Server<br/>Node-RED 讀寫流程"]
     D -->|AI 影像| I2["Teachable Machine 訓練<br/>或 YOLO 標註＋訓練"]
+    D -->|資料庫| I3["MySQL mytable<br/>寫入／查詢／ui_table"]
     E --> I["歸檔回對應 Class 資料夾"]
     F --> I
     G --> I
     H --> I
     I2 --> I
+    I3 --> I
 ```
 
 ---
@@ -230,6 +245,7 @@ flowchart LR
 | labelImg | 影像標註工具（產生 YOLO 格式標註檔） | `Class-24`（Ch11 沿用已標註資料集） |
 | Thonny | 攜帶版 Python IDE（執行 AI 腳本） | `Class-24`、`Class-25` |
 | node-red-contrib-image-tools、node-red-node-ui-webcam、node-red-node-ui-iframe | 影像預覽／註記、攝影機、iframe 嵌入 | `Class-23`～`Class-28` |
+| MySQL／node-red-node-mysql／node-red-node-ui-table | `mytable` 寫入、查詢、條件篩選、軟刪除與 Dashboard 表格 | `Class-29`、`Class-30`（`1125/`） |
 
 > 教材內的 `.exe`、`.zip` 為課堂教學用安裝檔，僅供教學參考；安裝前請自行確認來源與授權。
 
@@ -242,7 +258,7 @@ flowchart LR
 | 項目 | 內容 |
 |---|---|
 | 清單名稱 | **工業4.0--工業4.0概論**（I-4.0; Industrial-4.0） |
-| 影片數 | **29 段直播**（涵蓋 2026-08-25 ～ 2026-11-24，共 28 堂課；Class-16 拆 Part-1／Part-2） |
+| 影片數 | **31 段直播**（涵蓋 2026-08-25 ～ 2026-11-26，共 30 堂課；Class-16 拆 Part-1／Part-2） |
 | 觀看方式 | 下方「播放清單網址」一次看完，或逐段點擊下表影片連結 |
 | 播放清單網址 | <https://www.youtube.com/playlist?list=PLKvXv11lxGbo> |
 
@@ -283,6 +299,8 @@ timeline
     11-18 Modbus 語音聲控與教材入庫
     11-19 Teachable Machine 模型
     11-24 影像分類→Modbus FC15
+    11-25 Node-RED＋MySQL
+    11-26 MySQL 教材延續
 ```
 
 | 上課日期 | 本庫資料夾 | 影片 | 長度 |
@@ -316,10 +334,12 @@ timeline
 | 2026-11-18 | Class-26 | [工業4.0-2026-11-18](https://www.youtube.com/watch?v=3i-ECZ0QnoU&list=PLKvXv11lxGbo) | 3:13:44 |
 | 2026-11-19 | Class-27 | [工業4.0-2026-11-19](https://www.youtube.com/watch?v=qsbAr0oddyU&list=PLKvXv11lxGbo) | 3:59:17 |
 | 2026-11-24 | Class-28 | [工業4.0-2026-11-24](https://www.youtube.com/watch?v=C792O5ZDcqA&list=PLKvXv11lxGbo) | 3:02:40 |
+| 2026-11-25 | Class-29 | [工業4.0-2026-11-25](https://www.youtube.com/watch?v=8VXwFDkzmqA&list=PLKvXv11lxGbo) | 1:08:11 |
+| 2026-11-26 | Class-30 | [工業4.0-2026-11-26](https://www.youtube.com/watch?v=UAx0M-blTvw&list=PLKvXv11lxGbo) | 直播／處理中 |
 
 > Class-25／26 存檔時長已分別更新為 3:07:36／3:13:44；Class-27 影片為 2026-11-19 當日直播存檔。
 > 頻道另有一段 3 秒的 Class-27 重複上傳（`videoId=-61uXegbv4M`），不計入正式段數。
-> Class-28 影片為 2026-11-24 當日直播存檔（3:02:40）。
+> Class-28 影片為 2026-11-24 當日直播存檔（3:02:40）；Class-29 影片時長 1:08:11；Class-30 影片上傳時 `lengthSeconds = 0`（直播／處理中），YouTube 處理完成後再更新。
 
 ---
 
@@ -366,6 +386,7 @@ flowchart TB
 | [docs/img/class26-modbus-voice.svg](docs/img/class26-modbus-voice.svg) | Class-26 Modbus TCP 語音聲控流程圖（SVG） |
 | [docs/img/class27-tm-modbus.svg](docs/img/class27-tm-modbus.svg) | Class-27 Teachable Machine＋Modbus 語音聲控流程圖（SVG） |
 | [docs/img/class28-tm-modbus-fc15.svg](docs/img/class28-tm-modbus-fc15.svg) | Class-28 TM 影像分類→Modbus FC15 流程圖（SVG） |
+| [docs/img/class29-mysql-flow.svg](docs/img/class29-mysql-flow.svg) | Class-29／30 Node-RED＋MySQL 寫入／查詢與 `ui_table` 流程圖（SVG） |
 | [Class-XX/README.md](docs/COURSE-MAP.md) | 各堂課資料夾說明：YT 連結、筆記、參考文件與程式 |
 | [netcheck/REPORT.md](netcheck/REPORT.md) | 對外網路連線測試報告 |
 | [netcheck/network-check-report.md](netcheck/network-check-report.md) | 網路連線詳細檢測 |
@@ -373,4 +394,4 @@ flowchart TB
 
 ---
 
-*文件最後更新：2026-11-24（新增 Class-28（TM 影像分類→Modbus FC15 寫入 M200／M201 與機丙 1 PLC 練習，9 檔／18.5 MB）、播放清單 29 段、Class-28 影片 3:02:40、新增 class28-tm-modbus-fc15.svg）*
+*文件最後更新：2026-11-26（新增 Class-28 課後補充 `1124/`（11 檔／19.1 MB）、Class-29（Node-RED＋MySQL，11 檔／20.7 MB）、Class-30（教材沿用說明，11 檔／20.7 MB）；播放清單 31 段、Class-29 影片 1:08:11、Class-30 影片直播中；新增 class29-mysql-flow.svg）*
