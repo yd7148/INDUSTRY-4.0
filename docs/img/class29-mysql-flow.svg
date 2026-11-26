@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" font-family="'Microsoft JhengHei','PingFang TC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2333"/>
+      <stop offset="1" stop-color="#26324e"/>
+    </linearGradient>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b06cff"/>
+      <stop offset="1" stop-color="#d0a1ff"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#7aa8ff"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ecc8f"/>
+      <stop offset="1" stop-color="#6be3b3"/>
+    </linearGradient>
+    <linearGradient id="gD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffd268"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8ea6d6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="460" fill="url(#bg)"/>
+  <text x="40" y="46" fill="#ffffff" font-size="24" font-weight="bold">Class-29／30（2026-11-25／26）｜Node-RED → MySQL 資料記錄與查詢</text>
+  <text x="40" y="72" fill="#9fb2d8" font-size="13">上半：寫入流程（產生資料 → SQL INSERT → mysql 節點）；下半：查詢／更新流程與 Dashboard ui_table 表格（Class-30 沿用本流程）</text>
+
+  <!-- 上半：寫入流程 -->
+  <g text-anchor="middle">
+    <rect x="40" y="110" width="210" height="92" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="145" y="138" fill="#ffffff" font-size="15" font-weight="bold">inject</text>
+    <text x="145" y="162" fill="#f4eaff" font-size="11">add1／add2</text>
+    <text x="145" y="182" fill="#f4eaff" font-size="11">Class-29 流程包</text>
+
+    <rect x="310" y="110" width="210" height="92" rx="12" fill="url(#gA)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="415" y="138" fill="#ffffff" font-size="15" font-weight="bold">Generate data</text>
+    <text x="415" y="162" fill="#f4eaff" font-size="11">15~35°C 隨機溫度</text>
+    <text x="415" y="182" fill="#f4eaff" font-size="11">topic_room1／mytopic</text>
+
+    <rect x="580" y="110" width="210" height="92" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="685" y="138" fill="#ffffff" font-size="15" font-weight="bold">Create Query</text>
+    <text x="685" y="162" fill="#eaf1ff" font-size="11">INSERT INTO mytable</text>
+    <text x="685" y="182" fill="#eaf1ff" font-size="11">topic／payload／date／time</text>
+
+    <rect x="850" y="110" width="310" height="92" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="1005" y="138" fill="#ffffff" font-size="15" font-weight="bold">mysql 節點 → mytable</text>
+    <text x="1005" y="162" fill="#eafff6" font-size="11">127.0.0.1:3306／mymqtt（精簡）・mymqtt2（進階）</text>
+    <text x="1005" y="182" fill="#eafff6" font-size="11">node-red-node-mysql 2.0.0／UTF8</text>
+  </g>
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M250,156 L305,156"/>
+    <path d="M520,156 L575,156"/>
+    <path d="M790,156 L845,156"/>
+  </g>
+
+  <!-- 下半：查詢／更新與表格 -->
+  <g text-anchor="middle">
+    <rect x="40" y="270" width="220" height="92" rx="12" fill="url(#gD)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="150" y="298" fill="#ffffff" font-size="15" font-weight="bold">select／條件查詢</text>
+    <text x="150" y="322" fill="#fff2d6" font-size="11">SELECT * FROM mytable</text>
+    <text x="150" y="342" fill="#fff2d6" font-size="11">WHERE topic／BETWEEN 時間</text>
+
+    <rect x="320" y="270" width="220" height="92" rx="12" fill="url(#gD)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="430" y="298" fill="#ffffff" font-size="15" font-weight="bold">update</text>
+    <text x="430" y="322" fill="#fff2d6" font-size="11">SET deleted = 1</text>
+    <text x="430" y="342" fill="#fff2d6" font-size="11">WHERE id = 5（軟刪除）</text>
+
+    <rect x="600" y="270" width="220" height="92" rx="12" fill="url(#gC)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="710" y="298" fill="#ffffff" font-size="15" font-weight="bold">mysql 節點</text>
+    <text x="710" y="322" fill="#eafff6" font-size="11">查詢結果回傳 msg.payload</text>
+    <text x="710" y="342" fill="#eafff6" font-size="11">debug 1 同步檢視</text>
+
+    <rect x="880" y="270" width="280" height="92" rx="12" fill="url(#gB)" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="1020" y="298" fill="#ffffff" font-size="15" font-weight="bold">ui_table 表格</text>
+    <text x="1020" y="322" fill="#eaf1ff" font-size="11">id／topic／payload／date／time／deleted</text>
+    <text x="1020" y="342" fill="#eaf1ff" font-size="11">Dashboard tab: mysql・group: mytable</text>
+  </g>
+  <g stroke="#8ea6d6" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M260,316 L315,316"/>
+    <path d="M540,316 L595,316"/>
+    <path d="M820,316 L875,316"/>
+  </g>
+
+  <text x="40" y="420" fill="#9fb2d8" font-size="12">教材：Class-29/30/1125/mySQL-tutorial.pdf（1.5 MB）＋ mysql flows.json（8.6 KB）｜影片：Class-29 8VXwFDkzmqA（1:08:11）・Class-30 UAx0M-blTvw</text>
+</svg>

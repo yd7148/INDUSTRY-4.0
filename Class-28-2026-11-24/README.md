@@ -8,9 +8,9 @@
 | 課次／日期 | Class-28／2026-11-24（星期二） |
 | 主題 | Teachable Machine 影像分類（圓形／矩形）判讀結果，經 Node-RED `function` 轉為 M200，再以 `modbus-flex-write` **FC15** 寫入 FX5U／SM402；機丙 1 PLC 專案練習 |
 | 上課直播 | [https://www.youtube.com/watch?v=C792O5ZDcqA](https://www.youtube.com/watch?v=C792O5ZDcqA)（頻道存檔標題為 工業4.0-2026-11-24-Class28） |
-| 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 29 段，Class01～Class28） |
+| 播放清單 | [工業4.0--工業4.0概論（YouTube 播放清單）](https://www.youtube.com/playlist?list=PLKvXv11lxGbo)（已更新為 31 段，Class01～Class30） |
 | 對應章節 | Node-RED 程式設計 ─ AI 影像分類＋Modbus TCP／M2M 應用；機電整合丙級 PLC 實作 |
-| 教材規模 | 9 個檔案／約 18.5 MB（Word 鎖定檔如出現由 `.gitignore` 排除） |
+| 教材規模 | 11 個檔案／約 19.1 MB（含課後補入的 `1124/`；Word 鎖定檔如出現由 `.gitignore` 排除） |
 
 ## 1. 上課影片
 
@@ -28,7 +28,8 @@
 3. **類別判定**：`function` 節點讀取 `msg.payload[0].class`／`.score`，在 `score > 0.6` 時將 `Circle` 轉為 `M200 = true`、`Rectangle` 轉為 `M200 = false`，輸出 `[M200, true]`（延續 11-19 的判斷邏輯）。
 4. **Modbus TCP FC15**：`modbus-flex-write` 以 `fc: 15`、`unitid: 1`、`address: 8392`（8192 + 200，即 M200）、`quantity: 2` 一次寫入 **M200～M201**，PLC 端為 FX5U／SM402。
 5. **機電整合丙級**：`機丙1 tutorial-1020.gx3`（10-20 版）與 `機丙1 tutorial-1124.gx3`（11-24 更新版）為 CIROS 機丙 1 的 PLC 練習專案。
-6. **沿用教材**：`json.txt.txt`（Class-26／27 系列的 Node-RED 流程匯出）、`20261119-1--SM402-140.gx3`（IP 140 版 PLC 專案）、`Node_Red_setup.bat`／`Node_Red_server.bat`（環境安裝與啟動）。
+6. **課後補充 `1124/`（AI 機丙 1）**：`20261124 AI機丙1.json` 以 `modbus-flex-getter` **FC1** 讀取 IP130（`172.16.7.130`）的 **M100**，由 `rbe`＋`switch`（OFF→ON）觸發 webcam 截圖；TM 線上模型 `_XeV4RQKE` 判讀 rect／circle（`score >= 0.8`）後，以 **FC15** 寫入 M200／M201（與主流程的 `G4A8FVg5i` 模型不同，保留兩版對照）。`AI 機丙1 tutorial-1124.gx3` 為對應 PLC 專案。
+7. **沿用教材**：`json.txt.txt`（Class-26／27 系列的 Node-RED 流程匯出）、`20261119-1--SM402-140.gx3`（IP 140 版 PLC 專案）、`Node_Red_setup.bat`／`Node_Red_server.bat`（環境安裝與啟動）。
 
 ```mermaid
 flowchart TB
@@ -41,6 +42,7 @@ flowchart TB
     H["base64 影像<br/>data:image/png;base64"] --> I["Dashboard &lt;img&gt; 顯示"]
     J["機丙1 tutorial-1020/1124.gx3"] --> G
     K["20261119-1--SM402-140.gx3"] --> G
+    M["1124/ AI 機丙1.json<br/>FC1 讀 M100 → 截圖 → TM _XeV4RQKE → FC15"] --> G
     G --> L["教材入庫 yd7148/INDUSTRY-4.0"]
 ```
 
@@ -64,6 +66,8 @@ flowchart LR
 | [20261119-1--SM402-140.gx3](20261119-1--SM402-140.gx3) | FX5U／SM402 PLC 專案（471 KB，IP 140 版，沿用） |
 | [機丙1 tutorial-1020.gx3](%E6%A9%9F%E4%B8%991%20tutorial-1020.gx3) | 機電整合丙級 PLC 練習專案（10-20 版，554 KB） |
 | [機丙1 tutorial-1124.gx3](%E6%A9%9F%E4%B8%991%20tutorial-1124.gx3) | 機電整合丙級 PLC 練習專案（11-24 更新版，555 KB） |
+| [1124/20261124 AI機丙1.json](1124/20261124%20AI%E6%A9%9F%E4%B8%991.json) | 課後補充流程（10 KB）：FC1 讀 M100 → 觸發截圖 → TM `_XeV4RQKE` → FC15 寫 M200／M201 |
+| [1124/AI 機丙1 tutorial-1124.gx3](1124/AI%20%E6%A9%9F%E4%B8%991%20tutorial-1124.gx3) | 課後補充 PLC 專案（560 KB），對應 AI 機丙 1 流程 |
 | [Class-28-2026-11-24.doc](Class-28-2026-11-24.doc) | 教師授課筆記（約 14.8 MB），含 `@2026-11-24-Class-TUESDAY`、模型 `G4A8FVg5i` 與 FC15 程式碼 |
 | [Node_Red_setup.bat](Node_Red_setup.bat) | `npm install -g node-red`（Node-RED 安裝） |
 | [Node_Red_server.bat](Node_Red_server.bat) | `node-red`（啟動 Node-RED 伺服器） |
@@ -74,8 +78,9 @@ flowchart LR
 - **筆記**：`Class-28-2026-11-24.doc`（教師授課紀錄，含 `@2026-11-24-Class-TUESDAY` 的 TM 模型連結、base64 影像、class／score 判定與 FC15 寫入程式碼）。
 - **模型**：`2026-11-19-2-project.tm`（TM 專案）；11-24 模型連結見 <https://teachablemachine.withgoogle.com/models/G4A8FVg5i/>。
 - **Node-RED 流程**：`json.txt.txt`（Import → Clipboard 貼上即可）；影像以 `data:image/png;base64` 顯示。
-- **PLC 專案**：`機丙1 tutorial-1020.gx3`、`機丙1 tutorial-1124.gx3`、`20261119-1--SM402-140.gx3`（GX Works3）。
+- **PLC 專案**：`機丙1 tutorial-1020.gx3`、`機丙1 tutorial-1124.gx3`、`20261119-1--SM402-140.gx3`、`1124/AI 機丙1 tutorial-1124.gx3`（GX Works3）。
 - **環境**：`Node_Red_setup.bat`、`Node_Red_server.bat`。
+- **課後補充流程**：`1124/20261124 AI機丙1.json`（Import → Clipboard），以 IP130 的 M100 上升緣觸發 TM 判讀與 FC15 寫入。
 - **延伸教材**：Teachable Machine 模型與 Ch11 完整 AI 流程見 [Class-27 README](../Class-27-2026-11-19/README.md) 與 [Class-25 README](../Class-25-2026-11-17/README.md)。
 
 ## 5. 檔案清單
@@ -87,12 +92,14 @@ flowchart LR
 | PLC 專案 | [20261119-1--SM402-140.gx3](20261119-1--SM402-140.gx3) | 471 KB |
 | PLC 專案 | [機丙1 tutorial-1020.gx3](%E6%A9%9F%E4%B8%991%20tutorial-1020.gx3) | 554 KB |
 | PLC 專案 | [機丙1 tutorial-1124.gx3](%E6%A9%9F%E4%B8%991%20tutorial-1124.gx3) | 555 KB |
+| Node-RED 流程 | [1124/20261124 AI機丙1.json](1124/20261124%20AI%E6%A9%9F%E4%B8%991.json) | 10 KB |
+| PLC 專案 | [1124/AI 機丙1 tutorial-1124.gx3](1124/AI%20%E6%A9%9F%E4%B8%991%20tutorial-1124.gx3) | 560 KB |
 | 筆記 | [Class-28-2026-11-24.doc](Class-28-2026-11-24.doc) | 15,195 KB |
 | 程式／範例 | [Node_Red_setup.bat](Node_Red_setup.bat) | < 1 KB |
 | 程式／範例 | [Node_Red_server.bat](Node_Red_server.bat) | < 1 KB |
 | 說明 | [README.md](README.md) | 7 KB |
 
-> 資料夾合計 9 檔／19,431,336 bytes（約 18.5 MB），單檔最大為教師筆記 `.doc`（14.8 MB），低於 GitHub 100 MB 上限，全數納入版控。
+> 資料夾合計 11 檔／20,014,995 bytes（約 19.1 MB，含課後補入的 `1124/` 兩檔；更新 README 前），單檔最大為教師筆記 `.doc`（14.8 MB），低於 GitHub 100 MB 上限，全數納入版控。
 
 ---
 
